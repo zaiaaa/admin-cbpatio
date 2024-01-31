@@ -1,14 +1,22 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Link, Route ,Routes } from 'react-router-dom'
+import { Login } from './pages/login/login'
+import { AuthContextProvider } from './context/auth'
+import { Home } from './pages/home/home'
+import { PrivateRoute } from './services/privateRoute'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Router>
-      <Routes>
-        <Route path='/' element={""}/>
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route path='/' element={<Login />}/>
+          <Route path='/home' element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>}/>
+        </Routes>
+      </AuthContextProvider>
     </Router>
   )
 }
