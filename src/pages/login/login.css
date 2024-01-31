@@ -1,0 +1,76 @@
+.bg{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../assets/bg-admin.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.ct-card{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    padding-right: 10%;
+}
+
+
+.ct-card h1{
+    font-size: 60px;
+    color: #B89BFF;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.ct-card img{
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ct-input{
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    
+    margin-bottom: 2.5rem;
+    gap: 25px;
+}
+
+
+.ct-input label{
+    margin-left: 5px;
+    color: #866CC9;
+}
+
+.ct-input div{
+    display: flex;
+    flex-direction: column;
+    
+    height: 100%;
+    gap: 5px;
+}
+
+.ct-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ct-img img{
+    max-width: 150px;
+}
+
+form{
+    padding: 0 2rem;
+}
