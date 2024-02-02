@@ -3,6 +3,7 @@ import { Home } from '../../pages/home/home'
 import { PrivateRoute } from '../../services/privateRoute'
 import { Campeonatos } from '../../pages/campeonatos/Campeonatos'
 import { Valores } from '../../pages/valores/Valores'
+import { Jogos } from '../../pages/jogos/Jogos'
 
 
 const MainRoutes = () => {
@@ -20,6 +21,10 @@ const MainRoutes = () => {
                 <Route path='/valores' element={
                     <PrivateRoute>
                         <Valores />
+                    </PrivateRoute>} />
+                <Route path='/jogos' element={
+                    <PrivateRoute>
+                        <Jogos />
                     </PrivateRoute>} />
             </Routes>
         </>
