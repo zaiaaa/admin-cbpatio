@@ -6,6 +6,18 @@ import { AuthContext } from '../../context/auth'
 
 const Layout = ({ children }) => {
 
+    const menuItem = document.querySelectorAll('.link');
+
+    function selectLink() {
+        menuItem.forEach((item) =>
+            item.classList.remove('active')
+        )
+        this.classList.add('active')
+    }
+    menuItem.forEach((item) =>
+        item.addEventListener('click', selectLink)
+    )
+
 
     return (
         <>
@@ -15,11 +27,16 @@ const Layout = ({ children }) => {
                         <img src={foto} alt="logo" />
                     </div>
                     <nav>
-                        <ul>
-                            <Link to={"/campeonatos"}>Campeonatos</Link>
-                            <Link to={"/home"}>home</Link>
+                        <ul className='ul-sidebar'>
+                            <Link to={"/home"} className='link'>home</Link>
+                            <Link to={"/campeonatos"} className='link'>Campeonatos</Link>
+                            <Link to={"/valores"} className='link'>Valores</Link>
+
                         </ul>
                     </nav>
+                    <div className="live-on-btn">
+                        live on?
+                    </div>
                 </div>
                 <div className="children">
                     {children}
