@@ -1,6 +1,6 @@
 .bg{
     margin: 0;
-    padding: 0;
+    padding: 10%;
     width: 100%;
     height: 100vh;
     background-image: url('../../assets/bg-admin.png');
@@ -8,6 +8,8 @@
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
+    z-index: 2;
+    position: fixed;
 }
 
 .ct-card{
@@ -17,7 +19,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: end;
-    padding-right: 10%;
 }
 
 
