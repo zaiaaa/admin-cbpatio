@@ -6,6 +6,7 @@ export const Home = () => {
   
     const {isAuth, logoff} = useContext(AuthContext)
     const navigate = useNavigate()
+    console.log(isAuth)
 
     useEffect(() => {
         if(!isAuth){
