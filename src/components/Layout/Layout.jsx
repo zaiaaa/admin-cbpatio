@@ -1,8 +1,6 @@
 import './Layout.css'
 import { Link } from 'react-router-dom/dist'
-import { useEffect, useContext } from 'react'
 import foto from "../../assets/logo.png"
-import { AuthContext } from '../../context/auth'
 
 const Layout = ({ children }) => {
 
@@ -28,7 +26,6 @@ const Layout = ({ children }) => {
                     </div>
                     <nav>
                         <ul className='ul-sidebar'>
-                            <Link to={"/home"} className='link'>home</Link>
                             <Link to={"/campeonatos"} className='link'>Campeonatos</Link>
                             <Link to={"/jogos"} className='link'>Jogos</Link>
                             <Link to={"/valores"} className='link'>Valores</Link>
