@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Link, Route ,Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { Login } from './pages/login/login'
 import { AuthContextProvider } from './context/auth'
-import { Home } from './pages/home/home'
-import { PrivateRoute } from './services/privateRoute'
+import {MainRoutes} from './components/MainRoutes/MainRoutes'
+import { Layout } from './components/Layout/Layout'
 
 function App() {
 
@@ -10,12 +10,11 @@ function App() {
     <Router>
       <AuthContextProvider>
         <Routes>
-          <Route path='/' element={<Login />}/>
-          <Route path='/home' element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>}/>
+          <Route path='/' element={<Login />} />
         </Routes>
+          <Layout>
+            <MainRoutes />
+          </Layout>
       </AuthContextProvider>
     </Router>
   )
