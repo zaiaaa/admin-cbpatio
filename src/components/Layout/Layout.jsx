@@ -30,6 +30,7 @@ const Layout = ({ children }) => {
                         <ul className='ul-sidebar'>
                             <Link to={"/home"} className='link'>home</Link>
                             <Link to={"/campeonatos"} className='link'>Campeonatos</Link>
+                            <Link to={"/jogos"} className='link'>Jogos</Link>
                             <Link to={"/valores"} className='link'>Valores</Link>
 
                         </ul>

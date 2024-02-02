@@ -52,9 +52,6 @@
 .active{
     color: #7662F1;
 }
-.children{
-    margin-left: 250px;
-}
 
 .live-on-btn{
     width: 80%;
@@ -71,4 +68,9 @@
 .live-on-btn:hover{
     background-color: #580affa1;
 
+}
+
+.children{
+
+    margin-left: 200px;
 }
