@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Home } from '../../pages/home/home'
 import { PrivateRoute } from '../../services/privateRoute'
 import { Campeonatos } from '../../pages/campeonatos/Campeonatos'
+import { Valores } from '../../pages/valores/Valores'
 
 
 const MainRoutes = () => {
@@ -14,7 +15,11 @@ const MainRoutes = () => {
                     </PrivateRoute>} />
                 <Route path='/campeonatos' element={
                     <PrivateRoute>
-                        <Campeonatos/>
+                        <Campeonatos />
+                    </PrivateRoute>} />
+                <Route path='/valores' element={
+                    <PrivateRoute>
+                        <Valores />
                     </PrivateRoute>} />
             </Routes>
         </>
@@ -22,4 +27,4 @@ const MainRoutes = () => {
 
 }
 
-export {MainRoutes}
+export { MainRoutes }
