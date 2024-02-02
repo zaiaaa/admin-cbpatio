@@ -35,7 +35,7 @@ export const AuthContextProvider = ({children}) =>{
                 console.log("logado")
                 
                 setIsAuth(true)
-                navigate('/home')
+                navigate('/campeonatos')
 
                 Api.defaults.headers.Authorization = `Bearer ${data}`
             }else{
