@@ -30,6 +30,7 @@ h2.h2-sublinhado {
   /* Espessura do sublinhado */
   text-underline-offset: 5px;
   margin-bottom: 3rem;
+  margin-top: 3rem;
   font-size: 25px;
   /* Ajuste a posição vertical do sublinhado */
 
