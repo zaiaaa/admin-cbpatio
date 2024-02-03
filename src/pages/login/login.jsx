@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import "./login.css"
 import { Card } from '../../components/Card/card'
 import { Input } from '../../components/Input/input'
@@ -19,7 +19,7 @@ const schema = yup.object({
 
 const Login = () => {
 
-  const {handleLogin} = useContext(AuthContext)
+  const {handleLogin, erros} = useContext(AuthContext)
 
   const {
     control,
@@ -31,9 +31,17 @@ const Login = () => {
 
 
 const onSubmit = async (formData) => {
-  handleLogin(formData)
+  try{
+    handleLogin(formData)
+  }catch(e){
+    console.log(e)
+  }
   console.log(formData)
 }
+
+useEffect(() => {
+  console.log(erros)
+}, [erros])
   
 
   return (
@@ -50,7 +58,7 @@ const onSubmit = async (formData) => {
                 
                 <div>
                   <label htmlFor="senha">Senha</label>
-                  <Input name={"senha"} control={control} type={"password"} placeholder={"Senha"} required/>
+                  <Input name={"senha"} control={control} type={"password"} placeholder={"Senha"}/>
                 </div>
               </div>
                 <Button text={"Entrar"} variant={"green"} type={"submit"} width={"20%"}/>
@@ -61,6 +69,7 @@ const onSubmit = async (formData) => {
 
           </Card>
         </div>
+            {errors?.senha?.message}
 
     </div>
   )
