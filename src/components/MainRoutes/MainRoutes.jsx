@@ -3,24 +3,18 @@ import { PrivateRoute } from '../../services/privateRoute'
 import { Campeonatos } from '../../pages/campeonatos/Campeonatos'
 import { Valores } from '../../pages/valores/Valores'
 import { Jogos } from '../../pages/jogos/Jogos'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/auth'
+
 
 
 const MainRoutes = () => {
+    const { isAuth } = useContext(AuthContext)
+
     return (
         <>
             <Routes>
-                <Route path='/campeonatos' element={
-                    <PrivateRoute>
-                        <Campeonatos />
-                    </PrivateRoute>} />
-                <Route path='/valores' element={
-                    <PrivateRoute>
-                        <Valores />
-                    </PrivateRoute>} />
-                <Route path='/jogos' element={
-                    <PrivateRoute>
-                        <Jogos />
-                    </PrivateRoute>} />
+                
             </Routes>
         </>
     )
