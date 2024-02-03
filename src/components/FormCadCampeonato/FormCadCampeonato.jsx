@@ -79,7 +79,7 @@ const FormCadCampeonato = () => {
                         <Input name={"data_hora"} control={control} />
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Button  text={"Entrar"} variant={"green"} type={"submit"} width={"100%"} />
+                        <Button  text={"Cadastrar"} variant={"green"} type={"submit"} width={"100%"} />
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Button  text={"Limpar"} variant={"yellow"} type={"reset"} width={"100%"} />
