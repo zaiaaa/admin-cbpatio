@@ -1,4 +1,8 @@
 .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
     box-sizing: border-box;
     height: 50px;
     width: 100%;
@@ -24,11 +28,11 @@
 
 .button.purple{
     background-color: #580aff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
     color: #fff;
+}
+
+.button.red{
+    background-color: red;
 }
 
 .button.yellow{
