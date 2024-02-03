@@ -40,10 +40,6 @@ const Login = () => {
     console.log(formData)
   }
 
-  useEffect(() => {
-    console.log(erros)
-  }, [erros])
-
 
   return (
     <div className='bg'>
@@ -67,6 +63,7 @@ const Login = () => {
           <div className='ct-img'>
             <img src={foto} alt="adwawd" />
           </div>
+          <p align="center" color='red'>{erros}</p>
 
         </Card>
       </div>
