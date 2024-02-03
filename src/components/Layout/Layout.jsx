@@ -1,10 +1,13 @@
 import './Layout.css'
 import { Link } from 'react-router-dom/dist'
 import foto from "../../assets/logo.png"
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button/button';
+import { AuthContext } from '../../context/auth';
 
 const Layout = ({ children }) => {
+
+    const {logoff} = useContext(AuthContext)
 
     const menuItem = document.querySelectorAll('.link');
     function selectLink() {
@@ -40,6 +43,7 @@ const Layout = ({ children }) => {
                         </ul>
                     </nav>
                     <Button text={ !isliveOn ? 'live on?' : 'live off?'} type={"button"} variant={"purple"} width={"100%"} padding={".75rem 2rem"} onClick={handleLiveOn} />
+                    <Button text={'Sair'} type={"button"} variant={"red"} width={"100%"} padding={".75rem 2rem"} onClick={logoff} />
                 </div>
                 <div className="children">
                     {children}
