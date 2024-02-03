@@ -3,15 +3,55 @@ import { Input } from '../Input/input'
 import { Button } from '../Button/button'
 import './FormCadCampeonato.css'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { Api } from '../../services/api'
 
+    const schema = yup.object({
+        nome: yup.string(),
+        modalidade: yup.string().max(20, 'No máximo 20 caracteres.'),
+        sinopse: yup.string(),
+        valor_entrada: yup.number().test({
+            name: 'formato',
+            message: 'O número deve estar no formato 0.00',
+            test: value => /^\d+(\.\d{1,2})?$/.test(value.toString()),
+        }).typeError('Deve ser um número'),
+        premiacao: yup.number().test({
+            name: 'formato',
+            message: 'O número deve estar no formato 0.00',
+            test: value => /^\d+(\.\d{1,2})?$/.test(value.toString()),
+        }).typeError('Deve ser um número'),
+        jogadores_por_time: yup.number(),
+        limite_de_inscrição: yup.number(),
+        foto: yup.mixed(),
+        data_hora: yup.date()
+        
+
+    }).required()
 
 const FormCadCampeonato = () => {
+
+
+    const handleCreateCampeonato = async (formData) => {
+        try{
+            Api.post('/campeonatos/cadastrar', {
+                nome: formData.nome,
+                foto: formData.foto,
+
+            })
+        }catch(e){
+
+        }
+    }
 
     const {
         control,
         handleSubmit,
         formState: { errors, isValid },
-    } = useForm()
+    } = useForm({
+        resolver: yupResolver(schema),
+        mode: 'onChange',
+    })
 
 
     const onSubmit = async (formData) => {
@@ -20,7 +60,7 @@ const FormCadCampeonato = () => {
         } catch (e) {
             console.log(e)
         }
-        console.log(formData)
+        //console.log(formData)
     }
 
     return (
@@ -34,11 +74,11 @@ const FormCadCampeonato = () => {
                 >
                     <GridItem colSpan={4}>
                         <label htmlFor="nome">Nome</label>
-                        <Input name={"nome"} control={control} />
+                        <Input name={"nome"} control={control} type={"text"} />
                     </GridItem>
                     <GridItem colSpan={2}>
                         <label htmlFor="modalidade">Modalidade</label>
-                        <Input name={"modalidade"} control={control} />
+                        <Input name={"modalidade"} control={control} type={'text'}/>
                     </GridItem>
                     <GridItem rowSpan={2} colSpan={2}>
                         <label htmlFor="sinopse">Sinopse</label>
@@ -51,11 +91,14 @@ const FormCadCampeonato = () => {
                             color={'#303030'}
                             height={'166px'}
                             size='md'
+                            outline={'none'} 
+                            type={'text'}
+                            required
                         />
                     </GridItem>
                     <GridItem colSpan={2}>
                         <label htmlFor="valor_entrada">Valor da Entrada</label>
-                        <Input name={"valor_entrada"} control={control} />
+                        <Input name={"valor_entrada"} control={control}/>
                     </GridItem>
                     <GridItem colSpan={2}>
                         <label htmlFor="premiacao">Premiação</label>
@@ -63,20 +106,20 @@ const FormCadCampeonato = () => {
                     </GridItem>
                     <GridItem colSpan={2}>
                         <label htmlFor="jogadores_por_time">Jogadores por time</label>
-                        <Input name={"jogadores_por_time"} control={control} />
+                        <Input name={"jogadores_por_time"} control={control} type={'number'} />
                     </GridItem>
 
                     <GridItem colSpan={2}>
                         <label htmlFor="limite_de_inscrição">Limite de inscrição</label>
-                        <Input name={"limite_de_inscrição"} control={control} />
+                        <Input name={"limite_de_inscrição"} control={control} type={'number'} />
                     </GridItem>
                     <GridItem colSpan={2} >
                         <label htmlFor="foto">Foto</label>
-                        <Input name={"foto"} control={control}  />
+                        <Input name={"foto"} control={control} type={"file"}/>
                     </GridItem>
                     <GridItem colSpan={2}>
                         <label htmlFor="data_hora">Data & Hora</label>
-                        <Input name={"data_hora"} control={control} />
+                        <Input name={"data_hora"} control={control} type='datetime-local' />
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Button  text={"Cadastrar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
@@ -85,7 +128,7 @@ const FormCadCampeonato = () => {
                         <Button  text={"Limpar"} variant={"yellow"} type={"reset"} width={"100%"} margin={'1.5rem 0'} padding={'2rem'}/>
                     </GridItem>
                 </Grid>
-                
+                <p>{errors?.valor_entrada?.message}</p>
             </form>
         </>
     )
