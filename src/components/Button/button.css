@@ -23,7 +23,11 @@
 }
 
 .button.purple{
-    background-color: #580affa1;
+    background-color: #580aff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
     color: #fff;
 }
 
