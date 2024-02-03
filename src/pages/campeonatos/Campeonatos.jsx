@@ -7,9 +7,6 @@ import { SliderCampeonatos } from "../../components/SliderCampeonatos/SliderCamp
 
 const Campeonatos = () => {
 
-    const { logoff } = useContext(AuthContext)
-
-
     return (
         <>
             <h1 >Campeonatos</h1>
@@ -17,7 +14,6 @@ const Campeonatos = () => {
             <SliderCampeonatos />
             <h2 className="h2-sublinhado">NOVO CAMPEONATO</h2>
             <FormCadCampeonato />
-            <Button text={"deslogar"} variant={"green"} type={"button"} onClick={logoff} />
         </>
     )
 }
