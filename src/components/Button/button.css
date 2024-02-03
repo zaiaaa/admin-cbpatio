@@ -9,6 +9,7 @@
     font-weight: 600;
     transition: .5s;
     text-align: center;
+    z-index: 1;
 }
 
 .button:hover{
@@ -18,5 +19,10 @@
 
 .button.green{
     background-color: #40B52D;
+    color: #fff;
+}
+
+.button.purple{
+    background-color: #580affa1;
     color: #fff;
 }
