@@ -1,26 +1,41 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Login } from './pages/login/login'
 import { AuthContext, AuthContextProvider } from './context/auth'
-import { MainRoutes } from './components/MainRoutes/MainRoutes'
 import { Layout } from './components/Layout/Layout'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useContext } from 'react'
-
+import { PrivateRoute } from './services/privateRoute'
+import { Campeonatos } from './pages/campeonatos/Campeonatos'
+import { Valores } from './pages/valores/Valores'
+import { Jogos } from './pages/jogos/Jogos'
 
 
 function App() {
-  const { isAuth } = useContext(AuthContext)
-  console.log(isAuth)
   return (
     <Router>
       <AuthContextProvider>
         <ChakraProvider>
           <Routes>
             <Route path='/' element={<Login />} />
+            <Route path='/campeonatos' element={
+                    <PrivateRoute>
+                        <Layout>
+                          <Campeonatos />
+                        </Layout>
+                    </PrivateRoute>} />
+                <Route path='/valores' element={
+                    <PrivateRoute>
+                        <Layout>
+                          <Valores />
+                        </Layout>
+                    </PrivateRoute>} />
+                <Route path='/jogos' element={
+                    <PrivateRoute>
+                        <Layout>
+                          <Jogos />
+                        </Layout>
+                    </PrivateRoute>} />
           </Routes>
-          <Layout>
-            <MainRoutes />
-          </Layout>
         </ChakraProvider>
       </AuthContextProvider>
     </Router>
