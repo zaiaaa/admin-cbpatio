@@ -8,6 +8,7 @@ export const AuthContext = createContext({})
 export const AuthContextProvider = ({children}) =>{
     const [token, setToken] = useState({})
     const [isAuth, setIsAuth] = useState(false)
+    const [erros, setErros] = useState('')
 
     const navigate = useNavigate()
 
@@ -43,7 +44,11 @@ export const AuthContextProvider = ({children}) =>{
             }
 
         }catch(e){
-            console.log(e)
+            e = "Login ou Senha inválidos"
+            setErros(e)
+            setTimeout(() => {
+                setErros("")
+            }, 2000);
         }
     }
 
@@ -55,7 +60,7 @@ export const AuthContextProvider = ({children}) =>{
     }
 
 
-    return(<AuthContext.Provider value={{token, logoff, handleLogin, isAuth}}>
+    return(<AuthContext.Provider value={{token, logoff, handleLogin, isAuth, erros}}>
         {children}
     </AuthContext.Provider>)
 }
