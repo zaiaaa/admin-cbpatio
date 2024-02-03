@@ -51,6 +51,7 @@ export const AuthContextProvider = ({children}) =>{
         setIsAuth(false)
         setToken({})
         localStorage.clear()
+        navigate('/')
     }
 
 
