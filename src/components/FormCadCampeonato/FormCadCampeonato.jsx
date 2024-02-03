@@ -11,6 +11,7 @@ import { Api } from '../../services/api'
         nome: yup.string(),
         modalidade: yup.string().max(20, 'No máximo 20 caracteres.'),
         sinopse: yup.string(),
+        
         valor_entrada: yup.number().test({
             name: 'formato',
             message: 'O número deve estar no formato 0.00',
@@ -21,8 +22,9 @@ import { Api } from '../../services/api'
             message: 'O número deve estar no formato 0.00',
             test: value => /^\d+(\.\d{1,2})?$/.test(value.toString()),
         }).typeError('Deve ser um número'),
-        jogadores_por_time: yup.number(),
-        limite_de_inscrição: yup.number(),
+
+        jogadores_por_time: yup.number().typeError('Deve ser um número'),
+        limite_de_inscrição: yup.number('Deve ser um número'),
         foto: yup.mixed(),
         data_hora: yup.date()
         
@@ -31,7 +33,7 @@ import { Api } from '../../services/api'
 
 const FormCadCampeonato = () => {
 
-
+    // falta só fazer a requisição aqui
     const handleCreateCampeonato = async (formData) => {
         try{
             Api.post('/campeonatos/cadastrar', {
@@ -128,7 +130,17 @@ const FormCadCampeonato = () => {
                         <Button  text={"Limpar"} variant={"yellow"} type={"reset"} width={"100%"} margin={'1.5rem 0'} padding={'2rem'}/>
                     </GridItem>
                 </Grid>
+                {/* colocar todos os possiveis erros nesse formato */}
+                <p>{errors?.nome?.message}</p>
+                <p>{errors?.data_hora?.message}</p>
+                <p>{errors?.foto?.message}</p>
+                <p>{errors?.jogadores_por_time?.message}</p>
+                <p>{errors?.limite_de_inscrição?.message}</p>
+                <p>{errors?.sinopse?.message}</p>
                 <p>{errors?.valor_entrada?.message}</p>
+                <p>{errors?.modalidade?.message}</p>
+                <p>{errors?.premiacao?.message}</p>
+
             </form>
         </>
     )
