@@ -16,12 +16,12 @@ import { Pagination, Navigation } from 'swiper/modules';
 import { CardCampeonato } from '../CardCampeonato/CardCampeonato';
 import bgImage from '../../assets/bg-admin.png'
 
-const SliderCampeonatos = () => {
+const SliderCampeonatos = ({data = []}) => {
 
     return (
         <>
             <Swiper
-                slidesPerView={4}
+                slidesPerView={5}
                 centeredSlides={false}
                 spaceBetween={10}
                 pagination={{
@@ -33,7 +33,7 @@ const SliderCampeonatos = () => {
             >
                 <SwiperSlide>
                     <CardCampeonato
-                        titulo={'FORTNITE BOXFIGHT 2V2'}
+                        titulo={data.nome}
                         variant={'campeonato'}
                         width={'100%'}
                         height={'100%'} 
