@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
 
 import './SliderCampeonatos.css';
 
@@ -28,7 +28,7 @@ const SliderCampeonatos = () => {
                     type: 'fraction',
                 }}
                 navigation={true}
-                modules={[Pagination, Navigation]}
+                //modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
                 <SwiperSlide>
