@@ -76,6 +76,7 @@ const FormCadCampeonato = () => {
             //     nome: formData.nome,
             //     foto: formData.foto,
             // })
+            const date = new Date(formData.data_hora)
             console.log(formData)
         } catch (e) {
 
