@@ -1,6 +1,3 @@
-import { useContext } from "react"
-import { Button } from "../../components/Button/button"
-import { AuthContext } from "../../context/auth"
 import { FormCadCampeonato } from "../../components/FormCadCampeonato/FormCadCampeonato"
 import { SliderCampeonatos } from "../../components/SliderCampeonatos/SliderCampeonatos"
 
