@@ -72,10 +72,11 @@ const FormCadCampeonato = () => {
     // falta só fazer a requisição aqui
     const handleCreateCampeonato = async (formData) => {
         try {
-            Api.post('/campeonatos/cadastrar', {
-                nome: formData.nome,
-                foto: formData.foto,
-            })
+            // Api.post('/campeonatos/cadastrar', {
+            //     nome: formData.nome,
+            //     foto: formData.foto,
+            // })
+            console.log(formData)
         } catch (e) {
 
         }
@@ -174,7 +175,7 @@ const FormCadCampeonato = () => {
                     </GridItem>
 
                     <GridItem colSpan={1}>
-                        <Button text={"Cadastrar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
+                        <Button text={"Cadastrar"} variant={"green"} type={"button"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} onClick={handleSubmit(onSubmit)} />
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Button text={"Limpar"} variant={"yellow"} type={'button'} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} onClick={handleCleanForm}/>
