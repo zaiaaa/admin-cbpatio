@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Api } from '../../services/api'
+import {format} from "date-fns"
 
 const schema = yup.object({
     nome:
@@ -72,15 +73,29 @@ const FormCadCampeonato = () => {
     // falta só fazer a requisição aqui
     const handleCreateCampeonato = async (formData) => {
         try {
-            // Api.post('/campeonatos/cadastrar', {
-            //     nome: formData.nome,
-            //     foto: formData.foto,
-            // })
-            const date = new Date(formData.data_hora)
-            console.log(formData)
-        } catch (e) {
+            formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
+            console.log(formData.foto)
 
-        }
+            Api.post('/campeonatos/cadastrar', {
+                nome: formData.nome,
+                foto: formData.foto,
+                modalidade: formData.modalidade,
+                sinopse: formData.sinopse,
+                data: formData.data_hora,
+                valor_entrada: formData.valor_entrada,
+                premiacao: formData.premiacao,
+                jogadores: formData.jogadores_por_time
+            }, 
+                {
+                    //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            )
+        } catch (e) {
+            console.log(e)
+        }   
     }
 
     const handleCleanForm = () => {
@@ -110,7 +125,7 @@ const FormCadCampeonato = () => {
     return (
         <>
 
-            <form onSubmit={handleSubmit(onSubmit)} className='form-campeonato'>
+            <form onSubmit={handleSubmit(onSubmit)} className='form-campeonato' encType='multipart/form-data'>
                 {/* grid com 4 linhas e 6 colunas */}
                 <Grid
                     templateRows='repeat(4, 1fr)'
