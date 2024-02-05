@@ -14,28 +14,32 @@ import { Pagination, Navigation } from 'swiper/modules';
 
 
 import { CardCampeonato } from '../CardCampeonato/CardCampeonato';
-import bgImage from '../../assets/bg-admin.png'
 import { useEffect, useState } from 'react';
 import { Api } from '../../services/api';
-const path = "http://localhost:3005"
 
-const SliderCampeonatos = ({}) => {
+//colocar path no .env 
+const path = "http://localhost:3005"
+import img from '../../assets/noimage.png'
+
+
+const SliderCampeonatos = ({ }) => {
 
     const [campeonatos, setCampeonatos] = useState([])
 
     useEffect(() => {
         const handleGetCampeonatos = async () => {
-            try{
+            try {
                 const fetch = await Api.get('/campeonatos')
                 setCampeonatos(fetch.data)
-            }catch(e){
+            } catch (e) {
 
             }
         }
         handleGetCampeonatos()
     }, [])
-    
+
     console.log(campeonatos)
+
 
     return (
         <>
@@ -47,25 +51,36 @@ const SliderCampeonatos = ({}) => {
                     type: 'fraction',
                 }}
                 navigation={true}
-                //modules={[Pagination, Navigation]}
+                modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                
+
                 {
-                campeonatos.length !== 0 ? campeonatos.map(campeonato => {
-                    const foto = campeonato.foto.replace(/\\/g, '/');
-                    return<SwiperSlide>
-                    <CardCampeonato
-                        titulo={campeonato.nome}
-                        variant={'campeonato'}
-                        width={'100%'}
-                        height={'100%'} 
-                        bgImage={`${path}/${foto}`}
-                        //TODO UMA OPC QUE TENHA UMA FOTO DE QUE A PESSOA/CAMPEONATO NAO TEM FOTO, CASO NAO TENHA
-                    />
-                </SwiperSlide>}) : "Não existem campeonatos cadastrados"
+                    campeonatos.length !== 0 ? campeonatos.map((campeonato, index) => {
+
+                        //OK //TODO UMA OPC QUE TENHA UMA FOTO DE QUE A PESSOA/CAMPEONATO NAO TEM FOTO, CASO NAO TENHA
+                        let foto = ''
+                        if (campeonato.foto) {
+                            foto = `${path}/${campeonato.foto.replace(/\\/g, '/')}`
+                        } else {
+                            foto = img
+                        }
+
+                        return <SwiperSlide
+                            key={index}
+                        >
+                            <CardCampeonato
+                                titulo={campeonato.nome}
+                                variant={'campeonato'}
+                                width={'100%'}
+                                height={'100%'}
+                                bgImage={foto}
+
+                            />
+                        </SwiperSlide>
+                    }) : "Não existem campeonatos cadastrados"
                 }
-                
+
             </Swiper>
 
         </>
