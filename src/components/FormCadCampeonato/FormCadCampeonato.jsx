@@ -1,10 +1,6 @@
 import {
     Grid,
     GridItem,
-    Textarea,
-    Alert,
-    AlertIcon,
-    AlertTitle,
 } from '@chakra-ui/react'
 
 import { Input } from '../Input/input'
@@ -108,12 +104,6 @@ const FormCadCampeonato = () => {
         <>
 
             <form onSubmit={handleSubmit(onSubmit)} className='form-campeonato'>
-                {errors.message && (
-                    <Alert status='error' >
-                        <AlertIcon />
-                        <AlertTitle color={'#303030'}>Preencha todos os campos corretamente</AlertTitle>
-                    </Alert>
-                )}
                 {/* grid com 4 linhas e 6 colunas */}
                 <Grid
                     templateRows='repeat(4, 1fr)'
