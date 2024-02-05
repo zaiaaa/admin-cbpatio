@@ -81,10 +81,15 @@ const FormCadCampeonato = () => {
         }
     }
 
+    const handleCleanForm = () => {
+        reset();
+    }
+
     const {
         control,
         handleSubmit,
         formState: { errors, isValid },
+        reset,
     } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange',
@@ -172,7 +177,7 @@ const FormCadCampeonato = () => {
                         <Button text={"Cadastrar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
                     </GridItem>
                     <GridItem colSpan={1}>
-                        <Button text={"Limpar"} variant={"yellow"} type={"reset"} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} />
+                        <Button text={"Limpar"} variant={"yellow"} type={'button'} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} onClick={handleCleanForm}/>
                     </GridItem>
                 </Grid>
                 {/* colocar todos os possiveis erros nesse formato */}
