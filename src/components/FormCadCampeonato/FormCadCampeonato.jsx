@@ -99,7 +99,7 @@ const FormCadCampeonato = () => {
 
     const onSubmit = async (formData) => {
         try {
-            console.log(formData)
+            handleCreateCampeonato(formData)
         } catch (e) {
             console.log(e)
         }
@@ -175,7 +175,7 @@ const FormCadCampeonato = () => {
                     </GridItem>
 
                     <GridItem colSpan={1}>
-                        <Button text={"Cadastrar"} variant={"green"} type={"button"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} onClick={handleSubmit(onSubmit)} />
+                        <Button text={"Cadastrar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Button text={"Limpar"} variant={"yellow"} type={'button'} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} onClick={handleCleanForm}/>
