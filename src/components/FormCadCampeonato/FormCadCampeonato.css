@@ -1,6 +1,11 @@
 
 form.form-campeonato{
     min-height: 596px;
+    background-color: #303030;
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
 }
 
 form.form-campeonato input{
