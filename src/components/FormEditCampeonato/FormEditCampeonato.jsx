@@ -96,6 +96,7 @@ const FormEditCampeonato = ({id}) => {
 
             console.log(formData)
 
+            //TODO fazer a requisição e testar
             // Api.put(`/campeonatos/atualizar/${id}`, {
             //     nome: formData.nome,
             //     foto: formData.foto,
