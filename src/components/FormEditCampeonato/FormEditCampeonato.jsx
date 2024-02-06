@@ -149,7 +149,7 @@ const FormEditCampeonato = ({id}) => {
 
     return (
         <>
-
+            {/* BUG NO FORM, NAO PODEMOS DEIXAR OSÓ O DEFAULTVALUE, PQ SE NAO ELE NAO DEIXA ENVIAR */}
             <form onSubmit={handleSubmit(onSubmit)} className='form-campeonato' encType='multipart/form-data'>
                 {/* grid com 4 linhas e 6 colunas */}
                 <Grid
