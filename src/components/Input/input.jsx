@@ -29,7 +29,7 @@ const Input = ({name, control, disabled, readOnly, type = 'text',...rest}) => {
       /> 
       
       //se não for um input de file nem de data
-      : <input className='input' value={value} onChange={onChange} disabled={disabled} readOnly={readOnly} {...rest}/>}
+      : <input className='input' type={type} value={value} onChange={onChange} disabled={disabled} readOnly={readOnly} {...rest}/>}
         />
     </>
   )
