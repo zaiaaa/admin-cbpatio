@@ -35,6 +35,15 @@ const EditarCampeonato = () => {
         return format(newDate, "dd/MM/yyyy HH:mm:ss")
     }
 
+    function formataDinheiro(valor){
+        const formata = Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        })
+
+        return formata.format(valor)
+    }
+
     let foto = ''
     if (campeonatos.foto) {
         foto = `${path}/${campeonatos.foto.replace(/\\/g, '/')}`
@@ -65,9 +74,9 @@ const EditarCampeonato = () => {
                                     sinopse={campeonatos.sinopse}
                                     data_hora={formataData(campeonatos.data)}
                                     modalidade={campeonatos.modalidade}
-                                    valor_ingresso={campeonatos.valor_entrada}
+                                    valor_ingresso={formataDinheiro(campeonatos.valor_entrada)}
                                     jogadores_time={campeonatos.jogadores}
-                                    premiacao={campeonatos.premiacao}
+                                    premiacao={formataDinheiro(campeonatos.premiacao)}
                                     limite_inscricao={10}
                                 />
                             </div>
