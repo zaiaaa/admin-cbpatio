@@ -3,8 +3,9 @@ import "./CardCampeonato.css"
 import { Card } from '../Card/card'
 import { Button } from '../Button/button'
 import { Flex, Center } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
-const CardCampeonato = ({ titulo, variant, width, height, bgImage }) => {
+const CardCampeonato = ({ idCamp, titulo, variant, width, height, bgImage }) => {
     // tres variantes de card de acordo com os btns
     //uma para o card da tela dos campeonatos, com somente 1 btn
     //outra para o preview de edição do campeonato
@@ -16,7 +17,11 @@ const CardCampeonato = ({ titulo, variant, width, height, bgImage }) => {
             <h3>{titulo}</h3>
             {
                 variant === 'campeonato' ? (
-                    <Button text={"Ver Campeonato"} variant={"purple"} width={"100%"} />
+                    <Link to={`/campeonatos/editar/${idCamp}`}>
+                        <Button text={"Ver Campeonato"} variant={"purple"} width={"100%"} />
+                    </Link>
+
+
                 )
                     : variant === 'preview' ? (
                         <Button text={"Inscreva-se"} variant={"purple"} width={"100%"} />
