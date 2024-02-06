@@ -1,0 +1,10 @@
+div.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0rem 2rem;
+}
+div.first-row{
+    width: 70%;
+}
