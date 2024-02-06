@@ -85,6 +85,7 @@ const SliderCampeonatos = ({ }) => {
                                     key={index}
                                 >
                                     <CardCampeonato
+                                        idCamp={campeonato.id_campeonato}
                                         titulo={campeonato.nome}
                                         variant={'campeonato'}
                                         width={'100%'}
