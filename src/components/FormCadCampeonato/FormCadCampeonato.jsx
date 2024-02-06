@@ -11,6 +11,9 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Api } from '../../services/api'
 import {format} from "date-fns"
+import { useNavigate } from 'react-router-dom'
+
+
 
 const schema = yup.object({
     nome:
@@ -69,6 +72,7 @@ const schema = yup.object({
 }).required()
 
 const FormCadCampeonato = () => {
+    const navigate = useNavigate()
 
     // falta só fazer a requisição aqui
     const handleCreateCampeonato = async (formData) => {
@@ -116,6 +120,8 @@ const FormCadCampeonato = () => {
     const onSubmit = async (formData) => {
         try {
             handleCreateCampeonato(formData)
+            handleCleanForm()
+            window.location.reload()
         } catch (e) {
             console.log(e)
         }
