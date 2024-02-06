@@ -54,7 +54,7 @@ const schema = yup.object({
                 test: value => /^\d+$/.test(value.toString()),
             })
             .typeError('Este campo deve ser preechido com um número'),
-    limite_de_inscrição:
+    limite:
         yup.number('Este campo deve ser preechido com um número')
             .required('Este campo não pode estar vazio!')
             .test({
@@ -182,7 +182,7 @@ const FormCadCampeonato = () => {
                     <GridItem colSpan={2}>
                         <label htmlFor="limite_de_inscrição">Limite de inscrição</label>
                         <Input name={"limite"} control={control} type={'number'} />
-                        <p>{errors?.limite_de_inscrição?.message}</p>
+                        <p>{errors?.limite?.message}</p>
 
                     </GridItem>
                     <GridItem colSpan={2}>
