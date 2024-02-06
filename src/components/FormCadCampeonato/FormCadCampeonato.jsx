@@ -88,7 +88,8 @@ const FormCadCampeonato = () => {
                 data: formData.data_hora,
                 valor_entrada: formData.valor_entrada,
                 premiacao: formData.premiacao,
-                jogadores: formData.jogadores_por_time
+                jogadores: formData.jogadores_por_time,
+                limite: formData.limite
             }, 
                 {
                     //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
@@ -180,7 +181,7 @@ const FormCadCampeonato = () => {
 
                     <GridItem colSpan={2}>
                         <label htmlFor="limite_de_inscrição">Limite de inscrição</label>
-                        <Input name={"limite_de_inscrição"} control={control} type={'number'} />
+                        <Input name={"limite"} control={control} type={'number'} />
                         <p>{errors?.limite_de_inscrição?.message}</p>
 
                     </GridItem>
