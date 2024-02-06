@@ -6,6 +6,7 @@ import { Button } from '../../components/Button/button';
 import { PreviewCampeonato } from "../../components/PreviewCampeonato/PreviewCampeonato";
 import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
+import {FormEditCampeonato} from "../../components/FormEditCampeonato/FormEditCampeonato"
 
 const path = "http://localhost:3005"
 import img from '../../assets/noimage.png'
@@ -92,6 +93,7 @@ const EditarCampeonato = () => {
                                     bgImage={foto}
                                 />
                             </div>
+
                         </div>
 
                     </>
@@ -100,6 +102,11 @@ const EditarCampeonato = () => {
             <Link to='/campeonatos'>
                 <Button text={'Voltar'} type={"button"} variant={"red"} width={"10%"} padding={".75rem 2rem"} />
             </Link>
+            
+            <div>
+                <h2 className="h2-sublinhado">EDITAR CAMPEONATO</h2>
+                <FormEditCampeonato id={id}/>
+            </div>
         </>
     )
 }
