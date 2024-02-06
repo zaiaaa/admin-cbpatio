@@ -26,11 +26,11 @@ const PreviewCampeonato = ({ nome, sinopse, data_hora, modalidade, valor_ingress
                     </p>
                     <p>
                         <span>valor_ingresso: </span>
-                        <span className='valor'>{valor_ingresso},00 R$</span>
+                        <span className='valor'>{valor_ingresso} R$</span>
                     </p>
                     <p>
                         <span >premiacao: </span>
-                        <span className='premio'>{premiacao},00 R$</span>
+                        <span className='premio'>{premiacao} R$</span>
                     </p>
                     <p>
                         <span>jogadores_time: </span>
