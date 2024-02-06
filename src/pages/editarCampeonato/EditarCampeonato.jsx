@@ -9,6 +9,7 @@ import './EditarCampeonato.css'
 
 const path = "http://localhost:3005"
 import img from '../../assets/noimage.png'
+import { format } from "date-fns";
 
 const EditarCampeonato = () => {
     const { id } = useParams()
@@ -28,6 +29,11 @@ const EditarCampeonato = () => {
         }
         handleGetCampeonatos()
     }, [])
+
+    function formataData(data){
+        const newDate = new Date(data)
+        return format(newDate, "dd/MM/yyyy HH:mm:ss")
+    }
 
     let foto = ''
     if (campeonatos.foto) {
@@ -57,7 +63,7 @@ const EditarCampeonato = () => {
                                 <PreviewCampeonato
                                     nome={campeonatos.nome}
                                     sinopse={campeonatos.sinopse}
-                                    data_hora={campeonatos.data}
+                                    data_hora={formataData(campeonatos.data)}
                                     modalidade={campeonatos.modalidade}
                                     valor_ingresso={campeonatos.valor_entrada}
                                     jogadores_time={campeonatos.jogadores}
