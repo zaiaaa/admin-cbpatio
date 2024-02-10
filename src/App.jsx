@@ -9,6 +9,7 @@ import { Campeonatos } from './pages/campeonatos/Campeonatos'
 import { Valores } from './pages/valores/Valores'
 import { Jogos } from './pages/jogos/Jogos'
 import { EditarCampeonato } from './pages/editarCampeonato/EditarCampeonato'
+import { ChaveCampeonato } from './pages/chaveCampeonato/ChaveCampeonato'
 
 
 function App() {
@@ -59,11 +60,11 @@ function App() {
                 </Layout>
               </PrivateRoute>} />
 
-              
+
             <Route path='/jogos/:id/chave' element={
               <PrivateRoute>
                 <Layout>
-                  <Jogos />
+                  <ChaveCampeonato/>
                 </Layout>
               </PrivateRoute>} />
           </Routes>
