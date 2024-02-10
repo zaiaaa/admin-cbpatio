@@ -1,0 +1,48 @@
+.semis-fase {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 2px solid #D21AF0;
+    border-radius: 10px;
+    text-transform: uppercase;
+    gap: 2rem;
+}
+
+.semis-fase .fase-titulo {
+    color: #D21AF0;
+    font-weight: 600;
+}
+
+.semis-fase .fase-jogos {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+
+.semis-fase .fase-jogos .jogo {
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    text-align: center;
+    flex-direction: column;
+}
+
+.semis-fase .fase-jogos .jogo select {
+    color: #D21AF0;
+    font-weight: 600;
+}
+
+.semis-fase .fase-jogos .jogo option {
+    color: #D21AF0;
+    font-weight: 600;
+}
+
+.semis-fase .fase-jogos .jogo .jogo-numero {
+    color: #D21AF0;
+    font-weight: 500;
+}
