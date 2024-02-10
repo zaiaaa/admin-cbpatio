@@ -57,6 +57,7 @@ const TodosCampeonatos = () => {
                             return (
                                 <CardCampeonato
                                     key={index}
+                                    idCamp={campeonato.id_campeonato}
                                     titulo={campeonato.nome}
                                     variant={'jogos'}
                                     width={'214px'}
