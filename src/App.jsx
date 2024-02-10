@@ -30,13 +30,37 @@ function App() {
                   <EditarCampeonato />
                 </Layout>
               </PrivateRoute>} />
+
+
+            <Route path='/campeonatos/:id/capitaes' element={
+              <PrivateRoute>
+                <Layout>
+                  <EditarCampeonato />
+                </Layout>
+              </PrivateRoute>} />
             <Route path='/valores' element={
               <PrivateRoute>
                 <Layout>
                   <Valores />
                 </Layout>
               </PrivateRoute>} />
+
+
+            <Route path='/valores/:id' element={
+              <PrivateRoute>
+                <Layout>
+                  <Valores />
+                </Layout>
+              </PrivateRoute>} />
             <Route path='/jogos' element={
+              <PrivateRoute>
+                <Layout>
+                  <Jogos />
+                </Layout>
+              </PrivateRoute>} />
+
+              
+            <Route path='/jogos/:id/chave' element={
               <PrivateRoute>
                 <Layout>
                   <Jogos />
