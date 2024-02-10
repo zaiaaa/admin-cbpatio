@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { Api } from "../../services/api"
 import { useEffect, useState } from "react"
+import { Chave } from "../../components/Chave/Chave"
 
 const ChaveCampeonato = () => {
 
@@ -25,6 +26,7 @@ const ChaveCampeonato = () => {
     return (
         <>
             <h1>{campeonato.nome}</h1>
+            <Chave />
         </>
     )
 }
