@@ -1,0 +1,68 @@
+.chave-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+
+/* ESTILIZAÇÃO DO CHAVEAMENTO GERAL */
+.chaveamento {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chaveamento .chave {
+    width: 40%;
+}
+
+.chaveamento .chave .chave-nome {
+    text-transform: uppercase;
+    color: #B54EF3;
+    font-weight: 600;
+    text-align: center;
+}
+
+.chaveamento .chave .chave-fases {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chaveamento .chave .chave-fases div{
+    pointer-events: none;
+    opacity: .5;
+}
+
+.chaveamento .chave .chave-fases div.active-div{
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+
+/* ESTILIZAÇÃO DO LAYOUT DOS BTNS NO FINAL DA PAGINA */
+.chaveamento-opcoes {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.chaveamento-opcoes .fase-opcoes {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.chaveamento-opcoes .mudar-fase {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
