@@ -7,7 +7,7 @@ const Input = ({defaultValue, name, control, disabled, readOnly, type = 'text',.
     <>        
         <Controller name={name}
         control={control}
-        defaultValue={type == 'file' ? null : ''}
+        defaultValue={type == 'file' ? null : defaultValue}
         rules={{required: true}}
         render={({field: {value, onChange}}) => type == 'file' ? 
         //se for um input de file
