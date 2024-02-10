@@ -35,7 +35,7 @@ const CardCampeonato = ({ idCamp, titulo, variant, width, height, bgImage }) => 
                                     <Link to={`/jogos/${idCamp}/chave`}>
                                         <Button text={"Montar Jogos"} variant={"purple"} width={"100%"} />
                                     </Link>
-                                    <Link to={`/campeonato/${idCamp}/capitaes`}>
+                                    <Link to={`/campeonatos/${idCamp}/capitaes`}>
                                         <Button text={"Ver Capitães"} variant={"purple"} width={"100%"} />
                                     </Link>
                                 </div>
