@@ -29,9 +29,15 @@ const CardCampeonato = ({ idCamp, titulo, variant, width, height, bgImage }) => 
                         : variant === 'jogos' && (
                             <>
                                 <div className='gap-btn'>
-                                    <Button text={"Ver valores"} variant={"purple"} width={"100%"} />
-                                    <Button text={"Montar Jogos"} variant={"purple"} width={"100%"} />
-                                    <Button text={"Ver Capitães"} variant={"purple"} width={"100%"} />
+                                    <Link to={`/valores/${idCamp}`}>
+                                        <Button text={"Ver valores"} variant={"purple"} width={"100%"} />
+                                    </Link>
+                                    <Link to={`/jogos/${idCamp}/chave`}>
+                                        <Button text={"Montar Jogos"} variant={"purple"} width={"100%"} />
+                                    </Link>
+                                    <Link to={`/campeonato/${idCamp}/capitaes`}>
+                                        <Button text={"Ver Capitães"} variant={"purple"} width={"100%"} />
+                                    </Link>
                                 </div>
                             </>
                         )
@@ -39,7 +45,7 @@ const CardCampeonato = ({ idCamp, titulo, variant, width, height, bgImage }) => 
 
 
 
-        </Card>
+        </Card >
     )
 }
 
