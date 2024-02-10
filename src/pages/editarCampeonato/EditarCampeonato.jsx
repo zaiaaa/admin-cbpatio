@@ -6,7 +6,7 @@ import { Button } from '../../components/Button/button';
 import { PreviewCampeonato } from "../../components/PreviewCampeonato/PreviewCampeonato";
 import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
-import {FormEditCampeonato} from "../../components/FormEditCampeonato/FormEditCampeonato"
+import { FormEditCampeonato } from "../../components/FormEditCampeonato/FormEditCampeonato"
 
 const path = "http://localhost:3005"
 import img from '../../assets/noimage.png'
@@ -31,12 +31,12 @@ const EditarCampeonato = () => {
         handleGetCampeonatos()
     }, [])
 
-    function formataData(data){
+    function formataData(data) {
         const newDate = new Date(data)
         return format(newDate, "dd/MM/yyyy HH:mm:ss")
     }
 
-    function formataDinheiro(valor){
+    function formataDinheiro(valor) {
         const formata = Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
@@ -99,14 +99,15 @@ const EditarCampeonato = () => {
                     </>
                 )
             }
-            <Link to='/campeonatos'>
-                <Button text={'Voltar'} type={"button"} variant={"red"} width={"10%"} padding={".75rem 2rem"} />
-            </Link>
-            
+
             <div>
                 <h2 className="h2-sublinhado">EDITAR CAMPEONATO</h2>
-                <FormEditCampeonato id={id}/>
+                <FormEditCampeonato id={id} />
             </div>
+
+            <Link to='/campeonatos'>
+                <Button text={'Voltar'} type={"button"} variant={"red"} width={"100%"} padding={".75rem 2rem"} />
+            </Link>
         </>
     )
 }
