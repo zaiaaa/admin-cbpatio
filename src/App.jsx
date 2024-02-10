@@ -10,6 +10,8 @@ import { Valores } from './pages/valores/Valores'
 import { Jogos } from './pages/jogos/Jogos'
 import { EditarCampeonato } from './pages/editarCampeonato/EditarCampeonato'
 import { ChaveCampeonato } from './pages/chaveCampeonato/ChaveCampeonato'
+import { ValoresCampeonato } from './pages/valoresCampeonato/ValoresCampeonato'
+import { CapitaesCampeonato } from './pages/capitaesCampeonato/CapitaesCampeonato'
 
 
 function App() {
@@ -31,12 +33,10 @@ function App() {
                   <EditarCampeonato />
                 </Layout>
               </PrivateRoute>} />
-
-
             <Route path='/campeonatos/:id/capitaes' element={
               <PrivateRoute>
                 <Layout>
-                  <EditarCampeonato />
+                  <CapitaesCampeonato />
                 </Layout>
               </PrivateRoute>} />
             <Route path='/valores' element={
@@ -45,12 +45,10 @@ function App() {
                   <Valores />
                 </Layout>
               </PrivateRoute>} />
-
-
             <Route path='/valores/:id' element={
               <PrivateRoute>
                 <Layout>
-                  <Valores />
+                  <ValoresCampeonato/>
                 </Layout>
               </PrivateRoute>} />
             <Route path='/jogos' element={
@@ -59,8 +57,6 @@ function App() {
                   <Jogos />
                 </Layout>
               </PrivateRoute>} />
-
-
             <Route path='/jogos/:id/chave' element={
               <PrivateRoute>
                 <Layout>
