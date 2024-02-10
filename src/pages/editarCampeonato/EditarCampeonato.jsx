@@ -78,7 +78,7 @@ const EditarCampeonato = () => {
                                     valor_ingresso={formataDinheiro(campeonatos.valor_entrada)}
                                     jogadores_time={campeonatos.jogadores}
                                     premiacao={formataDinheiro(campeonatos.premiacao)}
-                                    limite_inscricao={10}
+                                    limite_inscricao={campeonatos.limite}
                                 />
                             </div>
 
