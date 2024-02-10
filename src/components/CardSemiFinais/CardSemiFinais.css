@@ -9,6 +9,12 @@
     border-radius: 10px;
     text-transform: uppercase;
     gap: 2rem;
+    pointer-events: none;
+    opacity: .5;
+}
+.semis-fase.active-div{
+    pointer-events: auto;
+    opacity: 1;
 }
 
 .semis-fase .fase-titulo {

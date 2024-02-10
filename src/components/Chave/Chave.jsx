@@ -15,7 +15,7 @@ const Chave = () => {
                             chave 1
                         </div>
                         <div className="chave-fases">
-                            <CardOitavasFinais className='active-div'/>
+                            <CardOitavasFinais className={'active-div'}/>
                             <CardQuartasFinais />
                             <CardSemiFinais/>
                         </div>

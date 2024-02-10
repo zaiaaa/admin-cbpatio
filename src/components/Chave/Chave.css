@@ -44,15 +44,6 @@
     align-items: center;
 }
 
-/* .chaveamento .chave .chave-fases div{
-    pointer-events: none;
-    opacity: .5;
-} */
-
-.chaveamento .chave .chave-fases div.active-div{
-    pointer-events: auto !important;
-    opacity: 1 !important;
-}
 
 /* ESTILIZAÇÃO DO LAYOUT DOS BTNS NO FINAL DA PAGINA */
 .chaveamento-opcoes {

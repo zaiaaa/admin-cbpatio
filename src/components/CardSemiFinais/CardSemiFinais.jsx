@@ -1,9 +1,9 @@
 import './CardSemiFinais.css'
 
-const CardSemiFinais = () => {
+const CardSemiFinais = ({className}) => {
     return (
         <>
-            <div className="semis-fase">
+            <div className={`semis-fase ${className}`}>
                 <div className="fase-titulo">
                     Semi
                 </div>

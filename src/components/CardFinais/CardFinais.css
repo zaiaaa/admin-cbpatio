@@ -9,6 +9,12 @@
     border-radius: 10px;
     text-transform: uppercase;
     gap: 2rem;
+    pointer-events: none;
+    opacity: .5;
+}
+.finais-fase.active-div{
+    pointer-events: auto;
+    opacity: 1;
 }
 
 .finais-fase .fase-titulo {

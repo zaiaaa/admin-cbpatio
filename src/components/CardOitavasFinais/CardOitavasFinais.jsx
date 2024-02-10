@@ -1,9 +1,9 @@
 import './CardOitavasFinais.css'
 
-const CardOitavasFinais = () => {
+const CardOitavasFinais = ({className}) => {
     return (
         <>
-            <div className="oitavas-fase">
+            <div className={`oitavas-fase ${className}`} >
                 <div className="fase-titulo">
                     Oitavas
                 </div>
