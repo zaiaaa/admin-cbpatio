@@ -14,7 +14,6 @@ const ChaveCampeonato = () => {
                 const fetch = await Api.get(`campeonatos/id/${id}`)
                 console.log(fetch)
                 setCampeonato(fetch.data[0])
-                console.log(campeonato)
             } catch(e) {
                 console.log(e)
             }
