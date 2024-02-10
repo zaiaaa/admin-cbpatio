@@ -1,0 +1,48 @@
+.oitavas-fase {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 2px solid #0E93F4;
+    border-radius: 10px;
+    text-transform: uppercase;
+    gap: 2rem;
+}
+
+.oitavas-fase .fase-titulo {
+    color: #0E93F4;
+    font-weight: 600;
+}
+
+.oitavas-fase .fase-jogos {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+
+.oitavas-fase .fase-jogos .jogo {
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    text-align: center;
+    flex-direction: column;
+}
+
+.oitavas-fase .fase-jogos .jogo select {
+    color: #0E93F4;
+    font-weight: 600;
+}
+
+.oitavas-fase .fase-jogos .jogo option {
+    color: #0E93F4;
+    font-weight: 600;
+}
+
+.oitavas-fase .fase-jogos .jogo .jogo-numero {
+    color: #0E93F4;
+    font-weight: 500;
+}
