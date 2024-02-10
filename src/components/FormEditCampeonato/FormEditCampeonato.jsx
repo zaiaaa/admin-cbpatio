@@ -102,28 +102,48 @@ const FormEditCampeonato = ({id}) => {
     console.log(id)
     const handleAlterCampeonato = async (formData) => {
         try {
-            //formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
+            formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
+            formData.foto = formData.foto == null ? campeonato[0].foto : formData.foto             
             console.log(formData)
 
-            //TODO fazer a requisição e testar
-            // Api.put(`/campeonatos/atualizar/${id}`, {
-            //     nome: formData.nome,
-            //     foto: formData.foto,
-            //     modalidade: formData.modalidade,
-            //     sinopse: formData.sinopse,
-            //     data: formData.data_hora,
-            //     valor_entrada: formData.valor_entrada,
-            //     premiacao: formData.premiacao,
-            //     jogadores: formData.jogadores_por_time
-            //      limite: formData.limite
-            // }, 
-            //     {
-            //         //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
-            //         headers: {
-            //             "Content-Type": "multipart/form-data"
-            //         }
-            //     }
-            // )
+            if(formData.foto){
+                console.log('executou')
+                Api.put(`/campeonatos/atualizar/${id}`, {
+                    nome: formData.nome,
+                    foto: formData.foto,
+                    modalidade: formData.modalidade,
+                    sinopse: formData.sinopse,
+                    data: formData.data_hora,
+                    valor_entrada: formData.valor_entrada,
+                    premiacao: formData.premiacao,
+                    jogadores: formData.jogadores_por_time,
+                    limite: formData.limite
+                }, 
+                {
+                    //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
+            }else{
+                console.log('executou')
+                Api.put(`/campeonatos/atualizar/${id}`, {
+                    nome: formData.nome,
+                    modalidade: formData.modalidade,
+                    sinopse: formData.sinopse,
+                    data: formData.data_hora,
+                    valor_entrada: formData.valor_entrada,
+                    premiacao: formData.premiacao,
+                    jogadores: formData.jogadores_por_time,
+                    limite: formData.limite
+                }, 
+                {
+                    //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+            }
         } catch (e) {
             console.log(e)
         }   
