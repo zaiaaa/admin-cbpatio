@@ -1,5 +1,9 @@
 import './Chave.css'
 import { Button } from '../Button/button'
+import { CardOitavasFinais } from '../CardOitavasFinais/CardOitavasFinais'
+import { CardQuartasFinais } from '../CardQuartasFinais/CardQuartasFinais'
+import {CardSemiFinais} from '../CardSemiFinais/CardSemiFinais'
+import {CardFinais} from '../CardFinais/CardFinais'
 
 const Chave = () => {
     return (
@@ -11,22 +15,22 @@ const Chave = () => {
                             chave 1
                         </div>
                         <div className="chave-fases">
-                            <div>oitavas</div>
-                            <div>quartas</div>
-                            <div>semis</div>
+                            <CardOitavasFinais className='active-div'/>
+                            <CardQuartasFinais />
+                            <CardSemiFinais/>
                         </div>
                     </div>
                     <div className="final">
-                        final Componente
+                        <CardFinais/>
                     </div>
                     <div className="chave">
                         <div className="chave-nome">
                             chave 2
                         </div>
                         <div className="chave-fases">
-                            <div className='active-div'>semis</div>
-                            <div>quartas</div>
-                            <div>oitavas</div>
+                            <CardSemiFinais/>
+                            <CardQuartasFinais />
+                            <CardOitavasFinais className='active-div'/>
                         </div>
                     </div>
                 </div>

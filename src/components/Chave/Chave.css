@@ -1,10 +1,11 @@
 .chave-page {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     padding: 1rem;
+    gap: 3rem;
 }
 
 
@@ -13,7 +14,15 @@
     width: 100%;
     height: 90%;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+
+}
+.chaveamento .final{
+    width: 15%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .chaveamento .chave {
@@ -35,10 +44,10 @@
     align-items: center;
 }
 
-.chaveamento .chave .chave-fases div{
+/* .chaveamento .chave .chave-fases div{
     pointer-events: none;
     opacity: .5;
-}
+} */
 
 .chaveamento .chave .chave-fases div.active-div{
     pointer-events: auto !important;
