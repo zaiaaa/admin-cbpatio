@@ -135,7 +135,7 @@ const FormEditCampeonato = ({id}) => {
                     valor_entrada: formData.valor_entrada,
                     premiacao: formData.premiacao,
                     jogadores: formData.jogadores_por_time,
-                    limite: formData.limite
+                    limite: formData.limite_de_inscrição
                 }, 
                 {
                     //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
@@ -170,7 +170,7 @@ const FormEditCampeonato = ({id}) => {
         try {
             handleAlterCampeonato(formData)
             //handleCleanForm()
-            //window.location.reload()
+            window.location.reload()
         } catch (e) {
             console.log(e)
         }
@@ -247,7 +247,7 @@ const FormEditCampeonato = ({id}) => {
                     </GridItem>
 
                     <GridItem colSpan={1}>
-                        <Button text={"Cadastrar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
+                        <Button text={"Editar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
                     </GridItem>
                     <GridItem colSpan={1}>
                         <Button text={"Limpar"} variant={"yellow"} type={'button'} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} onClick={handleCleanForm}/>
