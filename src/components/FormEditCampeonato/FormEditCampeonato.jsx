@@ -13,6 +13,7 @@ import { Api } from '../../services/api'
 import {format} from "date-fns"
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { formataDinheiro } from '../../services/functions'
 
 
 
@@ -79,6 +80,15 @@ const FormEditCampeonato = ({id}) => {
     useEffect(() => {
         const handleGetCampeonato = async () => {
             const {data} = await Api.get(`/campeonatos/id/${id}`)
+            console.log(data[0])
+            setValue('nome', data[0].nome)
+            setValue('jogadores_por_time', data[0].jogadores)
+            setValue('limite_de_inscrição', data[0].limite)
+            setValue('data_hora', format(new Date(data[0].data), "yyyy-MM-dd HH:mm:ss"))
+            setValue('modalidade', data[0].modalidade)
+            setValue('sinopse', data[0].sinopse)
+            setValue('valor_entrada', data[0].valor_entrada)
+            setValue('premiacao', data[0].premiacao)
             setCampeonato(data)
         }
         handleGetCampeonato()
@@ -88,12 +98,11 @@ const FormEditCampeonato = ({id}) => {
     campeonato.length > 0 ? console.log(format(campeonato[0].data, "yyyy-MM-ddTHH:mm")) : ""
     
     
-    console.log(id)
-    const handleCreateCampeonato = async (formData) => {
-        try {
-            formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
-            console.log(formData.foto)
 
+    console.log(id)
+    const handleAlterCampeonato = async (formData) => {
+        try {
+            //formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
             console.log(formData)
 
             //TODO fazer a requisição e testar
@@ -130,6 +139,7 @@ const FormEditCampeonato = ({id}) => {
         handleSubmit,
         formState: { errors, isValid },
         reset,
+        setValue
     } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange',
@@ -138,9 +148,9 @@ const FormEditCampeonato = ({id}) => {
 
     const onSubmit = async (formData) => {
         try {
-            handleCreateCampeonato(formData)
-            handleCleanForm()
-            window.location.reload()
+            handleAlterCampeonato(formData)
+            //handleCleanForm()
+            //window.location.reload()
         } catch (e) {
             console.log(e)
         }
