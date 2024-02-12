@@ -6,9 +6,11 @@ import { CardSemiFinais } from '../CardSemiFinais/CardSemiFinais'
 import { CardFinais } from '../CardFinais/CardFinais'
 import { useState } from 'react'
 import { Api } from '../../services/api'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Alert } from '@chakra-ui/react'
 
 const Chave = () => {
+    const navigate = useNavigate()
     const [fase, setFase] = useState(1)
     const [dadosJogoEsquerda, setDadosJogoEsquerda] = useState([])
     const [dadosJogoDireita, setDadosJogoDireita] = useState([])
@@ -64,7 +66,8 @@ const Chave = () => {
                 "chave": chave
             })
         })
-        
+
+        alert('Jogos cadastrados com sucesso!')        
         // for (let i = 0; i < dadosJogoDireita.length; i++) {
         //     //console.log(id)
         //     console.log(dadosJogoDireita[i].id_time)
