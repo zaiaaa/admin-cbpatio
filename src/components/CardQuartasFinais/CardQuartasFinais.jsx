@@ -39,14 +39,14 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         getChave()
     }, [])
 
-    //console.log(chave)
+    console.log(chave)
 
     useEffect(() => {
         async function fetchNomesTimes() {
             const nomesTimes = await Promise.all(
                 times.map(async (item) => {
-                    const { data } = await Api.get(`/times/time/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, nome: data[0].nome };
+                    const { data } = await Api.get(`/campeonatos/time/times/nome/ids/${item.fk_id_time}`)
+                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, id_campeonato: data[0].id_campeonato, nome: data[0].nome_time };
                 })
             );
 
@@ -55,6 +55,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
         fetchNomesTimes();
     }, [times]);
+
+    console.log(timesComNomes)
 
     useEffect(() => {
         async function fetchNomesOitavas() {            
@@ -101,6 +103,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     //console.log(chave.esquerda[0])
 
     return (
+        // TODO fazer um botao de resetar a chave e cadastrar defineCssVars, pq das quartas pra frente é só post
         <>
             <div className={`quartas-fase ${className}`}>
                 <div className="fase-titulo">
@@ -119,7 +122,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                             }
 
                             {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato}`}>
+                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -136,7 +139,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                             }
 
                             {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato}`}>
+                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -154,7 +157,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                             )
                         }
                         {timesComNomes.map((item, index) => (
-                            <option key={index} value={`${item.id_time} ${item.id_time_campeonato}`}>
+                            <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
                                 {item.nome}
                             </option>
                         ))}
@@ -171,7 +174,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                             }
 
                             {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato}`}>
+                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
