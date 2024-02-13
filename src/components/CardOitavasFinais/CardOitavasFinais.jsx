@@ -26,8 +26,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
         }
 
         const getChave = async () => {
-            const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}`)
-            const dir = await Api.get(`/campeonatos/time/times/chave/direita/${id}`)
+            const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/oitavas`)
+            const dir = await Api.get(`/campeonatos/time/times/chave/direita/${id}/oitavas`)
 
             setChave({
                 esquerda: esq.data,
