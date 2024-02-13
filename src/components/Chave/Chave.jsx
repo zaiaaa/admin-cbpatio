@@ -26,7 +26,8 @@ const Chave = () => {
     }
 
     const handleSaveGames = async () => {
-        //console.log(dadosJogoDireita)
+        console.log(dadosJogoDireita)
+        console.log(dadosJogoEsquerda)
         dadosJogoEsquerda.forEach(async (value, index) => {
             const ids = value.id_time_and_time_campeonato
             const splitId = ids.split(" ")
@@ -116,7 +117,7 @@ const Chave = () => {
                         </div>
                         <div className="chave-fases">
                             <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
-                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''}/>
+                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'}/>
                             <CardSemiFinais className={fase == 3 ? 'active-div' : ''}/>
                         </div>
                     </div>
@@ -129,7 +130,7 @@ const Chave = () => {
                         </div>
                         <div className="chave-fases">
                             <CardSemiFinais className={fase == 3 ? 'active-div' : ''}/>
-                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''}/>
+                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
                             <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
                         </div>
                     </div>
