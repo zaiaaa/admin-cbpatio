@@ -28,11 +28,13 @@ const Chave = () => {
     const handleSaveGames = async () => {
         console.log(dadosJogoDireita)
         console.log(dadosJogoEsquerda)
+
         dadosJogoEsquerda.forEach(async (value, index) => {
             const ids = value.id_time_and_time_campeonato
             const splitId = ids.split(" ")
             const id_time = splitId[0]
             const id_time_campeonato = splitId[1]
+            const id_campeonato = splitId[2]
 
             const nomeJogo = value.name
             const split = nomeJogo.split(" ")
@@ -40,54 +42,67 @@ const Chave = () => {
             const jogo = split[1]
             const chave = split[split.length - 1]
 
-            await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
-                "fase": fase,
-                "jogo": jogo,
-                "chave": chave
-            })
+            switch (fase) {
+                case 'oitavas':
+                    await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
+                        "fase": fase,
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+                case 'quartas': 
+                    await Api.post('/campeonatos/time/novoTime', {
+                        "fk_id_time": id_time,
+                        "fk_id_campeonato": id_campeonato,
+                        "fase": "quartas",
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+            
+                default:
+                    break;
+            }
         })
 
         dadosJogoDireita.forEach(async (value, index) => {
-            console.log(value.id_time)
-
             const ids = value.id_time_and_time_campeonato
             const splitId = ids.split(" ")
             const id_time = splitId[0]
             const id_time_campeonato = splitId[1]
+            const id_campeonato = splitId[2]
 
             const nomeJogo = value.name
             const split = nomeJogo.split(" ")
             const fase = split[2]
             const jogo = split[1]
             const chave = split[split.length - 1]
-
-            await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
-                "fase": fase,
-                "jogo": jogo,
-                "chave": chave
-            })
+            
+            switch (fase) {
+                case 'oitavas':
+                    await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
+                        "fase": fase,
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+                case 'quartas': 
+                    await Api.post('/campeonatos/time/novoTime', {
+                        "fk_id_time": id_time,
+                        "fk_id_campeonato": id_campeonato,
+                        "fase": "quartas",
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+            
+                default:
+                    alert('erro')
+                    break;
+            }
         })
 
         alert('Jogos cadastrados com sucesso!')        
-        // for (let i = 0; i < dadosJogoDireita.length; i++) {
-        //     //console.log(id)
-        //     console.log(dadosJogoDireita[i].id_time)
-            
-        //     const nomeCamp = dadosJogoDireita[i].name
-        //     const split = nomeCamp.split(" ")
-        //     const fase = split[2]
-        //     const jogo = split[1]
-        //     const chave = split[split.length - 1]
-        //     //console.log(fase, jogo, chave)
-
-        //     await Api.post('/campeonatos/time/novoTime', {
-        //         "fk_id_time": dadosJogoDireita[i].id_time, 
-        //         "fk_id_campeonato": id,
-        //         "fase": fase,
-        //         "jogo": jogo,
-        //         "chave": chave
-        //     })
-        // }
     }
 
     // console.log(dadosJogoEsquerda)
