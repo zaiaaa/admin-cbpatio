@@ -102,6 +102,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     const handleDeletaChave = async () => {
         try{
             await Api.delete(`/campeonatos/resetar/fase/quartas/${id}`)
+            window.location.reload()
         }catch(e){
             alert(e)
         }
