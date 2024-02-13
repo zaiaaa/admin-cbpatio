@@ -2,6 +2,7 @@ import './CardQuartasFinais.css'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Api } from '../../services/api';
+import { Button } from '../Button/button';
 
 const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
@@ -98,6 +99,14 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         console.log(selectedValues)
     }, [selectedValues])
 
+    const handleDeletaChave = async () => {
+        try{
+            await Api.delete(`/campeonatos/resetar/fase/quartas/${id}`)
+        }catch(e){
+            alert(e)
+        }
+    }
+
     console.log(times)
 
     //console.log(chave.esquerda[0])
@@ -112,8 +121,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                 <div className="fase-jogos">
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
-                        
-                        {!chave || !chave.esquerda || !chave.esquerda[0] ? 
                         <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas (casa) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
@@ -128,31 +135,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                     {item.nome}
                                 </option>
                             ))}
-                        </select> 
-                        
-                        : 
-
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas-edit (casa) ${ladoChave}`, e)}>
-                            {
-                                (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
-                                    <option value="">Selecione a equipe!</option>
-                                ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[0]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[0]?.nome : ""}</option>
-                                )
-                            }
-
-                            {/* {!chave || !chave.esquerda || !chave.esquerda[0] ? "" : ""} */}
-                                
-
-
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
-                                    {item.nome}
-                                </option>
-                            ))}
                         </select>
-                        }
-
                         VS.
                         <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas (visitante) ${ladoChave}`, e)}>
                             
@@ -208,6 +191,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         </select>
                     </div>
                 </div>
+                <Button text={"Resetar chave"} variant={"red"} onClick={handleDeletaChave}/>
             </div>
         </>
     )
