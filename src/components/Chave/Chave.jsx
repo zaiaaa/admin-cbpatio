@@ -59,6 +59,14 @@ const Chave = () => {
                         "chave": chave
                     })
                     break;
+
+                case 'quartas-start':
+                    await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
+                        "fase": 'quartas',
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
             
                 default:
                     break;
@@ -96,6 +104,14 @@ const Chave = () => {
                     })
                     break;
             
+                case 'quartas-start':
+                    await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
+                        "fase": 'quartas',
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+
                 default:
                     alert('erro')
                     break;
