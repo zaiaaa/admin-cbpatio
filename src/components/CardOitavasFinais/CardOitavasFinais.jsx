@@ -42,21 +42,6 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     console.log(chave)
 
     useEffect(() => {
-        async function fetchNomesTimes() {
-            const nomesTimes = await Promise.all(
-                times.map(async (item) => {
-                    const { data } = await Api.get(`/campeonatos/time/times/nome/ids/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, id_campeonato: data[0].id_campeonato, nome: data[0].nome_time };
-                })
-            );
-
-            setTimesComNomes(nomesTimes);
-        }
-
-        fetchNomesTimes();
-    }, [times]);
-
-    useEffect(() => {
         async function fetchNomesOitavas() {            
             const nomesTimesChavesEsq = await Promise.all(
                 chave.esquerda.map(async (item) => {
@@ -81,27 +66,10 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
         fetchNomesOitavas()
     }, [chave])
 
-    console.log(nomeChaves)
+    console.log(times)
 
 
     const handleSelectChange = (id, name, event) => {
-        // console.log(event.target.value)
-        // const idTime = event.target.value.split(" ")[0]
-
-        // setIdTimesJaSelecionados(prevState => [
-        //     ...prevState,
-        //     idTime
-        // ])
-
-        // console.log(IdtimesJaSelecionados)
-        // console.log(timesComNomes)
-        // const optionsTags = window.document.getElementsByTagName('option')
-        // const selectTags = document.querySelector('.oitavas-fase').getElementsByTagName('select')
-
-        // console.log(selectTags)
-
-        
-
         setSelectedValues(prevState => [
             ...prevState,
             { "id_time_and_time_campeonato": event.target.value, "name": name }
@@ -141,8 +109,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -158,8 +126,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 )
                             } 
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -175,8 +143,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[2]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[2]?.nome : ""}</option>
                                 )
                             }
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -190,8 +158,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[3]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[3]?.nome : ""}</option>
                                 )
                             }
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -209,8 +177,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -226,8 +194,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -245,8 +213,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -260,8 +228,9 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[7]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[7]?.nome : ""}</option>
                                 )
                             }
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} `}>
+                            
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
