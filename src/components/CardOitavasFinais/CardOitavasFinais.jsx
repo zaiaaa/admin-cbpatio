@@ -9,8 +9,6 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     
     const [times, setTimes] = useState([])
         
-    const [nomeChaves, setNomeChaves] = useState([])
-
     const [chave, setChave] = useState({})
 
     const { id } = useParams()
@@ -34,35 +32,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
         getTeams()
         getChave()
     }, [])
-
-    console.log(chave)
-
-    useEffect(() => {
-        async function fetchNomesOitavas() {            
-            const nomesTimesChavesEsq = await Promise.all(
-                chave.esquerda.map(async (item) => {
-                    const { data } = await Api.get(`/times/time/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: data[0].id_campeonato, nome: data[0].nome };
-                })
-            );
-
-            const nomesTimesChavesDir = await Promise.all(
-                chave.direita.map(async (item) => {
-                    const { data } = await Api.get(`/times/time/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, nome: data[0].nome };
-                })
-            );
-
-            setNomeChaves({
-                esquerda: nomesTimesChavesEsq,
-                direita: nomesTimesChavesDir
-            })
-        }
-
-        fetchNomesOitavas()
-    }, [chave])
-
-    console.log(times)
+    console.log(chave.esquerda)
 
 
     const handleSelectChange = (id, name, event) => {
@@ -101,7 +71,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[0]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[0]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[0]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[0]?.nome : ""}</option>
                                 )
                             }
 
@@ -118,7 +88,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[1]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[1]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[1]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[1]?.nome : ""}</option>
                                 )
                             } 
 
@@ -136,7 +106,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[2]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[2]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[2]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[2]?.nome : ""}</option>
                                 )
                             }
                             {times.map((item, index) => (
@@ -151,7 +121,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[3]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[3]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[3]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[3]?.nome : ""}</option>
                                 )
                             }
                             {times.map((item, index) => (
@@ -169,7 +139,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[4]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[4]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[4]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[4]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[4]?.nome : ""}</option>
                                 )
                             }
 
@@ -186,7 +156,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[5]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[5]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[5]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[5]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[5]?.nome : ""}</option>
                                 )
                             }
 
@@ -205,7 +175,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[6]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[6]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[6]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[6]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[6]?.nome : ""}</option>
                                 )
                             }
 
@@ -221,7 +191,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[7]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[7]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[7]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[7]?.nome : ""}</option>
                                 )
                             }
                             
