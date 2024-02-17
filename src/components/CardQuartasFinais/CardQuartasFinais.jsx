@@ -12,11 +12,9 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         
     const [nomeChaves, setNomeChaves] = useState([])
 
-    const [chave, setChave] = useState({})
-    
-    const [timesComNomes, setTimesComNomes] = useState([]);
-    //const [IdtimesJaSelecionados, setIdTimesJaSelecionados] = useState([])
+    const [oitavas, setOitavas] = useState([])
 
+    const [chave, setChave] = useState({})
 
     const { id } = useParams()
 
@@ -25,6 +23,11 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
             const { data } = await Api.get(`/campeonatos/time/times/${id}`)
             setTimes(data)
         }
+
+        const getOitavas = async () => {
+            const {data} = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`)
+            setOitavas(data)
+        } 
 
         const getChave = async () => {
             const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/quartas`)
@@ -38,26 +41,10 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
         getTeams()
         getChave()
+        getOitavas()
     }, [])
 
-    console.log(chave)
-
-    useEffect(() => {
-        async function fetchNomesTimes() {
-            const nomesTimes = await Promise.all(
-                times.map(async (item) => {
-                    const { data } = await Api.get(`/campeonatos/time/times/nome/ids/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, id_campeonato: data[0].id_campeonato, nome: data[0].nome_time };
-                })
-            );
-
-            setTimesComNomes(nomesTimes);
-        }
-
-        fetchNomesTimes();
-    }, [times]);
-
-    console.log(timesComNomes)
+    console.log(oitavas)
 
     useEffect(() => {
         async function fetchNomesOitavas() {            
@@ -84,9 +71,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         fetchNomesOitavas()
     }, [chave])
 
-    console.log(nomeChaves)
-
-
     const handleSelectChange = (id, name, event) => {      
         setSelectedValues(prevState => [
             ...prevState,
@@ -96,7 +80,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
     useEffect(() => {
         getDadosJogo(selectedValues)
-        console.log(selectedValues)
     }, [selectedValues])
 
     const handleDeletaChave = async () => {
@@ -107,9 +90,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
             alert(e)
         }
     }
-
-    console.log(times)
-
     //console.log(chave.esquerda[0])
 
     return (
@@ -123,7 +103,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
                         {!chave || !chave.esquerda || !chave.esquerda[0] ? 
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas-start (casa) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -132,8 +112,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -141,7 +121,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas (casa) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -150,8 +130,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -162,7 +142,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         VS.
                         
                         {!chave || !chave.esquerda || !chave.esquerda[1] ? 
-                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas-start (visitante) ${ladoChave}`, e)}>
+                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -172,17 +152,16 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
-
                         </select> 
                         
                         :
                         
-                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas (visitante) ${ladoChave}`, e)}>
+                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -192,8 +171,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -206,7 +185,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 2</div>
                         
-                        {!chave || !chave.esquerda || !chave.esquerda[2] ? <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 quartas-start (casa) ${ladoChave}`, e)}>
+                        {!chave || !chave.esquerda || !chave.esquerda[2] ? <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                         {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
@@ -214,17 +193,16 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[2]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[2]?.nome : ""}</option>
                             )
                         }
-                        {timesComNomes.map((item, index) => (
-                            <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
-                                {item.nome}
-                            </option>
-                        ))}
-
+                        {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
+                                    {item.nome}
+                                </option>
+                            ))}
                         </select>
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 quartas (casa) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                         {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
@@ -232,11 +210,11 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[2]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[2]?.nome : ""}</option>
                             )
                         }
-                        {timesComNomes.map((item, index) => (
-                            <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
-                                {item.nome}
-                            </option>
-                        ))}
+                        {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
+                                    {item.nome}
+                                </option>
+                            ))}
 
                         </select>
                         
@@ -246,7 +224,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
                         VS.
                         
-                        {!chave || !chave.esquerda || !chave.esquerda[3] ? <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas-start (visitante) ${ladoChave}`, e)}>
+                        {!chave || !chave.esquerda || !chave.esquerda[3] ? <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -255,8 +233,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                           {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
@@ -265,7 +243,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                     :
                     
-                    <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas (visitante) ${ladoChave}`, e)}>
+                    <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -274,18 +252,19 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 )
                             }
 
-                            {timesComNomes.map((item, index) => (
-                                <option key={index} value={`${item.id_time} ${item.id_time_campeonato} ${item.id_campeonato}`}>
+                            {times.map((item, index) => (
+                                <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
                                 </option>
                             ))}
-
                         </select>
                     }
                         
                     </div>
                 </div>
-                <Button text={"Resetar chave"} variant={"red"} onClick={handleDeletaChave}/>
+                
+                {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : ""}
+                
             </div>
         </>
     )
