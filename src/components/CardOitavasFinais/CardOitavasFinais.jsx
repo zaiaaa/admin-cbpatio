@@ -60,13 +60,9 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
                         <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 oitavas (casa) ${ladoChave}`, e)}>
-                            {/* se existe time cadastrado o valor padrao vai ser ele */}
-
-                            {/* NA PARTE DO CLIENTE DEVEMOS FAZER A REQUEST SEM A CHAVE, JOGO E FASE.  */}
-                            {/* VAMOS FAZER UM PUT E SETAR TODOS NAS OITAVAS, DEPOIS SÓ COM POSTS PRA PRÓXIMAS FASES */}
                             
 
-                            {/* ITS FUCKING WORKING BITCHHHHHHHHH */}
+                            {/* nesse caso, se nao tiver chave, o default será "Selecione a equipe!, se já tiver uma chave (ou seja, se ja existem times cadastrados nessa fase), mostraremos o nome do time. "*/}
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
