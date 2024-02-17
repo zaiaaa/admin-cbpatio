@@ -12,10 +12,6 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     const [nomeChaves, setNomeChaves] = useState([])
 
     const [chave, setChave] = useState({})
-    
-    const [timesComNomes, setTimesComNomes] = useState([]);
-    //const [IdtimesJaSelecionados, setIdTimesJaSelecionados] = useState([])
-
 
     const { id } = useParams()
 
