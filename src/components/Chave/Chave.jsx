@@ -67,6 +67,30 @@ const Chave = () => {
                         "chave": chave
                     })
                     break;
+                case 'semis':
+                    await Api.post('/campeonatos/time/novoTime', {
+                        "fk_id_time": id_time,
+                        "fk_id_campeonato": id_campeonato,
+                        "fase": "semis",
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+                case 'semis-start': 
+                    await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
+                        "fase": 'semis',
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+                case "final":
+                    await Api.post('/campeonatos/time/novoTime', {
+                        "fk_id_time": id_time,
+                        "fk_id_campeonato": id_campeonato,
+                        "fase": "final",
+                        "jogo": jogo,
+                        "chave": "esquerda"
+                    })
             
                 default:
                     break;
@@ -111,6 +135,22 @@ const Chave = () => {
                         "chave": chave
                     })
                     break;
+                case 'semis':
+                    await Api.post('/campeonatos/time/novoTime', {
+                        "fk_id_time": id_time,
+                        "fk_id_campeonato": id_campeonato,
+                        "fase": "semis",
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
+                case 'semis-start': 
+                    await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
+                        "fase": 'semis',
+                        "jogo": jogo,
+                        "chave": chave
+                    })
+                    break;
 
                 default:
                     alert('erro')
@@ -142,6 +182,9 @@ const Chave = () => {
     }
     return (
         <>
+            <header>
+            <h2 align="center">o campeao é tal nego</h2>
+            </header>
             <div className="chave-page">
                 <div className='chaveamento'>
                     <div className="chave">
@@ -151,18 +194,18 @@ const Chave = () => {
                         <div className="chave-fases">
                             <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
                             <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'}/>
-                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''}/>
+                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'}/>
                         </div>
                     </div>
                     <div className="final">
-                        <CardFinais className={fase == 4 ? 'active-div' : ''}/>
+                        <CardFinais className={fase == 4 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda}/>
                     </div>
                     <div className="chave">
                         <div className="chave-nome">
                             chave 2
                         </div>
                         <div className="chave-fases">
-                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''}/>
+                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
                             <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
                             <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
                         </div>
