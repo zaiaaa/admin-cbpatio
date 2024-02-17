@@ -9,8 +9,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     const [selectedValues, setSelectedValues] = useState([]);
     
     const [times, setTimes] = useState([])
-        
-    const [nomeChaves, setNomeChaves] = useState([])
 
     const [oitavas, setOitavas] = useState([])
 
@@ -45,31 +43,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     }, [])
 
     console.log(oitavas)
-
-    useEffect(() => {
-        async function fetchNomesOitavas() {            
-            const nomesTimesChavesEsq = await Promise.all(
-                chave.esquerda.map(async (item) => {
-                    const { data } = await Api.get(`/times/time/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, nome: data[0].nome };
-                })
-            );
-
-            const nomesTimesChavesDir = await Promise.all(
-                chave.direita.map(async (item) => {
-                    const { data } = await Api.get(`/times/time/${item.fk_id_time}`)
-                    return { id_time_campeonato: item.id_time_campeonato, id_time: item.fk_id_time, nome: data[0].nome };
-                })
-            );
-
-            setNomeChaves({
-                esquerda: nomesTimesChavesEsq,
-                direita: nomesTimesChavesDir
-            })
-        }
-
-        fetchNomesOitavas()
-    }, [chave])
 
     const handleSelectChange = (id, name, event) => {      
         setSelectedValues(prevState => [
@@ -108,7 +81,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[0]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[0]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[0]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[0]?.nome : ""}</option>
                                 )
                             }
 
@@ -126,7 +99,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[0]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[0]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[0]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[0]?.nome : ""}</option>
                                 )
                             }
 
@@ -148,7 +121,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[1]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[1]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[1]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[1]?.nome : ""}</option>
                                 )
                             }
 
@@ -167,7 +140,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[1]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[1]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[1]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[1]?.nome : ""}</option>
                                 )
                             }
 
@@ -190,7 +163,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
                             ) : (
-                                <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[2]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[2]?.nome : ""}</option>
+                                <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[2]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[2]?.nome : ""}</option>
                             )
                         }
                         {times.map((item, index) => (
@@ -207,7 +180,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
                             ) : (
-                                <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[2]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[2]?.nome : ""}</option>
+                                <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[2]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[2]?.nome : ""}</option>
                             )
                         }
                         {times.map((item, index) => (
@@ -229,7 +202,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[3]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[3]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[3]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[3]?.nome : ""}</option>
                                 )
                             }
 
@@ -248,7 +221,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
-                                    <option value="">{ladoChave === 'esquerda' && nomeChaves?.esquerda ? nomeChaves?.esquerda[3]?.nome : ladoChave === 'direita' && nomeChaves?.direita ? nomeChaves?.direita[3]?.nome : ""}</option>
+                                    <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[3]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[3]?.nome : ""}</option>
                                 )
                             }
 
