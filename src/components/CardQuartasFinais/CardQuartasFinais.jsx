@@ -45,11 +45,15 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     console.log(oitavas)
 
     const handleSelectChange = (id, name, event) => {      
-        setSelectedValues(prevState => [
-            ...prevState,
-            { "id_time_and_time_campeonato": event.target.value, "name": name }
-        ]);
-    };
+         // Define o novo valor selecionado
+        const newValue = { "id": id, "id_time_and_time_campeonato": event.target.value, "name": name };
+        // Atualiza o estado mantendo apenas o último valor para o checkbox correspondente
+        setSelectedValues(prevState => {
+        // Filtra os valores antigos removendo o valor do checkbox atual
+        const filteredValues = prevState.filter(value => value.id !== id);
+        // Retorna um novo array com o novo valor adicionado
+        return [...filteredValues, newValue];}
+    )};
 
     useEffect(() => {
         getDadosJogo(selectedValues)
@@ -58,7 +62,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     const handleDeletaChave = async () => {
         try{
             await Api.delete(`/campeonatos/resetar/fase/quartas/${id}`)
-            await Api.delete(`/campeonatos/resetar/fase/eliminado/${id}`)
+            await Api.delete(`/campeonatos/resetar/fase/eliminado oitavas/${id}`)
             window.location.reload()
         }catch(e){
             alert(e)
@@ -116,7 +120,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         VS.
                         
                         {!chave || !chave.esquerda || !chave.esquerda[1] ? 
-                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -135,7 +139,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                         :
                         
-                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -159,7 +163,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 2</div>
                         
-                        {!chave || !chave.esquerda || !chave.esquerda[2] ? <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        {!chave || !chave.esquerda || !chave.esquerda[2] ? <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                         {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
@@ -176,7 +180,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                         {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
@@ -198,7 +202,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
                         VS.
                         
-                        {!chave || !chave.esquerda || !chave.esquerda[3] ? <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        {!chave || !chave.esquerda || !chave.esquerda[3] ? <select name="sla" id="sla" onChange={(e) => handleSelectChange(3, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -217,7 +221,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                     :
                     
-                    <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                    <select name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 3 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
