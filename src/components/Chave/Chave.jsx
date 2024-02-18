@@ -14,6 +14,8 @@ const Chave = () => {
     const [fase, setFase] = useState(1)
     const [dadosJogoEsquerda, setDadosJogoEsquerda] = useState([])
     const [dadosJogoDireita, setDadosJogoDireita] = useState([])
+    const [faseAtual, setFaseAtual] = useState("")
+    const [faseAnteriorElim, setFaseAnteriorElim] = useState("")
 
     const {id} = useParams()
 
@@ -58,6 +60,8 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+                    setFaseAtual("quartas")
+                    setFaseAnteriorElim("oitavas")
                     break;
 
                 case 'quartas-start':
@@ -75,6 +79,8 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+                    setFaseAtual("semis")
+                    setFaseAnteriorElim("quartas")
                     break;
                 case 'semis-start': 
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
@@ -91,7 +97,9 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": "esquerda"
                     })
-            
+
+                    setFaseAtual("final")
+                    setFaseAnteriorElim("semis")
                 default:
                     break;
             }
@@ -158,9 +166,44 @@ const Chave = () => {
             }
         })
 
+        async function getEliminados(){
+            for (let i = 1; i <= 4; i++) {
+                 try{
+                    if(faseAtual && faseAnteriorElim){
+                        const timeEliminado = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                             params:{
+                                "jogo": i,
+                                "faseAnterior": faseAnterior,
+                                "faseAtual": faseAtual,
+                                "chave": "direita"
+                             }
+                         },
+                         {
+                             headers: {
+                             'Content-Type': "application/json"
+                         }
+                         })                
+                         console.log(timeEliminado.data[0])
+    
+                         await Api.post(`/campeonatos/time/novoTime`, {
+                            "fk_id_time": timeEliminado.data[0].fk_id_time,
+                            "fk_id_campeonato": id,
+                            "fase": "eliminado",
+                            "jogo": ""
+                         })
+                    }else{
+                        console.error('deu zika')
+                    }
+                 }catch(e){
+                    console.log(e)
+                 }
+            }
+        }
 
-        window.location.reload()
-        alert('Jogos cadastrados com sucesso!')        
+
+        getEliminados()    
+        //window.location.reload()
+        alert('Jogos cadastrados com sucesso!')    
     }
 
     // console.log(dadosJogoEsquerda)
