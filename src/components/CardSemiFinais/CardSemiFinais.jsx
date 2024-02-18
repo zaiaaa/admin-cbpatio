@@ -45,11 +45,15 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     console.log(chave)
 
     const handleSelectChange = (id, name, event) => {      
-        setSelectedValues(prevState => [
-            ...prevState,
-            { "id_time_and_time_campeonato": event.target.value, "name": name }
-        ]);
-    };
+        // Define o novo valor selecionado
+       const newValue = { "id": id, "id_time_and_time_campeonato": event.target.value, "name": name };
+       // Atualiza o estado mantendo apenas o último valor para o checkbox correspondente
+       setSelectedValues(prevState => {
+       // Filtra os valores antigos removendo o valor do checkbox atual
+       const filteredValues = prevState.filter(value => value.id !== id);
+       // Retorna um novo array com o novo valor adicionado
+       return [...filteredValues, newValue];}
+   )};
 
     useEffect(() => {
         getDadosJogo(selectedValues)
@@ -58,6 +62,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     const handleDeletaChave = async () => {
         try{
             await Api.delete(`/campeonatos/resetar/fase/semis/${id}`)
+            await Api.delete(`/campeonatos/resetar/fase/eliminado quartas/${id}`)
             window.location.reload()
         }catch(e){
             alert(e)
@@ -110,7 +115,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 semis${quartas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -130,7 +135,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                         VS.
 
                         {!chave || !chave.esquerda || !chave.esquerda[1] ? 
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 2 semis${quartas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -165,7 +170,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
