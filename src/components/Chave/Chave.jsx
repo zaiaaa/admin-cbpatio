@@ -4,7 +4,7 @@ import { CardOitavasFinais } from '../CardOitavasFinais/CardOitavasFinais'
 import { CardQuartasFinais } from '../CardQuartasFinais/CardQuartasFinais'
 import { CardSemiFinais } from '../CardSemiFinais/CardSemiFinais'
 import { CardFinais } from '../CardFinais/CardFinais'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Api } from '../../services/api'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Alert } from '@chakra-ui/react'
@@ -53,6 +53,7 @@ const Chave = () => {
                     })
                     break;
                 case 'quartas': 
+                    console.log('fez o post na esquerda')
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
                         "fk_id_campeonato": id_campeonato,
@@ -127,6 +128,7 @@ const Chave = () => {
                     })
                     break;
                 case 'quartas': 
+                console.log('fez o post na direita')
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
                         "fk_id_campeonato": id_campeonato,
@@ -164,50 +166,175 @@ const Chave = () => {
                     alert('erro')
                     break;
             }
-        })
-
-        async function getEliminados(){
-            for (let i = 1; i <= 4; i++) {
-                 try{
-                    if(faseAtual && faseAnteriorElim){
-                        const timeEliminado = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
-                             params:{
-                                "jogo": i,
-                                "faseAnterior": faseAnterior,
-                                "faseAtual": faseAtual,
-                                "chave": "direita"
-                             }
-                         },
-                         {
-                             headers: {
-                             'Content-Type': "application/json"
-                         }
-                         })                
-                         console.log(timeEliminado.data[0])
-    
-                         await Api.post(`/campeonatos/time/novoTime`, {
-                            "fk_id_time": timeEliminado.data[0].fk_id_time,
-                            "fk_id_campeonato": id,
-                            "fase": "eliminado",
-                            "jogo": ""
-                         })
-                    }else{
-                        console.error('deu zika')
-                    }
-                 }catch(e){
-                    console.log(e)
-                 }
-            }
-        }
-
-
-        getEliminados()    
+        })   
         //window.location.reload()
         alert('Jogos cadastrados com sucesso!')    
     }
 
+    useEffect(() => {
+
+    }, [faseAtual, faseAnteriorElim])
+
     // console.log(dadosJogoEsquerda)
     // console.log(dadosJogoDireita)
+
+    useEffect(() => {
+        
+        async function getEliminados(){
+            if(faseAnteriorElim == "oitavas"){
+                for (let i = 1; i <= 4; i++) {
+                    try{
+                       if(faseAtual && faseAnteriorElim){
+                           const timeEliminadoDireita = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                              params:{
+                                  "jogo": i,
+                                  "faseAnterior": faseAnteriorElim,
+                                  "faseAtual": faseAtual,
+                                  "chave": "direita"
+                              },
+   
+                              headers: {
+                               "Content-Type": "application/json"
+                              }
+                            })          
+                            
+                            const timeEliminadoEsquerda = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                                params:{
+                                    "jogo": i,
+                                    "faseAnterior": faseAnteriorElim,
+                                    "faseAtual": faseAtual,
+                                    "chave": "esquerda"
+                                },
+     
+                                headers: {
+                                 "Content-Type": "application/json"
+                                }
+                              })          
+       
+                            await Api.post(`/campeonatos/time/novoTime`, {
+                                "fk_id_time": timeEliminadoDireita.data[0].fk_id_time,
+                                "fk_id_campeonato": id,
+                                "fase": "eliminado oitavas",
+                                "jogo": ""
+                            })
+
+                            await Api.post(`/campeonatos/time/novoTime`, {
+                                "fk_id_time": timeEliminadoEsquerda.data[0].fk_id_time,
+                                "fk_id_campeonato": id,
+                                "fase": "eliminado oitavas",
+                                "jogo": ""
+                                })                            
+                       }else{
+                           console.error('deu zika')
+                       }
+                    }catch(e){
+                       console.log(e)
+                    }
+               }
+            }else if(faseAnteriorElim == "quartas"){
+                for (let i = 1; i <= 2; i++) {
+                    try{
+                       if(faseAtual && faseAnteriorElim){
+                           const timeEliminadoDireita = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                              params:{
+                                  "jogo": i,
+                                  "faseAnterior": faseAnteriorElim,
+                                  "faseAtual": faseAtual,
+                                  "chave": "direita"
+                              },
+   
+                              headers: {
+                               "Content-Type": "application/json"
+                              }
+                            })          
+                            
+                            const timeEliminadoEsquerda = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                                params:{
+                                    "jogo": i,
+                                    "faseAnterior": faseAnteriorElim,
+                                    "faseAtual": faseAtual,
+                                    "chave": "esquerda"
+                                },
+     
+                                headers: {
+                                 "Content-Type": "application/json"
+                                }
+                              })          
+       
+                            await Api.post(`/campeonatos/time/novoTime`, {
+                                "fk_id_time": timeEliminadoDireita.data[0].fk_id_time,
+                                "fk_id_campeonato": id,
+                                "fase": "eliminado quartas",
+                                "jogo": ""
+                            })
+
+                            await Api.post(`/campeonatos/time/novoTime`, {
+                                "fk_id_time": timeEliminadoEsquerda.data[0].fk_id_time,
+                                "fk_id_campeonato": id,
+                                "fase": "eliminado quartas",
+                                "jogo": ""
+                                })                            
+                       }else{
+                           console.error('deu zika')
+                       }
+                    }catch(e){
+                       console.log(e)
+                    }
+               }
+            }else if(faseAnteriorElim == "semis"){
+                for (let i = 1; i <= 1; i++) {
+                    try{
+                       if(faseAtual && faseAnteriorElim){
+                           const timeEliminadoDireita = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                              params:{
+                                  "jogo": i,
+                                  "faseAnterior": faseAnteriorElim,
+                                  "faseAtual": faseAtual,
+                                  "chave": "direita"
+                              },
+   
+                              headers: {
+                               "Content-Type": "application/json"
+                              }
+                            })          
+                            
+                            const timeEliminadoEsquerda = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
+                                params:{
+                                    "jogo": i,
+                                    "faseAnterior": faseAnteriorElim,
+                                    "faseAtual": faseAtual,
+                                    "chave": "esquerda"
+                                },
+     
+                                headers: {
+                                 "Content-Type": "application/json"
+                                }
+                              })          
+       
+                            await Api.post(`/campeonatos/time/novoTime`, {
+                                "fk_id_time": timeEliminadoDireita.data[0].fk_id_time,
+                                "fk_id_campeonato": id,
+                                "fase": "eliminado semis",
+                                "jogo": ""
+                            })
+
+                            await Api.post(`/campeonatos/time/novoTime`, {
+                                "fk_id_time": timeEliminadoEsquerda.data[0].fk_id_time,
+                                "fk_id_campeonato": id,
+                                "fase": "eliminado semis",
+                                "jogo": ""
+                                })                            
+                       }else{
+                           console.error('deu zika')
+                       }
+                    }catch(e){
+                       console.log(e)
+                    }
+               }
+            }
+        }
+        getEliminados() 
+    }, [faseAtual, faseAnteriorElim])
 
     const minFase = 1;
     const maxFase = 4;
