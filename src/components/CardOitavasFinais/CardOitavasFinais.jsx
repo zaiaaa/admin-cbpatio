@@ -35,12 +35,16 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     console.log(chave.esquerda)
 
 
-    const handleSelectChange = (id, name, event) => {
-        setSelectedValues(prevState => [
-            ...prevState,
-            { "id_time_and_time_campeonato": event.target.value, "name": name }
-        ]);
-    };
+    const handleSelectChange = (id, name, event) => {      
+        // Define o novo valor selecionado
+       const newValue = { "id": id, "id_time_and_time_campeonato": event.target.value, "name": name };
+       // Atualiza o estado mantendo apenas o último valor para o checkbox correspondente
+       setSelectedValues(prevState => {
+       // Filtra os valores antigos removendo o valor do checkbox atual
+       const filteredValues = prevState.filter(value => value.id !== id);
+       // Retorna um novo array com o novo valor adicionado
+       return [...filteredValues, newValue];}
+   )};
 
     useEffect(() => {
         getDadosJogo(selectedValues)
