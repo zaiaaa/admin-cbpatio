@@ -36,11 +36,15 @@ const CardFinais = ({className, getDadosJogo}) => {
     console.log(chave)
 
     const handleSelectChange = (id, name, event) => {      
-        setSelectedValues(prevState => [
-            ...prevState,
-            { "id_time_and_time_campeonato": event.target.value, "name": name }
-        ]);
-    };
+        // Define o novo valor selecionado
+       const newValue = { "id": id, "id_time_and_time_campeonato": event.target.value, "name": name };
+       // Atualiza o estado mantendo apenas o último valor para o checkbox correspondente
+       setSelectedValues(prevState => {
+       // Filtra os valores antigos removendo o valor do checkbox atual
+       const filteredValues = prevState.filter(value => value.id !== id);
+       // Retorna um novo array com o novo valor adicionado
+       return [...filteredValues, newValue];}
+   )};
 
     useEffect(() => {
         getDadosJogo(selectedValues)
@@ -49,7 +53,8 @@ const CardFinais = ({className, getDadosJogo}) => {
 
     const handleDeletaChave = async () => {
         try{
-            await Api.delete(`/campeonatos/resetar/fase/semis/${id}`)
+            await Api.delete(`/campeonatos/resetar/fase/final/${id}`)
+            await Api.delete(`/campeonatos/resetar/fase/eliminado semis/${id}`)
             window.location.reload()
         }catch(e){
             alert(e)
@@ -86,7 +91,7 @@ const CardFinais = ({className, getDadosJogo}) => {
 
                         </select>
                         VS.
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 final (visitante)`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 final (visitante)`, e)}>
                             {
                                 (!chave || !chave[1]) ? (
                                     <option value="">Selecione a equipe!</option>
