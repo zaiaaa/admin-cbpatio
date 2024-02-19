@@ -68,6 +68,22 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
             alert(e)
         }
     }
+
+    const handleAlteraChave = async () => {
+        try {
+            const { data } = await Api.get(`/campeonatos/time/times/fase/quartas/${id}`);
+            for (const time of data) {
+                await Api.put(`/campeonatos/time/alterarTime/${time.id_time_campeonato}`, {
+                    fase: "",
+                    jogo: "",
+                    chave: ""
+                });
+            }
+            window.location.reload();
+        } catch (error) {
+            alert(error);
+        }
+    }
     //console.log(chave.esquerda[0])
 
     return (
@@ -241,7 +257,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     </div>
                 </div>
                 
-                {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : ""}
+                {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : <Button text={"put nas quartas"} variant={"red"} onClick={handleAlteraChave}/>}
                 
             </div>
         </>
