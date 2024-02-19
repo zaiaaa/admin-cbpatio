@@ -167,7 +167,7 @@ const Chave = () => {
                     break;
             }
         })   
-        //window.location.reload()
+        window.location.reload()
         alert('Jogos cadastrados com sucesso!')    
     }
 
