@@ -59,24 +59,17 @@ const Chave = () => {
         if(faseAnteriorElim && faseAtual && podeIr){
             if(faseAnteriorElim == "oitavas"){
                 for (let i = 1; i <= 4; i++) {
-                    setTimeout(async () => {
-                        await findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
-                        await findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
-                    }, 1500);
-
+                    findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
+                    findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
                }
             }else if(faseAnteriorElim == "quartas"){
                 for (let i = 1; i <= 2; i++) {
-                    setTimeout(async () => {
-                        await findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
-                        await findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
-                    }, 1500);
+                    findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
+                    findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
                }
             }else if(faseAnteriorElim == "semis"){
-                setTimeout(async () => {
-                    await findEliminado(1, "semis", "final", "direita", "esquerda")
-                    await findEliminado(1, "semis", "final", "esquerda", "esquerda")
-                }, 1500);
+                findEliminado(1, "semis", "final", "direita", "esquerda")
+                findEliminado(1, "semis", "final", "esquerda", "esquerda")
             }
         }else{
             console.log('acabou')
