@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
     const [selectedValues, setSelectedValues] = useState([]);
-    
+
     const [times, setTimes] = useState([])
-        
+
     const [chave, setChave] = useState({})
 
     const { id } = useParams()
@@ -35,16 +35,18 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     console.log(chave.esquerda)
 
 
-    const handleSelectChange = (id, name, event) => {      
+    const handleSelectChange = (id, name, event) => {
         // Define o novo valor selecionado
-       const newValue = { "id": id, "id_time_and_time_campeonato": event.target.value, "name": name };
-       // Atualiza o estado mantendo apenas o último valor para o checkbox correspondente
-       setSelectedValues(prevState => {
-       // Filtra os valores antigos removendo o valor do checkbox atual
-       const filteredValues = prevState.filter(value => value.id !== id);
-       // Retorna um novo array com o novo valor adicionado
-       return [...filteredValues, newValue];}
-   )};
+        const newValue = { "id": id, "id_time_and_time_campeonato": event.target.value, "name": name };
+        // Atualiza o estado mantendo apenas o último valor para o checkbox correspondente
+        setSelectedValues(prevState => {
+            // Filtra os valores antigos removendo o valor do checkbox atual
+            const filteredValues = prevState.filter(value => value.id !== id);
+            // Retorna um novo array com o novo valor adicionado
+            return [...filteredValues, newValue];
+        }
+        )
+    };
 
     useEffect(() => {
         getDadosJogo(selectedValues)
@@ -64,7 +66,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
                         <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 oitavas (casa) ${ladoChave}`, e)}>
-                            
+
 
                             {/* nesse caso, se nao tiver chave, o default será "Selecione a equipe!, se já tiver uma chave (ou seja, se ja existem times cadastrados nessa fase), mostraremos o nome do time. "*/}
                             {
@@ -83,14 +85,14 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                         </select>
                         VS.
                         <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 oitavas (visitante) ${ladoChave}`, e)}>
-                            
+
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
                                 ) : (
                                     <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[1]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[1]?.nome : ""}</option>
                                 )
-                            } 
+                            }
 
                             {times.map((item, index) => (
                                 <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
@@ -134,7 +136,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 3</div>
                         <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(4, `jogo 3 oitavas (casa) ${ladoChave}`, e)}>
-                            
+
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[4]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -151,7 +153,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                         </select>
                         VS.
                         <select name="sla" id="sla" onChange={(e) => handleSelectChange(5, `jogo 3 oitavas (visitante) ${ladoChave}`, e)}>
-                            
+
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[5]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -170,7 +172,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 4</div>
                         <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(6, `jogo 4 oitavas (casa) ${ladoChave}`, e)}>
-                            
+
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[6]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -194,7 +196,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     <option value="">{ladoChave === 'esquerda' && chave?.esquerda ? chave?.esquerda[7]?.nome : ladoChave === 'direita' && chave?.direita ? chave?.direita[7]?.nome : ""}</option>
                                 )
                             }
-                            
+
                             {times.map((item, index) => (
                                 <option key={index} value={`${item.fk_id_time} ${item.id_time_campeonato} ${item.fk_id_campeonato}`}>
                                     {item.nome}
