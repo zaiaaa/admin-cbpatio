@@ -65,7 +65,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                 <div className="fase-jogos">
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 oitavas (casa) ${ladoChave}`, e)}>
+                        {/*disabled={chave ? true : false}*/}
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 oitavas (casa) ${ladoChave}`, e)}  >
 
 
                             {/* nesse caso, se nao tiver chave, o default será "Selecione a equipe!, se já tiver uma chave (ou seja, se ja existem times cadastrados nessa fase), mostraremos o nome do time. "*/}
