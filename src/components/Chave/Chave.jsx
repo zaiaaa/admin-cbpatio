@@ -10,6 +10,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 import { ModalEliminados } from '../ModalEliminados/ModalEliminados'
 import { ModalCampeao } from '../ModalCampeao/ModalCampeao'
+import { ModalHoraJogo } from '../ModalHoraJogo/ModalHoraJogo'
 
 const Chave = () => {
     const [fase, setFase] = useState(1)
@@ -260,7 +261,7 @@ const Chave = () => {
                 <div className='chaveamento'>
                     <div className="chave">
                         <div className="chave-nome">
-                            chave 1
+                            chave esquerda
                         </div>
                         <div className="chave-fases">
                             <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
@@ -273,7 +274,7 @@ const Chave = () => {
                     </div>
                     <div className="chave">
                         <div className="chave-nome">
-                            chave 2
+                            chave direita
                         </div>
                         <div className="chave-fases">
                             <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
@@ -293,6 +294,7 @@ const Chave = () => {
                             width={'100%'}></Button>
 
                         <ModalEliminados />
+                        <ModalHoraJogo/>
                         {
                             fase === 4 && ( //somente se o usuario estiver na fase das finais que o btn vai aparecer
                                 <>
