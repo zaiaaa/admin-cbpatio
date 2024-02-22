@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { ModalComponent } from "../Modal/Modal"
 import {
     Table,
@@ -8,7 +9,34 @@ import {
     Td,
     TableContainer,
 } from '@chakra-ui/react'
+import { Api } from "../../services/api"
+import { useParams } from "react-router-dom"
+
+
 const ModalEliminados = () => {
+    const {id} = useParams()
+    const [eliminados, setEliminados] = useState({})
+
+    useEffect(() => {
+        const getEliminados = async () => {
+            const {data: oitavas} = await Api.get(`campeonatos/time/times/fase/eliminado%20oitavas/1`)
+            const {data: quartas} = await Api.get(`/campeonatos/time/times/fase/eliminado quartas/${id}`)
+            const {data: semis} = await Api.get(`/campeonatos/time/times/fase/eliminado semis/${id}`)
+            const {data: final} = await Api.get(`/campeonatos/time/times/fase/eliminado final/${id}`)
+    
+            setEliminados({
+                oitavas,
+                quartas,
+                semis,
+                final
+            })
+        }
+        getEliminados()
+    }, [])
+    
+    
+    
+    
     return (
         <>
             <ModalComponent titulo={'Eliminados'} textModalOpenBtn={'Ver eliminados'} variantTextOpenBtn={'red'}>
@@ -21,31 +49,31 @@ const ModalEliminados = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            <Tr>
-                                <Td>S.Squad</Td>
-                                <Td>Oitavas</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>S.Squad 3</Td>
-                                <Td>Semi</Td>
-                            </Tr>
-                             <Tr>
-                                <Td>S.Squad</Td>
-                                <Td>Oitavas</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>S.Squad 3</Td>
-                                <Td>Semi</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>S.Squad</Td>
-                                <Td>Oitavas</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>S.Squad 3</Td>
-                                <Td>Semi</Td>
-                            </Tr>
-
+                                {eliminados && eliminados?.oitavas ? eliminados.oitavas.map((item) => (
+                                        <Tr key={item.id_time_campeonato}>
+                                            <Td>{item.nome}</Td>
+                                            <Td>OITAVAS</Td>
+                                        </Tr>
+                                )) : null}
+                                
+                                {eliminados && eliminados?.quartas ? eliminados.quartas.map((item) => (
+                                            <Tr key={item.id_time_campeonato}>
+                                                <Td>{item.nome}</Td>
+                                                <Td>QUARTAS</Td>
+                                            </Tr>
+                                    )) : null}
+                                {eliminados && eliminados?.semis ? eliminados.semis.map((item) => (
+                                            <Tr key={item.id_time_campeonato}>
+                                                <Td>{item.nome}</Td>
+                                                <Td>SEMIS</Td>
+                                            </Tr>
+                                    )) : null}
+                                {eliminados && eliminados?.final ? eliminados.final.map((item) => (
+                                            <Tr key={item.id_time_campeonato}>
+                                                <Td>{item.nome}</Td>
+                                                <Td>VICE-CAMPEÃO</Td>
+                                            </Tr>
+                                    )) : null}
                         </Tbody>
                     </Table>
                 </TableContainer>
