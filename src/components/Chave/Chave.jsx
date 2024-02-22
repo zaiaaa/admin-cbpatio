@@ -55,6 +55,8 @@ const Chave = () => {
             "fase": `eliminado ${faseAnterior}`,
             "jogo": ""
         })
+
+        window.location.reload()
     }
 
     useEffect(() => {
@@ -275,7 +277,6 @@ const Chave = () => {
             }
         }
 
-        //window.location.reload()
         setPodeIr(true)
         alert('Jogos cadastrados com sucesso!')
     }
