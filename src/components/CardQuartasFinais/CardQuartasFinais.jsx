@@ -257,7 +257,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     </div>
                 </div>
                 
-                {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : <Button text={"put nas quartas"} variant={"red"} onClick={handleAlteraChave}/>}
+                {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : <Button text={"Resetar quartas"} variant={"red"} onClick={handleAlteraChave}/>}
                 
             </div>
         </>
