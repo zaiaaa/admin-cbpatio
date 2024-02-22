@@ -13,6 +13,7 @@ import { ModalCampeao } from '../ModalCampeao/ModalCampeao'
 import { ModalHoraJogo } from '../ModalHoraJogo/ModalHoraJogo'
 
 const Chave = () => {
+    const [campeao, setCampeao] = useState({})
     const [fase, setFase] = useState(1)
     const [dadosJogoEsquerda, setDadosJogoEsquerda] = useState([])
     const [dadosJogoDireita, setDadosJogoDireita] = useState([])
@@ -57,6 +58,16 @@ const Chave = () => {
     }
 
     useEffect(() => {
+        const getCampeao = async () => {
+            const {data} = await Api.get(`/campeonatos/time/times/fase/campeao/${id}`)
+            setCampeao(data)
+        }
+        getCampeao()
+    }, [])
+
+    console.log(campeao)
+
+    useEffect(() => {
 
         if (faseAnteriorElim && faseAtual && podeIr) {
             if (faseAnteriorElim == "oitavas") {
@@ -80,10 +91,6 @@ const Chave = () => {
 
     }, [podeIr])
 
-
-
-
-
     const handleSaveGames = async () => {
         console.log(dadosJogoDireita)
         console.log(dadosJogoEsquerda)
@@ -104,6 +111,11 @@ const Chave = () => {
 
             switch (fase) {
                 case 'oitavas':
+                    if(dadosJogoEsquerda.length && dadosJogoDireita.length < 8){
+                        alert("Erro -> chaves incompletas")
+                        window.location.reload()
+                        return
+                    } 
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": fase,
                         "jogo": jogo,
@@ -111,7 +123,11 @@ const Chave = () => {
                     })
                     break;
                 case 'quartas':
-                    console.log('fez o post na esquerda')
+                    if(dadosJogoEsquerda.length && dadosJogoDireita.length < 4 || !dadosJogoDireita && !dadosJogoEsquerda){
+                        alert("Erro -> chaves incompletas")
+                        window.location.reload()
+                        return
+                    } 
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
                         "fk_id_campeonato": id_campeonato,
@@ -124,6 +140,11 @@ const Chave = () => {
                     break;
 
                 case 'quartas-start':
+                    if(dadosJogoEsquerda.length && dadosJogoDireita.length < 4){
+                        alert("Erro -> chaves incompletas")
+                        window.location.reload()
+                        return
+                    } 
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'quartas',
                         "jogo": jogo,
@@ -131,6 +152,11 @@ const Chave = () => {
                     })
                     break;
                 case 'semis':
+                    if(dadosJogoEsquerda.length && dadosJogoDireita.length < 2){
+                        alert("Erro -> chaves incompletas")
+                        window.location.reload()
+                        return
+                    } 
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
                         "fk_id_campeonato": id_campeonato,
@@ -143,6 +169,11 @@ const Chave = () => {
                     setFaseAnteriorElim("quartas")
                     break;
                 case 'semis-start':
+                    if(dadosJogoEsquerda.length && dadosJogoDireita.length < 2){
+                        alert("Erro -> chaves incompletas")
+                        window.location.reload()
+                        return
+                    } 
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'semis',
                         "jogo": jogo,
@@ -150,6 +181,11 @@ const Chave = () => {
                     })
                     break;
                 case "final":
+                    if(dadosJogoEsquerda.length < 2){
+                        alert("Erro -> chaves incompletas")
+                        window.location.reload()
+                        return
+                    } 
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
                         "fk_id_campeonato": id_campeonato,
@@ -181,6 +217,12 @@ const Chave = () => {
 
             switch (fase) {
                 case 'oitavas':
+                    if(dadosJogoDireita.length && dadosJogoEsquerda.length < 8){
+                        alert("Erro -> chave direita incompleta")
+                        window.location.reload()
+                        return
+                    } 
+
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": fase,
                         "jogo": jogo,
@@ -255,7 +297,11 @@ const Chave = () => {
     return (
         <>
             <header>
-                <h2 align="center">jonhy sins ganhou o campeonato de fortnite </h2>
+                {
+                    campeao && campeao.length > 0 ? (<h2 align="center">{campeao[0].nome} ganhou o campeonato de fortnite</h2>) : null
+                }
+                
+
             </header>
             <div className="chave-page">
                 <div className='chaveamento'>
