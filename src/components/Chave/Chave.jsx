@@ -7,10 +7,11 @@ import { CardFinais } from '../CardFinais/CardFinais'
 import { useEffect, useState } from 'react'
 import { Api } from '../../services/api'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Alert } from '@chakra-ui/react'
+
+import { ModalEliminados } from '../ModalEliminados/ModalEliminados'
+import { ModalCampeao } from '../ModalCampeao/ModalCampeao'
 
 const Chave = () => {
-    const navigate = useNavigate()
     const [fase, setFase] = useState(1)
     const [dadosJogoEsquerda, setDadosJogoEsquerda] = useState([])
     const [dadosJogoDireita, setDadosJogoDireita] = useState([])
@@ -19,7 +20,7 @@ const Chave = () => {
     const [podeIr, setPodeIr] = useState(false)
 
 
-    const {id} = useParams()
+    const { id } = useParams()
 
     const getDadosJogoEsquerda = (data) => {
         setDadosJogoEsquerda(data)
@@ -31,7 +32,7 @@ const Chave = () => {
 
     const findEliminado = async (jogo, faseAnterior, faseAtual, chave, chaveTarget) => {
         const timeEliminado = await Api.get(`/campeonatos/time/times/eliminados/${id}`, {
-            params:{
+            params: {
                 "jogo": jogo,
                 "faseAnterior": faseAnterior,
                 "faseAtual": faseAtual,
@@ -40,9 +41,9 @@ const Chave = () => {
             },
 
             headers: {
-            "Content-Type": "application/json"
+                "Content-Type": "application/json"
             }
-        })          
+        })
 
         console.log(timeEliminado)
 
@@ -55,38 +56,38 @@ const Chave = () => {
     }
 
     useEffect(() => {
-        
-        if(faseAnteriorElim && faseAtual && podeIr){
-            if(faseAnteriorElim == "oitavas"){
+
+        if (faseAnteriorElim && faseAtual && podeIr) {
+            if (faseAnteriorElim == "oitavas") {
                 for (let i = 1; i <= 4; i++) {
                     findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
                     findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
-               }
-            }else if(faseAnteriorElim == "quartas"){
+                }
+            } else if (faseAnteriorElim == "quartas") {
                 for (let i = 1; i <= 2; i++) {
                     findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
                     findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
-               }
-            }else if(faseAnteriorElim == "semis"){
+                }
+            } else if (faseAnteriorElim == "semis") {
                 findEliminado(1, "semis", "final", "direita", "esquerda")
                 findEliminado(1, "semis", "final", "esquerda", "esquerda")
             }
-        }else{
+        } else {
             console.log('acabou')
         }
         setPodeIr(false)
 
     }, [podeIr])
- 
 
-    
+
+
 
 
     const handleSaveGames = async () => {
         console.log(dadosJogoDireita)
         console.log(dadosJogoEsquerda)
 
-        for(const value of dadosJogoEsquerda){
+        for (const value of dadosJogoEsquerda) {
 
             const ids = value.id_time_and_time_campeonato
             const splitId = ids.split(" ")
@@ -108,7 +109,7 @@ const Chave = () => {
                         "chave": chave
                     })
                     break;
-                case 'quartas': 
+                case 'quartas':
                     console.log('fez o post na esquerda')
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
@@ -140,7 +141,7 @@ const Chave = () => {
                     setFaseAtual("semis")
                     setFaseAnteriorElim("quartas")
                     break;
-                case 'semis-start': 
+                case 'semis-start':
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'semis',
                         "jogo": jogo,
@@ -164,7 +165,7 @@ const Chave = () => {
             }
         }
 
-        for(const value of dadosJogoDireita){
+        for (const value of dadosJogoDireita) {
             const ids = value.id_time_and_time_campeonato
             const splitId = ids.split(" ")
             const id_time = splitId[0]
@@ -176,7 +177,7 @@ const Chave = () => {
             const fase = split[2]
             const jogo = split[1]
             const chave = split[split.length - 1]
-            
+
             switch (fase) {
                 case 'oitavas':
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
@@ -185,7 +186,7 @@ const Chave = () => {
                         "chave": chave
                     })
                     break;
-                case 'quartas': 
+                case 'quartas':
                     await Api.post('/campeonatos/time/novoTime', {
                         "fk_id_time": id_time,
                         "fk_id_campeonato": id_campeonato,
@@ -197,7 +198,7 @@ const Chave = () => {
                     setFaseAtual("quartas")
                     setFaseAnteriorElim("oitavas")
                     break;
-            
+
                 case 'quartas-start':
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'quartas',
@@ -217,7 +218,7 @@ const Chave = () => {
                     setFaseAtual("semis")
                     setFaseAnteriorElim("quartas")
                     break;
-                case 'semis-start': 
+                case 'semis-start':
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'semis',
                         "jogo": jogo,
@@ -233,27 +234,27 @@ const Chave = () => {
 
         //window.location.reload()
         setPodeIr(true)
-        alert('Jogos cadastrados com sucesso!')    
+        alert('Jogos cadastrados com sucesso!')
     }
 
     const minFase = 1;
     const maxFase = 4;
 
     const proxFase = () => {
-        if(fase < maxFase){
+        if (fase < maxFase) {
             setFase(fase + 1)
         }
-        
+
     }
     const faseAnterior = () => {
-        if(fase > minFase){
-             setFase(fase - 1)
+        if (fase > minFase) {
+            setFase(fase - 1)
         }
     }
     return (
         <>
             <header>
-            <h2 align="center">o campeao é tal nego</h2>
+                <h2 align="center">jonhy sins ganhou o campeonato de fortnite </h2>
             </header>
             <div className="chave-page">
                 <div className='chaveamento'>
@@ -263,29 +264,43 @@ const Chave = () => {
                         </div>
                         <div className="chave-fases">
                             <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
-                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'}/>
-                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'}/>
+                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
+                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
                         </div>
                     </div>
                     <div className="final">
-                        <CardFinais className={fase == 4 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda}/>
+                        <CardFinais className={fase == 4 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} />
                     </div>
                     <div className="chave">
                         <div className="chave-nome">
                             chave 2
                         </div>
                         <div className="chave-fases">
-                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
-                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
-                            <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'}/>
+                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
+                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
+                            <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
                         </div>
                     </div>
                 </div>
                 <div className="chaveamento-opcoes">
                     <div className="fase-opcoes">
                         <Button text={'Salvar'} type={'button'} variant={'green'} padding={'1rem'} width={'100%'} onClick={handleSaveGames} ></Button>
-                        <Button text={'Limpar'} type={'button'} variant={'yellow'} padding={'1rem'} width={'100%'}></Button>
-                        <Button text={'Ver eliminados'} type={'button'} variant={'red'} padding={'1rem'} width={'100%'}></Button>
+                        <Button
+                            text={'Limpar'}
+                            type={'button'}
+                            variant={'yellow'}
+                            padding={'1rem'}
+                            width={'100%'}></Button>
+
+                        <ModalEliminados />
+                        {
+                            fase === 4 && ( //somente se o usuario estiver na fase das finais que o btn vai aparecer
+                                <>
+                                    <ModalCampeao />
+                                </>
+
+                            )
+                        }
                     </div>
                     <div className="mudar-fase">
                         <Button text={'Proxima fase'} type={'button'} variant={'pink'} padding={'1rem'} width={'100%'}
