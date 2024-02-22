@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Api } from '../../services/api';
 import './CardOitavasFinais.css'
 import { useEffect, useState } from 'react';
+import { Button } from '../Button/button';
 
 const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
@@ -54,6 +55,22 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     }, [selectedValues])
 
     //console.log(chave.esquerda[0])
+
+    const handleAlteraChave = async () => {
+        try {
+            const { data } = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`);
+            for (const time of data) {
+                await Api.put(`/campeonatos/time/alterarTime/${time.id_time_campeonato}`, {
+                    fase: "",
+                    jogo: "",
+                    chave: ""
+                });
+            }
+            window.location.reload();
+        } catch (error) {
+            alert(error);
+        }
+    }
 
     return (
         <>
@@ -207,6 +224,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                     </div>
 
                 </div>
+
+                <Button text={"Resetar oitavas"} variant={"red"} onClick={handleAlteraChave} />
             </div>
         </>
     )
