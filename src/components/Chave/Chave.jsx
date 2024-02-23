@@ -152,6 +152,7 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+
                     break;
                 case 'semis':
                     if(dadosJogoEsquerda.length && dadosJogoDireita.length < 2){
@@ -230,6 +231,9 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+
+                    alert("Jogos cadastrados com sucesso!")
+                    window.location.reload()
                     break;
                 case 'quartas':
                     await Api.post('/campeonatos/time/novoTime', {
@@ -250,6 +254,8 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+                    alert("Jogos cadastrados com sucesso!")
+                    window.location.reload()
                     break;
                 case 'semis':
                     await Api.post('/campeonatos/time/novoTime', {
@@ -269,6 +275,8 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+                    alert("Jogos cadastrados com sucesso!")
+                    window.location.reload()
                     break;
 
                 default:
