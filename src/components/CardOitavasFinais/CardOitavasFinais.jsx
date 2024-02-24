@@ -3,6 +3,9 @@ import { Api } from '../../services/api';
 import './CardOitavasFinais.css'
 import { useEffect, useState } from 'react';
 import { Button } from '../Button/button';
+import { PopoverComponent } from '../Popover/Popover';
+import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
+
 
 const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
@@ -118,6 +121,21 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 </option>
                             ))}
                         </select>
+
+                        <div className="jogo-opcoes">
+                            {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverComponent
+                                popoverTitle={'O jogo vai começar:'}
+                                textDispare={<i class="fa-solid fa-clock"></i>}
+                            >
+                                16/02 as 21 e 10
+                            </PopoverComponent>
+                            {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverDefinirHorario
+                                textDispare={<i class="fa-solid fa-gear"></i>}
+                                popoverTitle={'Data & Hora do jogo:'}
+                            />
+                        </div>
                     </div>
                     <div className="jogo">
                         <div className="jogo-numero">jogo 2</div>
