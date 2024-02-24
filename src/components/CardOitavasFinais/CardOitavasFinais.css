@@ -53,3 +53,8 @@
     color: #0E93F4;
     font-weight: 500;
 }
+
+.jogo-opcoes{
+    display: flex;
+    justify-content: center;
+}
