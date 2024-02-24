@@ -48,3 +48,8 @@
     background-color: #FA5959;
     color: #fff;
 }
+
+.button.hour{
+  color: #fff;
+    border-radius: 100%;
+}
