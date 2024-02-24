@@ -31,6 +31,8 @@ const ModalEliminados = () => {
                 semis,
                 final
             })
+
+            setFilter("all")
         }
         getEliminados()
     }, [])
