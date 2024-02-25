@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
-const ModalHoraJogo = () => {
+const ModalHoraJogo = ({jogo, chave, fase}) => {
 
 
     const schema = yup.object({
