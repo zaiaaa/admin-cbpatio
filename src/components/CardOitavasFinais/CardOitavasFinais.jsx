@@ -124,16 +124,21 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                         <div className="jogo-opcoes">
                             {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            
+                            {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
                             <PopoverComponent
                                 popoverTitle={'O jogo vai começar:'}
                                 textDispare={<i class="fa-solid fa-clock"></i>}
                             >
-                                16/02 as 21 e 10
                             </PopoverComponent>
+
                             {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
                             <PopoverDefinirHorario
+                                jogo={1}
+                                chave={ladoChave}
+                                fase={"oitavas"}
                                 textDispare={<i class="fa-solid fa-gear"></i>}
-                                popoverTitle={'Data & Hora do jogo:'}
+                                popoverTitle={`Data & Hora do jogo 1: `}
                             />
                         </div>
                     </div>
