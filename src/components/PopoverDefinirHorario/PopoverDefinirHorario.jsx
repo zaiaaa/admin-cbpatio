@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Button } from "../Button/button"
 
-const PopoverDefinirHorario = ({ textDispare, popoverTitle }) => {
+const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) => {
 
   
     const schema = yup.object({
@@ -30,8 +30,8 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle }) => {
     })
 
 
-    const handleOnClickSaveButton = () => {
-        alert('deifinir horario')
+    const handleOnClickSaveButton = () => {        
+        alert(`deifinir horario do jogo ${jogo} da chave ${chave} e da fase ${fase}`)
     }
 
 
