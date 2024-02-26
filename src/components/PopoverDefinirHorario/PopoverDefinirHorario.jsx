@@ -5,8 +5,12 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Button } from "../Button/button"
+import { Api } from "../../services/api"
+import { useParams } from "react-router-dom"
 
 const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) => {
+
+    const {id} = useParams()
 
   
     const schema = yup.object({
@@ -22,16 +26,25 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) 
         control,
         handleSubmit,
         formState: { errors, isValid },
-        reset,
-        setValue
     } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange',
     })
 
 
-    const handleOnClickSaveButton = () => {        
+    const onSubmit = async (formData) => {        
+        const data = format(formData.data_hora, "yyyy-MM-dd HH:mm:ss")
+        console.log(data)
+        try {
+            await Api.put(`/campeonatos/hora/jogo/${jogo}/fase/${fase}/chave/${chave}/campeonato/${id}`, {
+                data_hora: data
+            })
+        } catch (e) {
+            alert("ERRO -> ", e)
+        }
+
         alert(`deifinir horario do jogo ${jogo} da chave ${chave} e da fase ${fase}`)
+        window.location.reload()
     }
 
 
@@ -41,8 +54,11 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) 
                 textDispare={textDispare}
                 popoverTitle={popoverTitle}
             >
-                <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={format(new Date(), "yyyy-MM-dd HH:mm:ss")} />
-                <Button variant={'purple'} text={'Salvar'} margin={'1rem 0rem'} onClick={handleOnClickSaveButton}></Button>
+                <form >
+                    <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={format(new Date(), "yyyy-MM-dd HH:mm:ss")} />
+                    <Button variant={'purple'} text={'Salvar'} margin={'1rem 0rem'} onClick={handleSubmit(onSubmit)}></Button>
+
+                </form>
             </PopoverComponent>
         </>
     )
