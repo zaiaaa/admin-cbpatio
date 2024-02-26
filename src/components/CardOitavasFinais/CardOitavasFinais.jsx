@@ -131,7 +131,31 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 popoverTitle={'O jogo vai começar:'}
                                 textDispare={<i className="fa-solid fa-clock"></i>}
                             >
-                                { !chave || !chave.esquerda || !chave.esquerda[0] || !chave.esquerda[0].data_hora ? "Sem horario definido" : format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")}
+                                { 
+
+                                ladoChave == "esquerda"
+                                ?
+
+                                !chave || !chave.esquerda || !chave.esquerda[0] || !chave.esquerda[0].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                
+                                 :
+
+                                 !chave || !chave.direita || !chave.direita[0] || !chave.direita[0].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                }
                             </PopoverComponent>
 
                             {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
