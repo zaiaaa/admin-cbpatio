@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../Button/button';
 import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
+import { format } from 'date-fns';
 
 
 const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
@@ -128,8 +129,9 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                             {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
                             <PopoverComponent
                                 popoverTitle={'O jogo vai começar:'}
-                                textDispare={<i class="fa-solid fa-clock"></i>}
+                                textDispare={<i className="fa-solid fa-clock"></i>}
                             >
+                                { !chave || !chave.esquerda || !chave.esquerda[0] || !chave.esquerda[0].data_hora ? "Sem horario definido" : format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")}
                             </PopoverComponent>
 
                             {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
@@ -137,7 +139,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 jogo={1}
                                 chave={ladoChave}
                                 fase={"oitavas"}
-                                textDispare={<i class="fa-solid fa-gear"></i>}
+                                textDispare={<i className="fa-solid fa-gear"></i>}
                                 popoverTitle={`Data & Hora do jogo 1: `}
                             />
                         </div>
