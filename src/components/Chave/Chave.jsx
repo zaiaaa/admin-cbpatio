@@ -300,8 +300,6 @@ const Chave = () => {
                 {
                     campeao && campeao.length > 0 ? (<h2 align="center">{campeao[0].nome} ganhou o campeonato de fortnite</h2>) : null
                 }
-                
-
             </header>
             <div className="chave-page">
                 <div className='chaveamento'>
