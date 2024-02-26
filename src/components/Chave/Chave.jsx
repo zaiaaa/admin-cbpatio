@@ -56,6 +56,7 @@ const Chave = () => {
             "jogo": ""
         })
 
+        alert('Jogos cadastrados com sucesso!')
         window.location.reload()
     }
 
@@ -66,8 +67,6 @@ const Chave = () => {
         }
         getCampeao()
     }, [])
-
-    console.log(campeao)
 
     useEffect(() => {
 
@@ -231,9 +230,6 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
-
-                    alert("Jogos cadastrados com sucesso!")
-                    window.location.reload()
                     break;
                 case 'quartas':
                     await Api.post('/campeonatos/time/novoTime', {
@@ -254,8 +250,6 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
-                    alert("Jogos cadastrados com sucesso!")
-                    window.location.reload()
                     break;
                 case 'semis':
                     await Api.post('/campeonatos/time/novoTime', {
@@ -275,8 +269,6 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
-                    alert("Jogos cadastrados com sucesso!")
-                    window.location.reload()
                     break;
 
                 default:
@@ -286,7 +278,6 @@ const Chave = () => {
         }
 
         setPodeIr(true)
-        alert('Jogos cadastrados com sucesso!')
     }
 
     const minFase = 1;
