@@ -338,7 +338,7 @@ const Chave = () => {
                             width={'100%'}></Button>
 
                         <ModalEliminados />
-                        <ModalHoraJogo/>
+                        {/* <ModalHoraJogo/> */}
                         {
                             fase === 4 && ( //somente se o usuario estiver na fase das finais que o btn vai aparecer
                                 <>
