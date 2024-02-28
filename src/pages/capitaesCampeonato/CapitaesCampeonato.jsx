@@ -37,6 +37,7 @@ const CapitaesCampeonato = () => {
 
         const getTimesByCampeonato = async () => {
             try {
+                // O FETCH AQUI TEM QUE PEGAR OS DADOS DOS TIMES INSCRITOS NO CAMPEONATO 
                 const fetch = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`)
                 setTimesOitavas(fetch.data)
 
