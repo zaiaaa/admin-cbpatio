@@ -22,7 +22,13 @@ const CapitaesCampeonato = () => {
         const getCapitaes = async () => {
             try {
                 const {data: capitaes} = await Api.get(`/campeonatos/time/times/capitaes/${id}`)
-                setCapitaes(capitaes)
+                const {data: capitaesOitavas} = await Api.get(`/campeonatos/time/times/capitaes/${id}/fase/oitavas`)
+                
+                if(capitaes.length > 16){
+                    setCapitaes(capitaesOitavas)
+                }else{
+                    setCapitaes(capitaes)
+                }
             } catch (e) {
                 console.error(e)
             }
