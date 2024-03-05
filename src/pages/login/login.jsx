@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import foto from "../../assets/logo.png"
+import { Navigate, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
 
 const schema = yup.object({
@@ -19,7 +20,19 @@ const schema = yup.object({
 
 const Login = () => {
 
+  const navigate = useNavigate()
+
   const { handleLogin, erros } = useContext(AuthContext)
+
+  useEffect(() => {
+    const token = localStorage.getItem("token") 
+
+    if(token){
+      navigate('/campeonatos')
+    }else{
+      navigate('/')
+    }
+  }, [])
 
   const {
     control,
