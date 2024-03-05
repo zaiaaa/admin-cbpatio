@@ -67,7 +67,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                 await Api.put(`/campeonatos/time/alterarTime/${time.id_time_campeonato}`, {
                     fase: "",
                     jogo: "",
-                    chave: ""
+                    chave: "",
+                    data_hora: null
                 });
             }
             window.location.reload();
@@ -168,6 +169,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                             />
                         </div>
                     </div>
+
                     <div className="jogo">
                         <div className="jogo-numero">jogo 2</div>
                         <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 oitavas (casa) ${ladoChave}`, e)}>
@@ -199,6 +201,52 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 </option>
                             ))}
                         </select>
+
+                        <div className="jogo-opcoes">
+                            {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            
+                            {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
+                            <PopoverComponent
+                                popoverTitle={'O jogo vai começar:'}
+                                textDispare={<i className="fa-solid fa-clock"></i>}
+                            >
+                                { 
+
+                                ladoChave == "esquerda"
+                                ?
+
+                                !chave || !chave.esquerda || !chave.esquerda[2] || !chave.esquerda[2].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.esquerda[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                
+                                 :
+
+                                 !chave || !chave.direita || !chave.direita[2] || !chave.direita[2].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.direita[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                }
+                            </PopoverComponent>
+
+                            {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverDefinirHorario
+                                jogo={2}
+                                chave={ladoChave}
+                                fase={"oitavas"}
+                                textDispare={<i className="fa-solid fa-gear"></i>}
+                                popoverTitle={`Data & Hora do jogo 2: `}
+                            />
+                        </div>
+
                     </div>
                     <div className="jogo">
                         <div className="jogo-numero">jogo 3</div>
@@ -235,6 +283,52 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 </option>
                             ))}
                         </select>
+
+                        <div className="jogo-opcoes">
+                            {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            
+                            {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
+                            <PopoverComponent
+                                popoverTitle={'O jogo vai começar:'}
+                                textDispare={<i className="fa-solid fa-clock"></i>}
+                            >
+                                { 
+
+                                ladoChave == "esquerda"
+                                ?
+
+                                !chave || !chave.esquerda || !chave.esquerda[4] || !chave.esquerda[4].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.esquerda[4].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                
+                                 :
+
+                                 !chave || !chave.direita || !chave.direita[4] || !chave.direita[4].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.direita[4].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                }
+                            </PopoverComponent>
+
+                            {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverDefinirHorario
+                                jogo={3}
+                                chave={ladoChave}
+                                fase={"oitavas"}
+                                textDispare={<i className="fa-solid fa-gear"></i>}
+                                popoverTitle={`Data & Hora do jogo 3: `}
+                            />
+                        </div>
+
                     </div>
                     <div className="jogo">
                         <div className="jogo-numero">jogo 4</div>
@@ -270,6 +364,52 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                 </option>
                             ))}
                         </select>
+
+                        <div className="jogo-opcoes">
+                            {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            
+                            {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
+                            <PopoverComponent
+                                popoverTitle={'O jogo vai começar:'}
+                                textDispare={<i className="fa-solid fa-clock"></i>}
+                            >
+                                { 
+
+                                ladoChave == "esquerda"
+                                ?
+
+                                !chave || !chave.esquerda || !chave.esquerda[7] || !chave.esquerda[7].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.esquerda[7].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                
+                                 :
+
+                                 !chave || !chave.direita || !chave.direita[7] || !chave.direita[7].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.direita[7].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                }
+                            </PopoverComponent>
+
+                            {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverDefinirHorario
+                                jogo={4}
+                                chave={ladoChave}
+                                fase={"oitavas"}
+                                textDispare={<i className="fa-solid fa-gear"></i>}
+                                popoverTitle={`Data & Hora do jogo 4: `}
+                            />
+                        </div>
+
                     </div>
 
                 </div>

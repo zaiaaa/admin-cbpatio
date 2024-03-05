@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Api } from '../../services/api';
 import { Button } from '../Button/button';
+import { PopoverComponent } from '../Popover/Popover';
+import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
+import { format } from 'date-fns';
+
 
 const CardFinais = ({className, getDadosJogo}) => {
 
@@ -114,6 +118,38 @@ const CardFinais = ({className, getDadosJogo}) => {
                             
                         </select>
                     </div>
+
+                    <div className="jogo-opcoes">
+                            {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            
+                            {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
+                            <PopoverComponent
+                                popoverTitle={'O jogo vai começar:'}
+                                textDispare={<i className="fa-solid fa-clock"></i>}
+                            >
+                                { 
+                                !chave ||!chave[0] || !chave[0].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+
+                                }
+                            </PopoverComponent>
+
+                            {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverDefinirHorario
+                                jogo={1}
+                                chave={"esquerda"}
+                                fase={"final"}
+                                textDispare={<i className="fa-solid fa-gear"></i>}
+                                popoverTitle={`Data & Hora do jogo 1: `}
+                            />
+                        </div>
+
                 </div>
             </div>
         </>

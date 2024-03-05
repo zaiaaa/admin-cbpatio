@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Api } from '../../services/api';
 import { Button } from '../Button/button';
+import { PopoverComponent } from '../Popover/Popover';
+import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
+import { format } from 'date-fns';
 
 const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     
@@ -186,6 +189,50 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                             ))}
                         </select>
                         }
+                        <div className="jogo-opcoes">
+                            {/* AQUI É ONDE VC VAI COLOCAR O HORARIO DO JOGO (SE VIRA) */}
+                            
+                            {/* aqui vem o ternario do lado da chave, certo? dps eu faço pq eu fui na harumi. fézinha 👌 */}
+                            <PopoverComponent
+                                popoverTitle={'O jogo vai começar:'}
+                                textDispare={<i className="fa-solid fa-clock"></i>}
+                            >
+                                { 
+
+                                ladoChave == "esquerda"
+                                ?
+
+                                !chave || !chave.esquerda || !chave.esquerda[0] || !chave.esquerda[0].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                
+                                 :
+
+                                 !chave || !chave.direita || !chave.direita[0] || !chave.direita[0].data_hora 
+                                ?
+                                 
+                                "Sem horario definido" 
+                                 
+                                 :
+                                 
+                                 format(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                }
+                            </PopoverComponent>
+
+                            {/* AQUI É ONDE VC VAI SALVAR O HORARIO DO JOGO (SE VIRA) */}
+                            <PopoverDefinirHorario
+                                jogo={1}
+                                chave={ladoChave}
+                                fase={"semis"}
+                                textDispare={<i className="fa-solid fa-gear"></i>}
+                                popoverTitle={`Data & Hora do jogo 1: `}
+                            />
+                        </div>
                     </div>
                 </div>
                 {quartas.length > 0 ? <Button text={"Resetar semi"} variant={"red"} onClick={handleDeletaChave}/> : ""}
