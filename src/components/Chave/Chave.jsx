@@ -56,8 +56,8 @@ const Chave = () => {
             "jogo": ""
         })
 
-        alert('Jogos cadastrados com sucesso!')
         window.location.reload()
+        alert('Jogos cadastrados com sucesso!')
     }
 
     useEffect(() => {
