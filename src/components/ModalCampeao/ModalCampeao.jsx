@@ -60,6 +60,7 @@ const ModalCampeao = () => {
             alert("Erro -> ", error)
         }
 
+        window.location.reload()
         alert(`o time selecionado foi campeão!`)
     }
 
