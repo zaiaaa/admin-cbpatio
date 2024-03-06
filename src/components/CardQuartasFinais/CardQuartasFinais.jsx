@@ -6,8 +6,11 @@ import { Button } from '../Button/button';
 import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
+import { Center, Spinner } from '@chakra-ui/react';
 
 const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
+
+    const [loading, setLoading] = useState(false)
 
     const [selectedValues, setSelectedValues] = useState([]);
     
@@ -63,16 +66,20 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
     }, [selectedValues])
 
     const handleDeletaChave = async () => {
+        setLoading(true)
         try{
             await Api.delete(`/campeonatos/resetar/fase/quartas/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado oitavas/${id}`)
-            window.location.reload()
+            window.location.reload();
+            alert( "jogos resetados com sucesso")
         }catch(e){
             alert(e)
         }
+        setLoading(false)
     }
 
     const handleAlteraChave = async () => {
+        setLoading(true)
         try {
             const { data } = await Api.get(`/campeonatos/time/times/fase/quartas/${id}`);
             for (const time of data) {
@@ -87,12 +94,29 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         } catch (error) {
             alert(error);
         }
+        setLoading(false)
     }
     //console.log(chave.esquerda[0])
 
     return (
-        // TODO fazer um botao de resetar a chave e cadastrar defineCssVars, pq das quartas pra frente é só post
         <>
+        
+        {
+            loading
+
+            ?
+            
+            <Center>
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    color='#fff'
+                    size='xl'
+                />
+            </Center>
+
+            :
+
             <div className={`quartas-fase ${className}`}>
                 <div className="fase-titulo">
                     Quartas
@@ -354,6 +378,9 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                 {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : <Button text={"Resetar quartas"} variant={"red"} onClick={handleAlteraChave}/>}
                 
             </div>
+
+        }
+            
         </>
     )
 }

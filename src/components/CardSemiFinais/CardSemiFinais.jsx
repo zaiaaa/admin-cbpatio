@@ -9,6 +9,8 @@ import { format } from 'date-fns';
 
 const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     
+    const [loading, setLoading] = useState(false)
+
     const [selectedValues, setSelectedValues] = useState([]);
     
     const [times, setTimes] = useState([])
@@ -63,6 +65,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     }, [selectedValues])
 
     const handleDeletaChave = async () => {
+        setLoading(true)
         try{
             await Api.delete(`/campeonatos/resetar/fase/semis/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado quartas/${id}`)
@@ -70,6 +73,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
         }catch(e){
             alert(e)
         }
+        setLoading(false)
     }
 
     return (

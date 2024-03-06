@@ -6,9 +6,12 @@ import { Button } from '../Button/button';
 import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
+import { Center, Spinner } from '@chakra-ui/react';
 
 
 const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
+
+    const [loading, setLoading] = useState(false)
 
     const [selectedValues, setSelectedValues] = useState([]);
 
@@ -61,6 +64,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     //console.log(chave.esquerda[0])
 
     const handleAlteraChave = async () => {
+        setLoading(true)
         try {
             const { data } = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`);
             for (const time of data) {
@@ -72,13 +76,31 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                 });
             }
             window.location.reload();
-        } catch (error) {
-            alert(error);
+            alert("jogos resetados com sucesso")
+        } catch (e) {
+            alert(e);
         }
+        setLoading(false)
     }
 
     return (
         <>
+        {
+            loading 
+            
+            ?
+
+            <Center>
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    color='#fff'
+                    size='xl'
+                />
+            </Center>
+
+            :
+
             <div className={`oitavas-fase ${className}`} >
                 <div className="fase-titulo">
                     Oitavas
@@ -414,8 +436,15 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                 </div>
 
-                <Button text={"Resetar oitavas"} variant={"red"} onClick={handleAlteraChave} />
+                {
+                    times.length > 16
+                    ?
+                    ""
+                    :
+                    <Button text={"Resetar oitavas"} variant={"red"} onClick={handleAlteraChave} />
+                }
             </div>
+        }
         </>
     )
 }
