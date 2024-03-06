@@ -10,9 +10,10 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 import { ModalEliminados } from '../ModalEliminados/ModalEliminados'
 import { ModalCampeao } from '../ModalCampeao/ModalCampeao'
-import { ModalHoraJogo } from '../ModalHoraJogo/ModalHoraJogo'
+import { Center, Spinner } from '@chakra-ui/react';
 
 const Chave = () => {
+    const [loading, setLoading] = useState(false)
     const [campeao, setCampeao] = useState({})
     const [fase, setFase] = useState(1)
     const [dadosJogoEsquerda, setDadosJogoEsquerda] = useState([])
@@ -55,9 +56,6 @@ const Chave = () => {
             "fase": `eliminado ${faseAnterior}`,
             "jogo": ""
         })
-
-        window.location.reload()
-        alert('Jogos cadastrados com sucesso!')
     }
 
     useEffect(() => {
@@ -71,28 +69,45 @@ const Chave = () => {
     useEffect(() => {
 
         if (faseAnteriorElim && faseAtual && podeIr) {
+            console.log(faseAnteriorElim)
             if (faseAnteriorElim == "oitavas") {
                 for (let i = 1; i <= 4; i++) {
                     findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
                     findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
                 }
+                
+                window.location.reload()
+                alert('Jogos cadastrados com sucesso!')
             } else if (faseAnteriorElim == "quartas") {
                 for (let i = 1; i <= 2; i++) {
                     findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
                     findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
-                }
+                } 
+                window.location.reload()
+                alert('Jogos cadastrados com sucesso!')
             } else if (faseAnteriorElim == "semis") {
                 findEliminado(1, "semis", "final", "direita", "esquerda")
                 findEliminado(1, "semis", "final", "esquerda", "esquerda")
+                
+                window.location.reload()
+                alert('Jogos cadastrados com sucesso!')
+            }else{
+                window.location.reload()
+                alert('Jogos cadastrados com sucesso!')
             }
         } else {
-            console.log('acabou')
+            console.log('acabou')   
         }
+
+        // window.location.reload()
+        // alert('Jogos cadastrados com sucesso!')
         setPodeIr(false)
+        setLoading(false)
 
     }, [podeIr])
 
     const handleSaveGames = async () => {
+        setLoading(true)
         console.log(dadosJogoDireita)
         console.log(dadosJogoEsquerda)
 
@@ -122,6 +137,9 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+
+                    setFaseAnteriorElim("n")
+                    setFaseAtual("oitavas")
                     break;
                 case 'quartas':
                     if(dadosJogoEsquerda.length && dadosJogoDireita.length < 4 || !dadosJogoDireita && !dadosJogoEsquerda){
@@ -151,7 +169,8 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
-
+                    setFaseAnteriorElim("n")
+                    setFaseAtual("quartas")
                     break;
                 case 'semis':
                     if(dadosJogoEsquerda.length && dadosJogoDireita.length < 2){
@@ -176,11 +195,14 @@ const Chave = () => {
                         window.location.reload()
                         return
                     } 
+                    setFaseAnteriorElim("n")
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'semis',
                         "jogo": jogo,
                         "chave": chave
                     })
+                    setFaseAnteriorElim("n")
+                    setFaseAtual("semis")
                     break;
                 case "final":
                     if(dadosJogoEsquerda.length < 2){
@@ -230,6 +252,10 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+
+                    setFaseAnteriorElim("n")
+                    setFaseAtual("oitavas")
+
                     break;
                 case 'quartas':
                     await Api.post('/campeonatos/time/novoTime', {
@@ -250,6 +276,10 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+
+                    setFaseAnteriorElim("n")
+                    setFaseAtual("quartas")
+
                     break;
                 case 'semis':
                     await Api.post('/campeonatos/time/novoTime', {
@@ -269,6 +299,10 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+
+                    setFaseAnteriorElim("n")
+                    setFaseAtual("semis")
+
                     break;
 
                 default:
@@ -276,7 +310,6 @@ const Chave = () => {
                     break;
             }
         }
-
         setPodeIr(true)
     }
 
@@ -296,67 +329,90 @@ const Chave = () => {
     }
     return (
         <>
-            <header>
-                {
-                    campeao && campeao.length > 0 ? (<h2 align="center">{campeao[0].nome} ganhou o campeonato de fortnite</h2>) : null
-                }
-            </header>
-            <div className="chave-page">
-                <div className='chaveamento'>
-                    <div className="chave">
-                        <div className="chave-nome">
-                            chave esquerda
-                        </div>
-                        <div className="chave-fases">
-                            <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
-                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
-                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
-                        </div>
-                    </div>
-                    <div className="final">
-                        <CardFinais className={fase == 4 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} />
-                    </div>
-                    <div className="chave">
-                        <div className="chave-nome">
-                            chave direita
-                        </div>
-                        <div className="chave-fases">
-                            <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
-                            <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
-                            <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
-                        </div>
-                    </div>
-                </div>
-                <div className="chaveamento-opcoes">
-                    <div className="fase-opcoes">
-                        <Button text={'Salvar'} type={'button'} variant={'green'} padding={'1rem'} width={'100%'} onClick={handleSaveGames} ></Button>
-                        <Button
-                            text={'Limpar'}
-                            type={'button'}
-                            variant={'yellow'}
-                            padding={'1rem'}
-                            width={'100%'}></Button>
+        {
+            loading 
 
-                        <ModalEliminados />
-                        {/* <ModalHoraJogo/> */}
-                        {
-                            fase === 4 && ( //somente se o usuario estiver na fase das finais que o btn vai aparecer
-                                <>
-                                    <ModalCampeao />
-                                </>
+            ?
 
-                            )
-                        }
+            (
+                <Center>
+                    <Spinner
+                        thickness='4px'
+                        speed='0.65s'
+                        color='#fff'
+                        size='xl'
+                    />
+                </Center>
+            )
+
+            :
+
+            (
+                <>
+                    <header>
+                    {
+                        campeao && campeao.length > 0 ? (<h2 align="center">{campeao[0].nome} ganhou o campeonato de fortnite</h2>) : null
+                    }
+                </header>
+                <div className="chave-page">
+                    <div className='chaveamento'>
+                        <div className="chave">
+                            <div className="chave-nome">
+                                chave esquerda
+                            </div>
+                            <div className="chave-fases">
+                                <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
+                                <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
+                                <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} ladoChave={'esquerda'} />
+                            </div>
+                        </div>
+                        <div className="final">
+                            <CardFinais className={fase == 4 ? 'active-div' : ''} getDadosJogo={getDadosJogoEsquerda} />
+                        </div>
+                        <div className="chave">
+                            <div className="chave-nome">
+                                chave direita
+                            </div>
+                            <div className="chave-fases">
+                                <CardSemiFinais className={fase == 3 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
+                                <CardQuartasFinais className={fase == 2 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
+                                <CardOitavasFinais className={fase == 1 ? 'active-div' : ''} getDadosJogo={getDadosJogoDireita} ladoChave={'direita'} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="mudar-fase">
-                        <Button text={'Proxima fase'} type={'button'} variant={'pink'} padding={'1rem'} width={'100%'}
-                            onClick={proxFase}></Button>
-                        <Button text={'Fase Anterior'} type={'button'} variant={'pink'} padding={'1rem'} width={'100%'}
-                            onClick={faseAnterior}
-                        ></Button>
+                    <div className="chaveamento-opcoes">
+                        <div className="fase-opcoes">
+                            <Button text={'Salvar'} type={'button'} variant={'green'} padding={'1rem'} width={'100%'} onClick={handleSaveGames} ></Button>
+                            <Button
+                                text={'Limpar'}
+                                type={'button'}
+                                variant={'yellow'}
+                                padding={'1rem'}
+                                width={'100%'}></Button>
+
+                            <ModalEliminados />
+                            {/* <ModalHoraJogo/> */}
+                            {
+                                fase === 4 && ( //somente se o usuario estiver na fase das finais que o btn vai aparecer
+                                    <>
+                                        <ModalCampeao />
+                                    </>
+
+                                )
+                            }
+                        </div>
+                        <div className="mudar-fase">
+                            <Button text={'Proxima fase'} type={'button'} variant={'pink'} padding={'1rem'} width={'100%'}
+                                onClick={proxFase}></Button>
+                            <Button text={'Fase Anterior'} type={'button'} variant={'pink'} padding={'1rem'} width={'100%'}
+                                onClick={faseAnterior}
+                            ></Button>
+                        </div>
                     </div>
-                </div>
-            </div >
+                </div >
+            </>
+            )
+        }
         </>
     )
 }
