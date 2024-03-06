@@ -4,6 +4,7 @@ import foto from "../../assets/logo.png"
 import { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button/button';
 import { AuthContext } from '../../context/auth';
+import { Api } from '../../services/api';
 
 const Layout = ({ children }) => {
 
@@ -23,9 +24,35 @@ const Layout = ({ children }) => {
 
     const [isliveOn, setIsLiveOn] = useState(false)
 
-    const handleLiveOn = () => {
-        setIsLiveOn(!isliveOn)
+    const handleLiveOn = async () => {
+        if(isliveOn == false){
+            await Api.put('/liveon/1', {
+                live_on: "s"
+            })
+        }else{
+            await Api.put('/liveon/1', {
+                live_on: "n"
+            })
+        }
+        window.location.reload()
+        alert("live setada com sucesso!")
     }
+
+    useEffect(() => {
+        const getLive =  async () => {
+            const {data: liveon} = await Api.get('/liveon')
+
+            const live_on = liveon[0].live_on
+            if(live_on == "s"){
+                setIsLiveOn(true)
+            }else{
+                setIsLiveOn(false)
+            }
+        }
+
+        getLive()
+    
+    }, [])
 
     return (
         <>
