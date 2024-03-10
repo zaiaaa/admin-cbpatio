@@ -54,7 +54,7 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase })
         })
 
         // alert(`deifinir horario do jogo ${jogo} da chave ${chave} e da fase ${fase}`)
-        // window.location.reload()
+        window.location.reload()
     }
 
 
