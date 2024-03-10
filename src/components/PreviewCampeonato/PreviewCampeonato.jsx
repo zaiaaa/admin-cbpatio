@@ -14,8 +14,6 @@ const PreviewCampeonato = ({ nome, sinopse, data_hora, modalidade, valor_ingress
                         <span>sinopse: </span>
                         {sinopse}
                     </p>
-                </div>
-                <div>
                     <p>
                         <span>data & hora: </span>
                         {data_hora}
