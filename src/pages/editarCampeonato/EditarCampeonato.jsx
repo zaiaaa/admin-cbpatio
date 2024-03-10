@@ -12,6 +12,17 @@ const path = "http://localhost:3005"
 import img from '../../assets/noimage.png'
 import { format } from "date-fns";
 
+
+
+function formataDinheiro(valor) {
+    const formata = Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    })
+
+    return formata.format(valor)
+}
+
 const EditarCampeonato = () => {
     const { id } = useParams()
     const [campeonatos, setCampeonatos] = useState([])
@@ -34,15 +45,6 @@ const EditarCampeonato = () => {
     function formataData(data) {
         const newDate = new Date(data)
         return format(newDate, "dd/MM/yyyy HH:mm:ss")
-    }
-
-    function formataDinheiro(valor) {
-        const formata = Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        })
-
-        return formata.format(valor)
     }
 
     let foto = ''
@@ -112,4 +114,4 @@ const EditarCampeonato = () => {
     )
 }
 
-export { EditarCampeonato }
+export { formataDinheiro, EditarCampeonato }
