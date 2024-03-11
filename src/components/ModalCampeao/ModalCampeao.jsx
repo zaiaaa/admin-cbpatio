@@ -87,14 +87,26 @@ const ModalCampeao = () => {
             setTimes(times)
         }
 
+        const getCampeao = async () => {
+            const {data: campeao} = await Api.get(`/campeonatos/time/times/fase/campeao/${id}`)
+            setCampeao(campeao)
+        }
+
         getTeams()
+        getCampeao()
     }, [])
 
     console.log("TIMES: ", times)
     console.log("FINAL: ", finalistas)
+    //console.log(campeao[0].nome)
 
     return (
         <>
+            {
+                campeao.length == 0 
+                
+                ?
+
             <ModalComponent
                 titulo={'Quem ganhou a porra toda?'}
                 textModalOpenBtn={'Definir Campeão'}
@@ -112,6 +124,22 @@ const ModalCampeao = () => {
                 </select>
 
             </ModalComponent>
+
+            :
+
+            <ModalComponent
+                titulo={`Time ${campeao[0]?.nome} campeão!`}
+                textModalOpenBtn={'Ver campeão'}
+                variantTextOpenBtn={'orange'}
+
+            >
+                {
+                    <h2>Parabéns {campeao[0]?.nome}!</h2>
+                }
+            </ModalComponent>
+
+            }
+
         </>
     )
 }
