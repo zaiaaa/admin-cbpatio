@@ -59,6 +59,8 @@ const CardFinais = ({className, getDadosJogo}) => {
         try{
             await Api.delete(`/campeonatos/resetar/fase/final/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado semis/${id}`)
+            await Api.delete(`/campeonatos/resetar/fase/eliminado final/${id}`)
+            await Api.delete(`/campeonatos/resetar/fase/campeao/${id}`)
             window.location.reload()
         }catch(e){
             alert(e)
@@ -151,6 +153,8 @@ const CardFinais = ({className, getDadosJogo}) => {
                         </div>
 
                 </div>
+
+                {semis.length > 0 ? <Button text={"Resetar final"} variant={"red"} onClick={handleDeletaChave}/> : ""}
             </div>
         </>
     )
