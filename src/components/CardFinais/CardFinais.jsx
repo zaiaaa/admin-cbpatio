@@ -6,9 +6,13 @@ import { Button } from '../Button/button';
 import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
+import { Center, Spinner } from '@chakra-ui/react';
+
 
 
 const CardFinais = ({className, getDadosJogo}) => {
+
+    const [loading, setLoading] = useState(false)
 
     const [selectedValues, setSelectedValues] = useState([]);
     
@@ -57,11 +61,13 @@ const CardFinais = ({className, getDadosJogo}) => {
 
     const handleDeletaChave = async () => {
         try{
+            setLoading(true)
             await Api.delete(`/campeonatos/resetar/fase/final/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado semis/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado final/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/campeao/${id}`)
             window.location.reload()
+            setLoading(false)
         }catch(e){
             alert(e)
         }
@@ -70,6 +76,23 @@ const CardFinais = ({className, getDadosJogo}) => {
 
     return (
         <>
+            {
+                loading
+                
+                ?
+
+                <Center>
+                    <Spinner
+                        thickness='4px'
+                        speed='0.65s'
+                        color='#fff'
+                        size='xl'
+                    />
+                </Center>
+
+                :
+
+
             <div className={` finais-fase ${className}`}>
                 <div className="fase-titulo">
                     Final
@@ -156,6 +179,8 @@ const CardFinais = ({className, getDadosJogo}) => {
 
                 {semis.length > 0 ? <Button text={"Resetar final"} variant={"red"} onClick={handleDeletaChave}/> : ""}
             </div>
+            }
+            
         </>
     )
 }
