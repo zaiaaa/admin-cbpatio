@@ -67,43 +67,44 @@ const Chave = () => {
     }, [])
 
     useEffect(() => {
-
-        if (faseAnteriorElim && faseAtual && podeIr) {
-            console.log(faseAnteriorElim)
-            if (faseAnteriorElim == "oitavas") {
-                for (let i = 1; i <= 4; i++) {
-                    findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
-                    findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
+        const getEliminados = async () => {
+            if (faseAnteriorElim && faseAtual && podeIr) {
+                console.log(faseAnteriorElim)
+                if (faseAnteriorElim == "oitavas") {
+                    for (let i = 1; i <= 4; i++) {
+                        await findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
+                        await findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
+                    }
+                    
+                    window.location.reload()
+                    alert('Jogos cadastrados com sucesso!')
+                } else if (faseAnteriorElim == "quartas") {
+                    for (let i = 1; i <= 2; i++) {
+                        await findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
+                        await findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
+                    } 
+                    window.location.reload()
+                    alert('Jogos cadastrados com sucesso!')
+                } else if (faseAnteriorElim == "semis") {
+                    await findEliminado(1, "semis", "final", "direita", "esquerda")
+                    await findEliminado(1, "semis", "final", "esquerda", "esquerda")
+                    
+                    window.location.reload()
+                    alert('Jogos cadastrados com sucesso!')
+                }else{
+                    window.location.reload()
+                    alert('Jogos cadastrados com sucesso!')
                 }
-                
-                window.location.reload()
-                alert('Jogos cadastrados com sucesso!')
-            } else if (faseAnteriorElim == "quartas") {
-                for (let i = 1; i <= 2; i++) {
-                    findEliminado(i, faseAnteriorElim, faseAtual, "direita", "direita")
-                    findEliminado(i, faseAnteriorElim, faseAtual, "esquerda", "esquerda")
-                } 
-                window.location.reload()
-                alert('Jogos cadastrados com sucesso!')
-            } else if (faseAnteriorElim == "semis") {
-                findEliminado(1, "semis", "final", "direita", "esquerda")
-                findEliminado(1, "semis", "final", "esquerda", "esquerda")
-                
-                window.location.reload()
-                alert('Jogos cadastrados com sucesso!')
-            }else{
-                window.location.reload()
-                alert('Jogos cadastrados com sucesso!')
             }
-        } else {
-            console.log('acabou')   
+    
+            // window.location.reload()
+            // alert('Jogos cadastrados com sucesso!')
+            setLoading(false)
+            
+            setPodeIr(false)
         }
 
-        // window.location.reload()
-        // alert('Jogos cadastrados com sucesso!')
-        setPodeIr(false)
-        setLoading(false)
-
+        getEliminados()
     }, [podeIr])
 
     const handleSaveGames = async () => {
