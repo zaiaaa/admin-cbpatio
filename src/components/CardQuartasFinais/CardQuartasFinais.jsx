@@ -18,6 +18,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
     const [oitavas, setOitavas] = useState([])
 
+    const [semis, setSemis] = useState([])
+
     const [chave, setChave] = useState({})
 
     const { id } = useParams()
@@ -33,6 +35,11 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
             setOitavas(data)
         } 
 
+        const getSemis = async () => {
+            const {data} = await Api.get(`/campeonatos/time/times/fase/semis/${id}`)
+            setSemis(data)
+        }
+
         const getChave = async () => {
             const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/quartas`)
             const dir = await Api.get(`/campeonatos/time/times/chave/direita/${id}/quartas`)
@@ -46,6 +53,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         getTeams()
         getChave()
         getOitavas()
+        getSemis()
     }, [])
 
     console.log(oitavas)
@@ -96,7 +104,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         }
         setLoading(false)
     }
-    //console.log(chave.esquerda[0])
+    console.log(semis)
 
     return (
         <>
@@ -375,7 +383,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     </div>
                 </div>
                 
-                {oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : <Button text={"Resetar quartas"} variant={"red"} onClick={handleAlteraChave}/>}
+                {oitavas.length > 8 && semis.length > 2 ? "" : oitavas.length == 0 ? <Button text={"put quartas"} variant={"red"} onClick={handleAlteraChave}/> : oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : ""}
                 
             </div>
 
