@@ -10,6 +10,7 @@ const ValoresCampeonato = () => {
     const [campeonato, setCampeonato] = useState({})
     const [valoresCamp, setValoresCamp] = useState(0)
     const [jogadoresInscritos, setJogadoresInscritos] = useState(0)
+    const [oitavas, setOitavas] = useState({})
 
     useEffect(() => {
 
@@ -26,9 +27,23 @@ const ValoresCampeonato = () => {
                 console.log(e)
             }
         }
+
+        const getOitavas = async () => {
+            try{
+                const {data: oitavas } = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`)
+                setOitavas(oitavas)
+            }catch(e){
+                console.error(e)
+            }
+
+        } 
+
+        getOitavas()
         getCamepeonatoData()
 
     }, [])
+
+    console.log("oitavass")
 
     return (
         <>
