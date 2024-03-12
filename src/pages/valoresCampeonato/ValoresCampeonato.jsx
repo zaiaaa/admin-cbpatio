@@ -10,7 +10,7 @@ const ValoresCampeonato = () => {
     const [campeonato, setCampeonato] = useState({})
     const [valoresCamp, setValoresCamp] = useState(0)
     const [jogadoresInscritos, setJogadoresInscritos] = useState(0)
-    const [oitavas, setOitavas] = useState({})
+    const [oitavas, setOitavas] = useState(0)
 
     useEffect(() => {
 
@@ -31,19 +31,19 @@ const ValoresCampeonato = () => {
         const getOitavas = async () => {
             try{
                 const {data: oitavas } = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`)
-                setOitavas(oitavas)
+                setOitavas(oitavas.length)
             }catch(e){
                 console.error(e)
             }
-
+            
         } 
-
+        
         getOitavas()
         getCamepeonatoData()
-
+        
     }, [])
-
-    console.log("oitavass")
+    
+    console.log(oitavas)
 
     return (
         <>
@@ -54,7 +54,7 @@ const ValoresCampeonato = () => {
                     <li>VALOR ARRECADADO: <span className="valores">{formataDinheiro(valoresCamp)}</span></li>
                     <li>VALOR EM PREMIAÇÕES: <span className="valores">{formataDinheiro(campeonato.premiacao)}</span></li>
                     <li>VALOR DA INSCRIÇÃO: <span className="valores">{formataDinheiro(campeonato.valor_entrada)}</span></li>
-                    <li>TIMES INSCRITOS: <span className="times-inscritos">{jogadoresInscritos}</span></li>
+                    <li>TIMES INSCRITOS: <span className="times-inscritos">{jogadoresInscritos > 16 ? oitavas : jogadoresInscritos}</span></li>
                 </ul>
             </CardValores>
         </>

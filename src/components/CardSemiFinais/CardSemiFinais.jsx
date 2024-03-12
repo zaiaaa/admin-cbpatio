@@ -122,7 +122,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        <select disabled={true} name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -177,7 +177,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                         
                         : 
                         
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select disabled={true} name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 semis${quartas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
                                     <option value="">Selecione a equipe!</option>
