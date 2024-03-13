@@ -20,7 +20,7 @@ const ModalEliminados = () => {
 
     useEffect(() => {
         const getEliminados = async () => {
-            const { data: oitavas } = await Api.get(`campeonatos/time/times/fase/eliminado%20oitavas/1`)
+            const { data: oitavas } = await Api.get(`campeonatos/time/times/fase/eliminado oitavas/${id}`)
             const { data: quartas } = await Api.get(`/campeonatos/time/times/fase/eliminado quartas/${id}`)
             const { data: semis } = await Api.get(`/campeonatos/time/times/fase/eliminado semis/${id}`)
             const { data: final } = await Api.get(`/campeonatos/time/times/fase/eliminado final/${id}`)

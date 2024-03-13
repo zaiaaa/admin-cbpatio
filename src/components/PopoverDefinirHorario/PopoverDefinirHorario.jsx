@@ -7,12 +7,13 @@ import * as yup from "yup"
 import { Button } from "../Button/button"
 import { Api } from "../../services/api"
 import { useParams } from "react-router-dom"
+import { useToast } from "@chakra-ui/react"
 
-const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) => {
+const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase }) => {
 
-    const {id} = useParams()
+    const { id } = useParams()
+    const toast = useToast()
 
-  
     const schema = yup.object({
         data_hora:
             yup.date()
@@ -32,7 +33,7 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) 
     })
 
 
-    const onSubmit = async (formData) => {        
+    const onSubmit = async (formData) => {
         const data = format(formData.data_hora, "yyyy-MM-dd HH:mm:ss")
         console.log(data)
         try {
@@ -43,7 +44,16 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) 
             alert("ERRO -> ", e)
         }
 
-        alert(`deifinir horario do jogo ${jogo} da chave ${chave} e da fase ${fase}`)
+        toast({
+            position: 'bottom-left',
+            title: "Horário definido",
+            description: `jogo ${jogo} da chave ${chave} e da fase ${fase}`,
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+        })
+
+        // alert(`deifinir horario do jogo ${jogo} da chave ${chave} e da fase ${fase}`)
         window.location.reload()
     }
 
@@ -56,7 +66,11 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase}) 
             >
                 <form >
                     <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={format(new Date(), "yyyy-MM-dd HH:mm:ss")} />
-                    <Button variant={'purple'} text={'Salvar'} margin={'1rem 0rem'} onClick={handleSubmit(onSubmit)}></Button>
+                    <Button variant={'purple'}
+                        text={'Salvar'}
+                        margin={'1rem 0rem'}
+                        onClick={handleSubmit(onSubmit)}
+                    ></Button>
 
                 </form>
             </PopoverComponent>
