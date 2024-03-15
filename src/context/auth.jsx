@@ -13,15 +13,28 @@ export const AuthContextProvider = ({children}) =>{
     const navigate = useNavigate()
 
     useEffect(() => {
-        const token = localStorage.getItem("token")
+        const checkToken = async () => {
+            const token = localStorage.getItem("token")
+            console.log(token)
+            const esperado = await Api.get(`/login/token/${token}`)
+    
+            if(esperado == "Token OK"){
+                setIsAuth(true)
+    
+                setToken({
+                    token
+                })
+                return
+            }
 
-        if(token){
-            setIsAuth(true)
-
-            setToken({
-                token
-            })
+            if(esperado == "Token Inválido"){
+                setIsAuth(false)
+                setToken({})
+                return
+            }
         }
+
+        checkToken()
     }, [])
 
 
