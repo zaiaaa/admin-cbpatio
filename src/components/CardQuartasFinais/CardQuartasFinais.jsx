@@ -106,6 +106,17 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         }
         setLoading(false)
     }
+
+    function disableCheckBox(){
+        //se tem chave e se nao tem quartas
+        if(chave?.esquerda?.length > 0) return true
+
+        if(semis?.length > 0) return true
+        
+        return false
+    }
+
+
     console.log(semis)
 
     return (
@@ -135,7 +146,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
                         {!chave || !chave.esquerda || !chave.esquerda[0] ? 
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)} disabled={disableCheckBox()}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -153,7 +164,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                         : 
                         
-                        <select disabled={true} name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        <select disabled={disableCheckBox()} name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -174,7 +185,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         VS.
                         
                         {!chave || !chave.esquerda || !chave.esquerda[1] ? 
-                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)} disabled={disableCheckBox()}>
                             
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -193,7 +204,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                         :
                         
-                        <select disabled={true} name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        <select disabled={disableCheckBox()} name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -255,6 +266,8 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 fase={"quartas"}
                                 textDispare={<i className="fa-solid fa-gear"></i>}
                                 popoverTitle={`Data & Hora do jogo 1: `}
+                                timesInscritos={chave?.esquerda}
+
                             />
                         </div>
 
@@ -262,7 +275,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     <div className="jogo">
                         <div className="jogo-numero">jogo 2</div>
                         
-                        {!chave || !chave.esquerda || !chave.esquerda[2] ? <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        {!chave || !chave.esquerda || !chave.esquerda[2] ? <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)} disabled={disableCheckBox()}>
                         {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
@@ -279,7 +292,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                         : 
                         
-                        <select disabled={true} name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
+                        <select disabled={disableCheckBox()} name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (casa) ${ladoChave}`, e)}>
                         {
                             (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                 <option value="">Selecione a equipe!</option>
@@ -301,7 +314,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
                         VS.
                         
-                        {!chave || !chave.esquerda || !chave.esquerda[3] ? <select name="sla" id="sla" onChange={(e) => handleSelectChange(3, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                        {!chave || !chave.esquerda || !chave.esquerda[3] ? <select name="sla" id="sla" onChange={(e) => handleSelectChange(3, `jogo 2 quartas${oitavas.length == 0 ? '-start' : ""} (visitante) ${ladoChave}`, e)} disabled={disableCheckBox()}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -320,7 +333,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                         
                     :
                     
-                    <select disabled={true} name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 3 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
+                    <select disabled={disableCheckBox()} name="sla" id="sla" onChange={(e) => handleSelectChange(0, `jogo 2 quartas${oitavas.length == 3 ? '-start' : ""} (visitante) ${ladoChave}`, e)}>
                             {
                                 (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -379,13 +392,15 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                 fase={"quartas"}
                                 textDispare={<i className="fa-solid fa-gear"></i>}
                                 popoverTitle={`Data & Hora do jogo 2: `}
+                                timesInscritos={chave?.esquerda}
+
                             />
                         </div>
                         
                     </div>
                 </div>
                 
-                {oitavas?.length > 0 && chave?.esquerda?.length ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : oitavas?.length === 0 && chave?.esquerda?.length && semis?.length === 0 ? <Button text={"put quartas"} variant={"red"} onClick={handleAlteraChave}/> : ""}
+                {oitavas?.length > 0 && chave?.esquerda?.length && semis?.length === 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : oitavas?.length === 0 && chave?.esquerda?.length && semis?.length === 0 ? <Button text={"put quartas"} variant={"red"} onClick={handleAlteraChave}/> : ""}
             </div>
 
         }

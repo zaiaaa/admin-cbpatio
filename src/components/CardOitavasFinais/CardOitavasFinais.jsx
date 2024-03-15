@@ -19,6 +19,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
     const [quartas, setQuartas] = useState({})
 
+    const [semis, setSemis] = useState({})
+
     const [chave, setChave] = useState({})
 
     const { id } = useParams()
@@ -45,9 +47,17 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
             setQuartas(data)
         }
 
+        const getSemis = async () => {
+            const {data} = await Api.get(`/campeonatos/time/times/fase/semis/${id}`)
+
+            setSemis(data)
+
+        }
+
         getTeams()
         getChave()
         getQuartas()
+        getSemis()
     }, [])
     console.log(chave?.esquerda?.length > 0 || quartas.length === 0)
     //console.log()
@@ -99,6 +109,17 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
         
     }
 
+    function disableCheckBox(){
+        //se tem chave e se nao tem quartas
+        if(chave?.esquerda?.length > 0) return true
+
+        if(quartas?.length > 0) return true
+
+        if(semis?.length > 0) return true
+        
+        return false
+    }
+
     return (
         <>
             {
@@ -126,7 +147,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                             <div className="jogo">
                                 <div className="jogo-numero">jogo 1</div>
                                 {/*disabled={chave ? true : false}*/}
-                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 oitavas (casa) ${ladoChave}`, e)}  >
+                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 oitavas (casa) ${ladoChave}`, e)} disabled={disableCheckBox()} >
 
 
                                     {/* nesse caso, se nao tiver chave, o default será "Selecione a equipe!, se já tiver uma chave (ou seja, se ja existem times cadastrados nessa fase), mostraremos o nome do time. "*/}
@@ -145,7 +166,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     ))}
                                 </select>
                                 VS.
-                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 oitavas (visitante) ${ladoChave}`, e)}>
+                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(1, `jogo 1 oitavas (visitante) ${ladoChave}`, e)} disabled={disableCheckBox()} >
 
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[1]) ? (
@@ -204,13 +225,14 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                         fase={"oitavas"}
                                         textDispare={<i className="fa-solid fa-gear"></i>}
                                         popoverTitle={`Data & Hora do jogo 1: `}
+                                        timesInscritos={chave?.esquerda}
                                     />
                                 </div>
                             </div>
 
                             <div className="jogo">
                                 <div className="jogo-numero">jogo 2</div>
-                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 oitavas (casa) ${ladoChave}`, e)}>
+                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(2, `jogo 2 oitavas (casa) ${ladoChave}`, e)} disabled={disableCheckBox()} >
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[2]) ? (
                                             <option value="">Selecione a equipe!</option>
@@ -225,7 +247,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     ))}
                                 </select>
                                 VS.
-                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(3, `jogo 2 oitavas (visitante) ${ladoChave}`, e)}>
+                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(3, `jogo 2 oitavas (visitante) ${ladoChave}`, e)} disabled={disableCheckBox()} >
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[3]) ? (
                                             <option value="">Selecione a equipe!</option>
@@ -282,13 +304,14 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                         fase={"oitavas"}
                                         textDispare={<i className="fa-solid fa-gear"></i>}
                                         popoverTitle={`Data & Hora do jogo 2: `}
+                                        timesInscritos={chave?.esquerda}
                                     />
                                 </div>
 
                             </div>
                             <div className="jogo">
                                 <div className="jogo-numero">jogo 3</div>
-                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(4, `jogo 3 oitavas (casa) ${ladoChave}`, e)}>
+                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(4, `jogo 3 oitavas (casa) ${ladoChave}`, e)} disabled={disableCheckBox()} >
 
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[4]) ? (
@@ -305,7 +328,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     ))}
                                 </select>
                                 VS.
-                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(5, `jogo 3 oitavas (visitante) ${ladoChave}`, e)}>
+                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(5, `jogo 3 oitavas (visitante) ${ladoChave}`, e)} disabled={disableCheckBox()} >
 
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[5]) ? (
@@ -364,13 +387,15 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                         fase={"oitavas"}
                                         textDispare={<i className="fa-solid fa-gear"></i>}
                                         popoverTitle={`Data & Hora do jogo 3: `}
+                                        timesInscritos={chave?.esquerda}
+
                                     />
                                 </div>
 
                             </div>
                             <div className="jogo">
                                 <div className="jogo-numero">jogo 4</div>
-                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(6, `jogo 4 oitavas (casa) ${ladoChave}`, e)}>
+                                <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(6, `jogo 4 oitavas (casa) ${ladoChave}`, e)} disabled={disableCheckBox()} >
 
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[6]) ? (
@@ -387,7 +412,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                     ))}
                                 </select>
                                 VS.
-                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(7, `jogo 4 oitavas (visitante) ${ladoChave}`, e)}>
+                                <select name="sla" id="sla" onChange={(e) => handleSelectChange(7, `jogo 4 oitavas (visitante) ${ladoChave}`, e)} disabled={disableCheckBox()} >
                                     {
                                         (!chave || !chave.esquerda || !chave.esquerda[0]) ? (
                                             <option value="">Selecione a equipe!</option>
@@ -445,6 +470,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                                         fase={"oitavas"}
                                         textDispare={<i className="fa-solid fa-gear"></i>}
                                         popoverTitle={`Data & Hora do jogo 4: `}
+                                        timesInscritos={chave?.esquerda}
+
                                     />
                                 </div>
 
