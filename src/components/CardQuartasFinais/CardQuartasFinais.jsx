@@ -81,6 +81,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
             setLoading(false)
             alert( "jogos resetados com sucesso")
+            window.location.reload()
         }catch(e){
             alert(e)
         }

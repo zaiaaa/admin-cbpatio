@@ -80,6 +80,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
             setLoading(false)
             alert("jogos resetados com sucesso")
+            window.location.reload()
         } catch (e) {
             setLoading(false)
             alert(e);
