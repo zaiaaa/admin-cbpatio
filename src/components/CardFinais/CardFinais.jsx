@@ -73,6 +73,15 @@ const CardFinais = ({className, getDadosJogo}) => {
         }
     }
 
+    function disableCheckBox(){
+        //se tem chave e se nao tem quartas
+        if(chave?.length > 0) return true
+
+        if(semis?.length === 0) return true
+        
+        return false
+    }
+
 
     return (
         <>
@@ -100,7 +109,7 @@ const CardFinais = ({className, getDadosJogo}) => {
                 <div className="fase-jogos">
                     <div className="jogo">
                         <div className="jogo-numero">jogo 1</div>
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 final (casa)`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(0, `jogo 1 final (casa)`, e)} disabled={disableCheckBox()}>
                             {
                                 (chave.length === 0) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -120,7 +129,7 @@ const CardFinais = ({className, getDadosJogo}) => {
 
                         </select>
                         VS.
-                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 final (visitante)`, e)}>
+                        <select name="jogo" id="jogo" onChange={(e) => handleSelectChange(1, `jogo 1 final (visitante)`, e)} disabled={disableCheckBox()}>
                             {
                                 (!chave || !chave[1]) ? (
                                     <option value="">Selecione a equipe!</option>
@@ -172,12 +181,13 @@ const CardFinais = ({className, getDadosJogo}) => {
                                 fase={"final"}
                                 textDispare={<i className="fa-solid fa-gear"></i>}
                                 popoverTitle={`Data & Hora do jogo 1: `}
+                                timesInscritos={chave}
                             />
                         </div>
 
                 </div>
 
-                {semis.length > 0 ? <Button text={"Resetar final"} variant={"red"} onClick={handleDeletaChave}/> : ""}
+                {semis.length > 0 && chave?.length > 0 ? <Button text={"Resetar final"} variant={"red"} onClick={handleDeletaChave}/> : ""}
             </div>
             }
             
