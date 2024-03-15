@@ -6,6 +6,8 @@ import { Button } from '../Button/button';
 import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
+import { Center, Spinner } from '@chakra-ui/react';
+
 
 const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     
@@ -16,6 +18,8 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
     const [times, setTimes] = useState([])
 
     const [quartas, setQuartas] = useState([])
+
+    const [final, setFinal] = useState([])
 
     const [chave, setChave] = useState({})
 
@@ -32,6 +36,11 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
             setQuartas(data)
         } 
 
+        const getFinal = async () => {
+            const {data} = await Api.get(`/campeonatos/time/times/fase/final/${id}`)
+            setFinal(data)
+        }
+
         const getChave = async () => {
             const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/semis`)
             const dir = await Api.get(`/campeonatos/time/times/chave/direita/${id}/semis`)
@@ -45,6 +54,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
         getTeams()
         getChave()
         getQuartas()
+        getFinal()
     }, [])
 
     console.log(chave)
@@ -76,8 +86,46 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
         setLoading(false)
     }
 
+    const handleAlteraChave = async () => {
+        setLoading(true)
+        try {
+            const { data } = await Api.get(`/campeonatos/time/times/fase/semis/${id}`);
+            for (const time of data) {
+                await Api.put(`/campeonatos/time/alterarTime/${time.id_time_campeonato}`, {
+                    fase: "",
+                    jogo: "",
+                    chave: "",
+                    data_hora: null
+                });
+            }
+            alert("Chave resetada com sucesso!")
+            window.location.reload();
+        } catch (error) {
+            alert(error);
+        }
+        setLoading(false)
+    }
+
+    console.log(final?.length > 0)
+
     return (
         <>
+        {
+            loading
+
+            ?
+            
+            <Center>
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    color='#fff'
+                    size='xl'
+                />
+            </Center>
+
+            :
+
             <div className={`semis-fase ${className}`}>
                 <div className="fase-titulo">
                     Semis
@@ -239,9 +287,10 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                         </div>
                     </div>
                 </div>
-                {quartas.length > 0 ? <Button text={"Resetar semi"} variant={"red"} onClick={handleDeletaChave}/> : ""}
+                {quartas?.length > 0 && chave?.esquerda?.length ? <Button text={"Resetar semis"} variant={"red"} onClick={handleDeletaChave}/> : quartas?.length === 0 && chave?.esquerda?.length && final?.length === 0 ? <Button text={"put semis"} variant={"red"} onClick={handleAlteraChave}/> : ""}
 
             </div>
+        }
         </>
     )
 }

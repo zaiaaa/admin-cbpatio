@@ -17,6 +17,8 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
     const [times, setTimes] = useState([])
 
+    const [quartas, setQuartas] = useState({})
+
     const [chave, setChave] = useState({})
 
     const { id } = useParams()
@@ -37,10 +39,18 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
             })
         }
 
+        const getQuartas = async () => {
+            const {data} = await Api.get(`/campeonatos/time/times/fase/quartas/${id}`)
+
+            setQuartas(data)
+        }
+
         getTeams()
         getChave()
+        getQuartas()
     }, [])
-    console.log(chave.esquerda)
+    console.log(chave?.esquerda?.length > 0 || quartas.length === 0)
+    //console.log()
 
 
     const handleSelectChange = (id, name, event) => {
@@ -62,6 +72,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
     }, [selectedValues])
 
     //console.log(chave.esquerda[0])
+    console.log(quartas)
 
     const handleAlteraChave = async () => {
         setLoading(true)
@@ -442,11 +453,11 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                         </div>
 
                         {
-                            times.length > 16
+                            chave?.esquerda?.length > 0 && quartas?.length == 0
                                 ?
-                                ""
-                                :
                                 <Button text={"Resetar oitavas"} variant={"red"} onClick={handleAlteraChave} />
+                                :
+                                ""
                         }
                     </div>
             }

@@ -56,7 +56,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         getSemis()
     }, [])
 
-    console.log(oitavas)
+    console.log(chave)
 
     const handleSelectChange = (id, name, event) => {      
          // Define o novo valor selecionado
@@ -385,8 +385,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     </div>
                 </div>
                 
-                {oitavas.length > 8 && semis.length > 2 ? "" : oitavas.length == 0 ? <Button text={"put quartas"} variant={"red"} onClick={handleAlteraChave}/> : oitavas.length > 0 ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : ""}
-                
+                {oitavas?.length > 0 && chave?.esquerda?.length ? <Button text={"Resetar quartas"} variant={"red"} onClick={handleDeletaChave}/> : oitavas?.length === 0 && chave?.esquerda?.length && semis?.length === 0 ? <Button text={"put quartas"} variant={"red"} onClick={handleAlteraChave}/> : ""}
             </div>
 
         }
