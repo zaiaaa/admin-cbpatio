@@ -9,7 +9,7 @@ import { Api } from "../../services/api"
 import { useParams } from "react-router-dom"
 import { useToast } from "@chakra-ui/react"
 
-const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase }) => {
+const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase, timesInscritos }) => {
 
     const { id } = useParams()
     const toast = useToast()
@@ -60,6 +60,20 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase })
 
     return (
         <>
+            {
+                timesInscritos?.length == 0
+
+                ?
+
+                    <PopoverComponent
+                    textDispare={textDispare}
+                    popoverTitle={popoverTitle}
+                    >
+                    
+                    Você precisa cadastrar um jogo para colocar um horario
+                </PopoverComponent>
+
+                :
             <PopoverComponent
                 textDispare={textDispare}
                 popoverTitle={popoverTitle}
@@ -74,6 +88,7 @@ const PopoverDefinirHorario = ({ textDispare, popoverTitle, jogo, chave, fase })
 
                 </form>
             </PopoverComponent>
+            }
         </>
     )
 
