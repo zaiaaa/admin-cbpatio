@@ -16,9 +16,12 @@ export const AuthContextProvider = ({children}) =>{
         const checkToken = async () => {
             const token = localStorage.getItem("token")
             console.log(token)
-            const esperado = await Api.get(`/login/token/${token}`)
-    
+            const {data: esperado} = await Api.get(`/login/token/${token}`)
+            console.log(esperado)
+
             if(esperado == "Token OK"){
+                console.log("oiii1")
+
                 setIsAuth(true)
     
                 setToken({
@@ -29,7 +32,7 @@ export const AuthContextProvider = ({children}) =>{
 
             if(esperado == "Token Inválido"){
                 setIsAuth(false)
-                setToken({})
+                localStorage.removeItem("token")
                 return
             }
         }
