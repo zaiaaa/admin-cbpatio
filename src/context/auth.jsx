@@ -15,25 +15,9 @@ export const AuthContextProvider = ({children}) =>{
     useEffect(() => {
         const checkToken = async () => {
             const token = localStorage.getItem("token")
-            console.log(token)
-            const {data: esperado} = await Api.get(`/login/token/${token}`)
-            console.log(esperado)
-
-            if(esperado == "Token OK"){
-                console.log("oiii1")
-
+            if(token){
                 setIsAuth(true)
-    
-                setToken({
-                    token
-                })
-                return
-            }
-
-            if(esperado == "Token Inválido"){
-                setIsAuth(false)
-                localStorage.removeItem("token")
-                return
+                setToken(token)
             }
         }
 
