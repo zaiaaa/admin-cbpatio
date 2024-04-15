@@ -155,6 +155,9 @@ const Chave = () => {
                         "jogo": jogo,
                         "chave": chave
                     })
+                    await Api.put(`/campeonatos/time/aconteceu/fase/oitavas/${id_campeonato}`, {
+                        aconteceu: 's'
+                    })
                     setFaseAtual("quartas")
                     setFaseAnteriorElim("oitavas")
                     break;
@@ -187,6 +190,10 @@ const Chave = () => {
                         "chave": chave
                     })
 
+                    await Api.put(`/campeonatos/time/aconteceu/fase/quartas/${id_campeonato}`, {
+                        aconteceu: 's'
+                    })
+
                     setFaseAtual("semis")
                     setFaseAnteriorElim("quartas")
                     break;
@@ -217,6 +224,10 @@ const Chave = () => {
                         "fase": "final",
                         "jogo": jogo,
                         "chave": "esquerda"
+                    })
+
+                    await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id_campeonato}`, {
+                        aconteceu: 's'
                     })
 
                     setFaseAtual("final")
