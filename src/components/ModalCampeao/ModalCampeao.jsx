@@ -27,7 +27,6 @@ const ModalCampeao = () => {
                 "Content-Type": "application/json"
             }
         })
-
         //console.log(timeEliminado)
 
         await Api.post(`/campeonatos/time/novoTime`, {
@@ -54,6 +53,12 @@ const ModalCampeao = () => {
                 "fase": "campeao",
                 "jogo": ""
             })
+
+            
+            await Api.put(`/campeonatos/time/aconteceu/fase/final/${id}`, {
+                aconteceu: 's'
+            })
+
 
             findEliminado(1, "final", "acabou", "esquerda", "esquerda")
         } catch (error) {

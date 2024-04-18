@@ -87,6 +87,10 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
         try{
             await Api.delete(`/campeonatos/resetar/fase/semis/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado quartas/${id}`)
+
+            await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id}`, {
+                aconteceu: ''
+            })
             window.location.reload()
         }catch(e){
             alert(e)
@@ -106,6 +110,12 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                     data_hora: null
                 });
             }
+
+            await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id}`, {
+                aconteceu: ''
+            })
+
+
             alert("Chave resetada com sucesso!")
             window.location.reload();
         } catch (error) {

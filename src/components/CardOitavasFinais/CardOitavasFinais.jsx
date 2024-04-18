@@ -99,6 +99,10 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
                 });
             }
 
+            await Api.put(`/campeonatos/time/aconteceu/fase/oitavas/${id}`, {
+                aconteceu: ''
+            })
+
             setLoading(false)
             alert("jogos resetados com sucesso")
             window.location.reload()

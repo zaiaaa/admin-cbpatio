@@ -79,6 +79,10 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
             await Api.delete(`/campeonatos/resetar/fase/quartas/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado oitavas/${id}`)
 
+            await Api.put(`/campeonatos/time/aconteceu/fase/quartas/${id}`, {
+                aconteceu: ''
+            })
+
             setLoading(false)
             alert( "jogos resetados com sucesso")
             window.location.reload()
@@ -100,6 +104,10 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                     data_hora: null
                 });
             }
+
+            await Api.put(`/campeonatos/time/aconteceu/fase/quartas/${id}`, {
+                aconteceu: ''
+            })
             window.location.reload();
         } catch (error) {
             alert(error);
