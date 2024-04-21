@@ -67,7 +67,7 @@ const CardFinais = ({className, getDadosJogo}) => {
             await Api.delete(`/campeonatos/resetar/fase/eliminado final/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/campeao/${id}`)
 
-            await Api.put(`/campeonatos/time/aconteceu/fase/final/${id}`, {
+            await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id}`, {
                 aconteceu: ''
             })
 

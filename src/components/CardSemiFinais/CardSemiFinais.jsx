@@ -88,7 +88,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
             await Api.delete(`/campeonatos/resetar/fase/semis/${id}`)
             await Api.delete(`/campeonatos/resetar/fase/eliminado quartas/${id}`)
 
-            await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id}`, {
+            await Api.put(`/campeonatos/time/aconteceu/fase/quartas/${id}`, {
                 aconteceu: ''
             })
             window.location.reload()
@@ -107,14 +107,10 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                     fase: "",
                     jogo: "",
                     chave: "",
+                    aconteceu: "",
                     data_hora: null
                 });
             }
-
-            await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id}`, {
-                aconteceu: ''
-            })
-
 
             alert("Chave resetada com sucesso!")
             window.location.reload();
