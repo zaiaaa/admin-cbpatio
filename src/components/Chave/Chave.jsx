@@ -54,7 +54,9 @@ const Chave = () => {
             "fk_id_time": timeEliminado.data[0].fk_id_time,
             "fk_id_campeonato": id,
             "fase": `eliminado ${faseAnterior}`,
-            "jogo": ""
+            "jogo": "",
+            "chave": "",
+            "aconteceu": ""
         })
     }
 
