@@ -33,7 +33,8 @@ const ModalCampeao = () => {
             "fk_id_time": timeEliminado.data[0].fk_id_time,
             "fk_id_campeonato": id,
             "fase": `eliminado ${faseAnterior}`,
-            "jogo": ""
+            "jogo": "",
+            "aconteceu": ""
         })
     }
     
@@ -51,7 +52,8 @@ const ModalCampeao = () => {
                 "fk_id_time": time,
                 "fk_id_campeonato": camp,
                 "fase": "campeao",
-                "jogo": ""
+                "jogo": "",
+                "aconteceu": ""
             })
 
             

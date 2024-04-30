@@ -33,8 +33,10 @@ const CardFinais = ({className, getDadosJogo}) => {
         } 
 
         const getFinal = async () => {
+            setLoading(true)
             const {data} = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/final`)
             setChave(data)
+            setLoading(false)
         }
 
         getFinal()

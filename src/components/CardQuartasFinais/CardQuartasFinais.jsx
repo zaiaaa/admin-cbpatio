@@ -41,13 +41,17 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
         }
 
         const getChave = async () => {
-            const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/quartas`)
-            const dir = await Api.get(`/campeonatos/time/times/chave/direita/${id}/quartas`)
-
+            setLoading(true)
+            const [esq, dir] = await Promise.all([
+                Api.get(`/campeonatos/time/times/chave/esquerda/${id}/quartas`),
+                Api.get(`/campeonatos/time/times/chave/direita/${id}/quartas`)
+            ])
+            
             setChave({
                 esquerda: esq.data,
                 direita: dir.data
             })
+            setLoading(false)
         }
 
         getTeams()

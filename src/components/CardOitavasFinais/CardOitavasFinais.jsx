@@ -32,13 +32,17 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
         }
 
         const getChave = async () => {
-            const esq = await Api.get(`/campeonatos/time/times/chave/esquerda/${id}/oitavas`)
-            const dir = await Api.get(`/campeonatos/time/times/chave/direita/${id}/oitavas`)
-
+            setLoading(true)
+            const [esq, dir] = await Promise.all([
+                Api.get(`/campeonatos/time/times/chave/esquerda/${id}/oitavas`),
+                Api.get(`/campeonatos/time/times/chave/direita/${id}/oitavas`)
+            ])
+            
             setChave({
                 esquerda: esq.data,
                 direita: dir.data
             })
+            setLoading(false)
         }
 
         const getQuartas = async () => {
@@ -59,7 +63,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
         getQuartas()
         getSemis()
     }, [])
-    console.log(chave?.esquerda?.length > 0 || quartas.length === 0)
+    //console.log(chave?.esquerda?.length > 0 || quartas.length === 0)
     //console.log()
 
 

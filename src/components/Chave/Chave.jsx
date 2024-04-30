@@ -138,7 +138,8 @@ const Chave = () => {
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": fase,
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     setFaseAnteriorElim("n")
@@ -155,7 +156,8 @@ const Chave = () => {
                         "fk_id_campeonato": id_campeonato,
                         "fase": "quartas",
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
                     await Api.put(`/campeonatos/time/aconteceu/fase/oitavas/${id_campeonato}`, {
                         aconteceu: 's'
@@ -173,7 +175,8 @@ const Chave = () => {
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'quartas',
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
                     setFaseAnteriorElim("n")
                     setFaseAtual("quartas")
@@ -189,7 +192,8 @@ const Chave = () => {
                         "fk_id_campeonato": id_campeonato,
                         "fase": "semis",
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     await Api.put(`/campeonatos/time/aconteceu/fase/quartas/${id_campeonato}`, {
@@ -209,7 +213,8 @@ const Chave = () => {
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'semis',
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
                     setFaseAnteriorElim("n")
                     setFaseAtual("semis")
@@ -225,7 +230,8 @@ const Chave = () => {
                         "fk_id_campeonato": id_campeonato,
                         "fase": "final",
                         "jogo": jogo,
-                        "chave": "esquerda"
+                        "chave": "esquerda",
+                        "aconteceu": ""
                     })
 
                     await Api.put(`/campeonatos/time/aconteceu/fase/semis/${id_campeonato}`, {
@@ -264,7 +270,8 @@ const Chave = () => {
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": fase,
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     setFaseAnteriorElim("n")
@@ -277,7 +284,8 @@ const Chave = () => {
                         "fk_id_campeonato": id_campeonato,
                         "fase": "quartas",
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     setFaseAtual("quartas")
@@ -288,7 +296,8 @@ const Chave = () => {
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'quartas',
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     setFaseAnteriorElim("n")
@@ -301,7 +310,8 @@ const Chave = () => {
                         "fk_id_campeonato": id_campeonato,
                         "fase": "semis",
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     setFaseAtual("semis")
@@ -311,7 +321,8 @@ const Chave = () => {
                     await Api.put(`/campeonatos/time/alterarTime/${id_time_campeonato}`, {
                         "fase": 'semis',
                         "jogo": jogo,
-                        "chave": chave
+                        "chave": chave,
+                        "aconteceu": ""
                     })
 
                     setFaseAnteriorElim("n")
