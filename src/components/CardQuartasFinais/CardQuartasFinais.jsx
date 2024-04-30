@@ -26,18 +26,16 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
     useEffect(() => {
         const getTeams = async () => {
-            const { data } = await Api.get(`/campeonatos/time/times/${id}`)
-            setTimes(data)
-        }
+            const [times, oitavas, semis] = await Promise.all([
+                Api.get(`/campeonatos/time/times/${id}`),
+                Api.get(`/campeonatos/time/times/fase/oitavas/${id}`),
+                Api.get(`/campeonatos/time/times/fase/semis/${id}`)
+            ])
+            
+            setTimes(times.data)
+            setOitavas(oitavas.data)
+            setSemis(semis.data)
 
-        const getOitavas = async () => {
-            const {data} = await Api.get(`/campeonatos/time/times/fase/oitavas/${id}`)
-            setOitavas(data)
-        } 
-
-        const getSemis = async () => {
-            const {data} = await Api.get(`/campeonatos/time/times/fase/semis/${id}`)
-            setSemis(data)
         }
 
         const getChave = async () => {
@@ -56,8 +54,6 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
         getTeams()
         getChave()
-        getOitavas()
-        getSemis()
     }, [])
 
     console.log(chave)

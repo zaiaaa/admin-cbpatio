@@ -26,11 +26,15 @@ const Chave = () => {
     const { id } = useParams()
 
     const getDadosJogoEsquerda = (data) => {
+        setLoading(true)
         setDadosJogoEsquerda(data)
+        setLoading(false)
     }
 
     const getDadosJogoDireita = (data) => {
+        setLoading(true)
         setDadosJogoDireita(data)
+        setLoading(false)
     }
 
     const findEliminado = async (jogo, faseAnterior, faseAtual, chave, chaveTarget) => {
