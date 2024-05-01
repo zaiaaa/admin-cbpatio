@@ -5,7 +5,7 @@ import { Api } from '../../services/api';
 
 
 //colocar path no .env 
-const path = "http://localhost:3005"
+const path = "https://cbpatio.onrender.com"
 import img from '../../assets/noimage.png'
 import { Spinner, Center } from '@chakra-ui/react';
 

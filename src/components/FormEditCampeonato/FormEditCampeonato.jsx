@@ -103,12 +103,12 @@ const FormEditCampeonato = ({id}) => {
     const handleAlterCampeonato = async (formData) => {
         try {
             formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
-            formData.foto = formData.foto == null ? campeonato[0].foto : formData.foto             
+            formData.foto = formData.foto == null ? "" : formData.foto             
             console.log(formData)
 
             if(formData.foto){
-                console.log('executou')
-                Api.put(`/campeonatos/atualizar/${id}`, {
+                console.log('executou 1')
+                await Api.put(`/campeonatos/atualizar/${id}`, {
                     nome: formData.nome,
                     foto: formData.foto,
                     modalidade: formData.modalidade,
@@ -125,9 +125,10 @@ const FormEditCampeonato = ({id}) => {
                         "Content-Type": "multipart/form-data"
                     }
                 })
+
             }else{
-                console.log('executou')
-                Api.put(`/campeonatos/atualizar/${id}`, {
+                console.log('executou 2')
+                await Api.put(`/campeonatos/atualizar/${id}`, {
                     nome: formData.nome,
                     modalidade: formData.modalidade,
                     sinopse: formData.sinopse,

@@ -8,7 +8,7 @@ import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
 import { FormEditCampeonato } from "../../components/FormEditCampeonato/FormEditCampeonato"
 
-const path = "http://localhost:3005"
+const path = "https://cbpatio.onrender.com"
 import img from '../../assets/noimage.png'
 import { format } from "date-fns";
 
