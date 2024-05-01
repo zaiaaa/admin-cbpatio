@@ -122,7 +122,7 @@ const FormCadCampeonato = () => {
         try {
             handleCreateCampeonato(formData)
             handleCleanForm()
-            window.location.reload()
+            navigate('/campeonatos')
         } catch (e) {
             console.log(e)
         }
