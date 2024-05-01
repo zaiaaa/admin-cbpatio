@@ -114,7 +114,7 @@ const FormEditCampeonato = ({id}) => {
 
             if(formData.foto){
                 console.log('executou 1')
-                Api.put(`/campeonatos/atualizar/${id}`, {
+                const req = await Api.put(`/campeonatos/atualizar/${id}`, {
                     nome: formData.nome,
                     foto: formData.foto,
                     modalidade: formData.modalidade,
@@ -132,9 +132,13 @@ const FormEditCampeonato = ({id}) => {
                     }
                 })
 
+                if(req.status == 201){
+                    window.location.reload()
+                }
+
             }else{
                 console.log('executou 2')
-                Api.put(`/campeonatos/atualizar/${id}`, {
+                const req = await Api.put(`/campeonatos/atualizar/${id}`, {
                     nome: formData.nome,
                     modalidade: formData.modalidade,
                     sinopse: formData.sinopse,
@@ -150,6 +154,10 @@ const FormEditCampeonato = ({id}) => {
                         "Content-Type": "application/json"
                     }
                 })
+
+                if(req.status == 201){
+                    window.location.reload()
+                }
             }
         } catch (e) {
             console.log(e)
@@ -176,13 +184,7 @@ const FormEditCampeonato = ({id}) => {
 
     const onSubmit = async (formData) => {
         try {
-            await handleAlterCampeonato(formData)
-            setLoading(true)
-            setTimeout(() => {
-                window.location.reload()
-                setLoading(false)
-            }, 1000);
-            //handleCleanForm()
+            handleAlterCampeonato(formData)
         } catch (e) {
             console.log(e)
         }
