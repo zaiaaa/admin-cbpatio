@@ -80,7 +80,7 @@ const FormCadCampeonato = () => {
             formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
             console.log(formData.foto)
 
-            Api.post('/campeonatos/cadastrar', {
+            const req = await Api.post('/campeonatos/cadastrar', {
                 nome: formData.nome,
                 foto: formData.foto,
                 modalidade: formData.modalidade,
@@ -98,6 +98,10 @@ const FormCadCampeonato = () => {
                     }
                 }
             )
+
+            if(req.status == 201){
+                window.location.reload()
+            }
         } catch (e) {
             console.log(e)
         }   
@@ -121,8 +125,6 @@ const FormCadCampeonato = () => {
     const onSubmit = async (formData) => {
         try {
             handleCreateCampeonato(formData)
-            handleCleanForm()
-            navigate('/campeonatos')
         } catch (e) {
             console.log(e)
         }
