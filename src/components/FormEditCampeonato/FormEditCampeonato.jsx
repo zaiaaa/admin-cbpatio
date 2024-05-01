@@ -1,7 +1,11 @@
 import {
     Grid,
     GridItem,
+    Spinner,
+    Center
 } from '@chakra-ui/react'
+
+
 
 import { Input } from '../Input/input'
 import { Button } from '../Button/button'
@@ -76,6 +80,7 @@ const schema = yup.object({
 const FormEditCampeonato = ({id}) => {
     const navigate = useNavigate()
     const [campeonato, setCampeonato] = useState({})
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const handleGetCampeonato = async () => {
@@ -101,6 +106,7 @@ const FormEditCampeonato = ({id}) => {
 
     console.log(id)
     const handleAlterCampeonato = async (formData) => {
+        setLoading(true)
         try {
             formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
             formData.foto = formData.foto == null ? "" : formData.foto             
@@ -108,7 +114,7 @@ const FormEditCampeonato = ({id}) => {
 
             if(formData.foto){
                 console.log('executou 1')
-                await Api.put(`/campeonatos/atualizar/${id}`, {
+                Api.put(`/campeonatos/atualizar/${id}`, {
                     nome: formData.nome,
                     foto: formData.foto,
                     modalidade: formData.modalidade,
@@ -128,7 +134,7 @@ const FormEditCampeonato = ({id}) => {
 
             }else{
                 console.log('executou 2')
-                await Api.put(`/campeonatos/atualizar/${id}`, {
+                Api.put(`/campeonatos/atualizar/${id}`, {
                     nome: formData.nome,
                     modalidade: formData.modalidade,
                     sinopse: formData.sinopse,
@@ -148,6 +154,7 @@ const FormEditCampeonato = ({id}) => {
         } catch (e) {
             console.log(e)
         }   
+        setLoading(false)
     }
 
     const handleCleanForm = () => {
@@ -169,9 +176,13 @@ const FormEditCampeonato = ({id}) => {
 
     const onSubmit = async (formData) => {
         try {
-            handleAlterCampeonato(formData)
+            await handleAlterCampeonato(formData)
+            setLoading(true)
+            setTimeout(() => {
+                window.location.reload()
+                setLoading(false)
+            }, 1000);
             //handleCleanForm()
-            window.location.reload()
         } catch (e) {
             console.log(e)
         }
@@ -181,83 +192,102 @@ const FormEditCampeonato = ({id}) => {
     return (
         <>
             {/* BUG NO FORM, NAO PODEMOS DEIXAR OSÓ O DEFAULTVALUE, PQ SE NAO ELE NAO DEIXA ENVIAR */}
-            <form onSubmit={handleSubmit(onSubmit)} className='form-campeonato' encType='multipart/form-data'>
-                {/* grid com 4 linhas e 6 colunas */}
-                <Grid
-                    templateRows='repeat(4, 1fr)'
-                    templateColumns='repeat(6, 1fr)'
-                    gap={2}
-                >
-                    <GridItem colSpan={4}>
-                        <label htmlFor="nome">Nome</label>
-                        <Input name={"nome"} control={control} type={"text"} defaultValue={campeonato.length > 0 ? campeonato[0].nome : ""} />
-                        <p>{errors?.nome?.message}</p>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <label htmlFor="modalidade">Modalidade</label>
-                        <Input name={"modalidade"} control={control} type={'text'} defaultValue={campeonato.length > 0 ? campeonato[0].modalidade : ""} />
-                        <p>{errors?.modalidade?.message}</p>
+            {
+                loading
 
-                    </GridItem>
-                    <GridItem rowSpan={1} colSpan={6}>
-                        <label htmlFor="sinopse">Sinopse</label>
-                        <Input
-                            name={"sinopse"}
-                            control={control}
-                            placeholder='Digite uma breve descrição sobre o campeonato...'
-                            type={'text'}
-                            defaultValue={campeonato.length > 0 ? campeonato[0].sinopse : ""}
+                ?
+
+                <Center>
+                        <Spinner
+                            thickness='4px'
+                            speed='0.65s'
+                            color='#fff'
+                            size='xl'
                         />
-                        <p>{errors?.sinopse?.message}</p>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <label htmlFor="valor_entrada">Valor da Entrada</label>
-                        <Input name={"valor_entrada"} control={control} defaultValue={campeonato.length > 0 ? campeonato[0].valor_entrada : ""}/>
-                        <p>{errors?.valor_entrada?.message}</p>
+                </Center>
 
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <label htmlFor="premiacao">Premiação</label>
-                        <Input name={"premiacao"} control={control} defaultValue={campeonato.length > 0 ? campeonato[0].premiacao : ""} />
-                        <p>{errors?.premiacao?.message}</p>
+                :
+                <form onSubmit={handleSubmit(onSubmit)} className='form-campeonato' encType='multipart/form-data'>
+                    {/* grid com 4 linhas e 6 colunas */}
+                    <Grid
+                        templateRows='repeat(4, 1fr)'
+                        templateColumns='repeat(6, 1fr)'
+                        gap={2}
+                    >
+                        <GridItem colSpan={4}>
+                            <label htmlFor="nome">Nome</label>
+                            <Input name={"nome"} control={control} type={"text"} defaultValue={campeonato.length > 0 ? campeonato[0].nome : ""} />
+                            <p>{errors?.nome?.message}</p>
+                        </GridItem>
+                        <GridItem colSpan={2}>
+                            <label htmlFor="modalidade">Modalidade</label>
+                            <Input name={"modalidade"} control={control} type={'text'} defaultValue={campeonato.length > 0 ? campeonato[0].modalidade : ""} />
+                            <p>{errors?.modalidade?.message}</p>
 
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <label htmlFor="jogadores_por_time">Jogadores por time</label>
-                        <Input name={"jogadores_por_time"} control={control} type={'number'} defaultValue={campeonato.length > 0 ? campeonato[0].jogadores : ""}/>
-                        <p>{errors?.jogadores_por_time?.message}</p>
+                        </GridItem>
+                        <GridItem rowSpan={1} colSpan={6}>
+                            <label htmlFor="sinopse">Sinopse</label>
+                            <Input
+                                name={"sinopse"}
+                                control={control}
+                                placeholder='Digite uma breve descrição sobre o campeonato...'
+                                type={'text'}
+                                defaultValue={campeonato.length > 0 ? campeonato[0].sinopse : ""}
+                            />
+                            <p>{errors?.sinopse?.message}</p>
+                        </GridItem>
+                        <GridItem colSpan={2}>
+                            <label htmlFor="valor_entrada">Valor da Entrada</label>
+                            <Input name={"valor_entrada"} control={control} defaultValue={campeonato.length > 0 ? campeonato[0].valor_entrada : ""}/>
+                            <p>{errors?.valor_entrada?.message}</p>
 
-                    </GridItem>
+                        </GridItem>
+                        <GridItem colSpan={2}>
+                            <label htmlFor="premiacao">Premiação</label>
+                            <Input name={"premiacao"} control={control} defaultValue={campeonato.length > 0 ? campeonato[0].premiacao : ""} />
+                            <p>{errors?.premiacao?.message}</p>
 
-                    <GridItem colSpan={2}>
-                        <label htmlFor="limite_de_inscrição">Limite de inscrição</label>
-                        <Input name={"limite"} control={control} type={'number'} defaultValue={campeonato.length > 0 ? campeonato[0].limite : ""} />
-                        <p>{errors?.limite?.message}</p>
+                        </GridItem>
+                        <GridItem colSpan={2}>
+                            <label htmlFor="jogadores_por_time">Jogadores por time</label>
+                            <Input name={"jogadores_por_time"} control={control} type={'number'} defaultValue={campeonato.length > 0 ? campeonato[0].jogadores : ""}/>
+                            <p>{errors?.jogadores_por_time?.message}</p>
 
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                        <label htmlFor="data_hora">Data & Hora</label>
-                        <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={campeonato && campeonato.length > 0 ? format(new Date(campeonato[0].data), "yyyy-MM-dd HH:mm:ss") : ""}/>
-                        <p>{errors?.data_hora?.message}</p>
+                        </GridItem>
 
-                    </GridItem>
-                    <GridItem colSpan={2} >
-                        <label htmlFor="foto">Foto</label>
-                        <Input name={"foto"} control={control} type={"file"} />
+                        <GridItem colSpan={2}>
+                            <label htmlFor="limite_de_inscrição">Limite de inscrição</label>
+                            <Input name={"limite"} control={control} type={'number'} defaultValue={campeonato.length > 0 ? campeonato[0].limite : ""} />
+                            <p>{errors?.limite?.message}</p>
 
-                    </GridItem>
+                        </GridItem>
+                        <GridItem colSpan={2}>
+                            <label htmlFor="data_hora">Data & Hora</label>
+                            <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={campeonato && campeonato.length > 0 ? format(new Date(campeonato[0].data), "yyyy-MM-dd HH:mm:ss") : ""}/>
+                            <p>{errors?.data_hora?.message}</p>
 
-                    <GridItem colSpan={1}>
-                        <Button text={"Editar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <Button text={"Limpar"} variant={"yellow"} type={'button'} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} onClick={handleCleanForm}/>
-                    </GridItem>
-                </Grid>
-                {/* colocar todos os possiveis erros nesse formato */}
+                        </GridItem>
+                        <GridItem colSpan={2} >
+                            <label htmlFor="foto">Foto</label>
+                            <Input name={"foto"} control={control} type={"file"} />
+
+                        </GridItem>
+
+                        <GridItem colSpan={1}>
+                            <Button text={"Editar"} variant={"green"} type={"submit"} width={"100%"} padding={'2rem'} margin={'1.5rem 0'} />
+                        </GridItem>
+                        <GridItem colSpan={1}>
+                            <Button text={"Limpar"} variant={"yellow"} type={'button'} width={"100%"} margin={'1.5rem 0'} padding={'2rem'} onClick={handleCleanForm}/>
+                        </GridItem>
+                    </Grid>
+                    {/* colocar todos os possiveis erros nesse formato */}
 
 
-            </form>
+                </form>
+
+
+            }
+            
         </>
     )
 
