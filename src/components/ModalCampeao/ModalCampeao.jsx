@@ -48,7 +48,7 @@ const ModalCampeao = () => {
         const camp = split[1]
 
         try {
-            await Api.post("/campeonatos/time/novoTime", {
+            const req1 = await Api.post("/campeonatos/time/novoTime", {
                 "fk_id_time": time,
                 "fk_id_campeonato": camp,
                 "fase": "campeao",
@@ -57,18 +57,20 @@ const ModalCampeao = () => {
             })
 
             
-            await Api.put(`/campeonatos/time/aconteceu/fase/final/${id}`, {
+            const req2 = await Api.put(`/campeonatos/time/aconteceu/fase/final/${id}`, {
                 aconteceu: 's'
             })
 
 
             findEliminado(1, "final", "acabou", "esquerda", "esquerda")
+
+            if(req1.status == 201 && req2.status == 201){
+                alert("O time campeão foi setado com sucesso")
+                window.location.reload();
+            }
         } catch (error) {
             alert("Erro -> ", error)
         }
-
-        window.location.reload()
-        alert(`o time selecionado foi campeão!`)
     }
 
     const handleSelectChange = (id, name, event) => {
