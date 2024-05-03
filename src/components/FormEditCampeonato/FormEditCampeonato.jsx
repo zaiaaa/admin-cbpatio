@@ -17,7 +17,7 @@ import { Api } from '../../services/api'
 import {format} from "date-fns"
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { formataDinheiro } from '../../services/functions'
+import { formataDinheiro, formataDataInput } from '../../services/functions'
 
 
 
@@ -265,7 +265,7 @@ const FormEditCampeonato = ({id}) => {
                         </GridItem>
                         <GridItem colSpan={2}>
                             <label htmlFor="data_hora">Data & Hora</label>
-                            <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={campeonato && campeonato.length > 0 ? format(new Date(campeonato[0].data), "yyyy-MM-dd HH:mm:ss") : ""}/>
+                            <Input name={"data_hora"} control={control} type='datetime-local' defaultValue={campeonato && campeonato.length > 0 ? formataDataInput(campeonato[0].data) : ""}/>
                             <p>{errors?.data_hora?.message}</p>
 
                         </GridItem>

@@ -7,6 +7,8 @@ import { PreviewCampeonato } from "../../components/PreviewCampeonato/PreviewCam
 import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
 import { FormEditCampeonato } from "../../components/FormEditCampeonato/FormEditCampeonato"
+import { formataData } from "../../services/functions";
+
 
 const path = "https://cbpatio-production.up.railway.app"
 import img from '../../assets/noimage.png'
@@ -41,11 +43,6 @@ const EditarCampeonato = () => {
         }
         handleGetCampeonatos()
     }, [])
-
-    function formataData(data) {
-        const newDate = new Date(data)
-        return format(newDate, "dd/MM/yyyy HH:mm:ss")
-    }
 
     let foto = ''
     if (campeonatos.foto) {
