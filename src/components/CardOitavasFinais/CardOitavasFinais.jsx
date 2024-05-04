@@ -7,6 +7,7 @@ import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
 import { Center, Spinner } from '@chakra-ui/react';
+import { formataData } from '../../services/functions';
 
 
 const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
@@ -203,7 +204,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.esquerda[0].data_hora)
 
                                                 :
 
@@ -214,7 +215,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                         }
                                     </PopoverComponent>
 
@@ -282,7 +283,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.esquerda[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.esquerda[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
 
                                                 :
 
@@ -293,7 +294,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.direita[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.direita[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                         }
                                     </PopoverComponent>
 
@@ -365,7 +366,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.esquerda[4].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.esquerda[4].data_hora, "dd/MM/yyyy - HH:mm:ss")
 
                                                 :
 
@@ -376,7 +377,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.direita[4].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.direita[4].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                         }
                                     </PopoverComponent>
 
@@ -448,7 +449,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.esquerda[7].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.esquerda[7].data_hora, "dd/MM/yyyy - HH:mm:ss")
 
                                                 :
 
@@ -459,7 +460,7 @@ const CardOitavasFinais = ({ className, getDadosJogo, ladoChave }) => {
 
                                                     :
 
-                                                    format(chave.direita[7].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                                    formataData(chave.direita[7].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                         }
                                     </PopoverComponent>
 

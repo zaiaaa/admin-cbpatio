@@ -7,6 +7,7 @@ import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
 import { Center, Spinner } from '@chakra-ui/react';
+import { formataData } from '../../services/functions';
 
 const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
 
@@ -249,7 +250,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                  
                                  :
                                  
-                                 format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                 
                                  :
 
@@ -260,7 +261,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                  
                                  :
                                  
-                                 format(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                 }
                             </PopoverComponent>
 
@@ -375,7 +376,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                  
                                  :
                                  
-                                 format(chave.esquerda[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave.esquerda[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                 
                                  :
 
@@ -386,7 +387,7 @@ const CardQuartasFinais = ({className, getDadosJogo, ladoChave}) => {
                                  
                                  :
                                  
-                                 format(chave.direita[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave.direita[2].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                 }
                             </PopoverComponent>
 
