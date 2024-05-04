@@ -7,6 +7,7 @@ import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
 import { Center, Spinner } from '@chakra-ui/react';
+import { formataData } from '../../services/functions';
 
 
 
@@ -176,7 +177,7 @@ const CardFinais = ({className, getDadosJogo}) => {
                                  
                                  :
                                  
-                                 format(chave[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
 
                                 }
                             </PopoverComponent>

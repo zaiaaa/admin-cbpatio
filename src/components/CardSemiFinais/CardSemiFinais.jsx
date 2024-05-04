@@ -7,6 +7,7 @@ import { PopoverComponent } from '../Popover/Popover';
 import { PopoverDefinirHorario } from '../PopoverDefinirHorario/PopoverDefinirHorario';
 import { format } from 'date-fns';
 import { Center, Spinner } from '@chakra-ui/react';
+import { formataData } from '../../services/functions';
 
 
 const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
@@ -284,7 +285,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                                  
                                  :
                                  
-                                 format(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave.esquerda[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                 
                                  :
 
@@ -295,7 +296,7 @@ const CardSemiFinais = ({ className, getDadosJogo, ladoChave }) => {
                                  
                                  :
                                  
-                                 format(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
+                                 formataData(chave.direita[0].data_hora, "dd/MM/yyyy - HH:mm:ss")
                                 }
                             </PopoverComponent>
 
