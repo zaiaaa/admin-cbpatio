@@ -108,7 +108,7 @@ const FormEditCampeonato = ({id}) => {
     const handleAlterCampeonato = async (formData) => {
         setLoading(true)
         try {
-            formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
+            formData.data_hora = formataDataInput(formData.data_hora)
             formData.foto = formData.foto == null || formData.foto == "" ? "" : formData.foto             
             console.log(formData)
 
@@ -156,7 +156,7 @@ const FormEditCampeonato = ({id}) => {
                 })
 
                 if(req.status == 201){
-                    window.location.reload()
+                    //window.location.reload()
                 }
             }
         } catch (e) {
