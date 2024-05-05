@@ -109,7 +109,7 @@ const FormEditCampeonato = ({id}) => {
         setLoading(true)
         try {
             formData.data_hora = format(formData.data_hora, 'yyyy-MM-dd HH:mm:ss' )
-            formData.foto = formData.foto == null ? "" : formData.foto             
+            formData.foto = formData.foto == null || formData.foto == "" ? "" : formData.foto             
             console.log(formData)
 
             if(formData.foto){
