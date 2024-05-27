@@ -25,13 +25,9 @@ const CapitaesCampeonato = () => {
         const getCapitaes = async () => {
             try {
                 const { data: capitaes } = await Api.get(`/campeonatos/time/times/capitaes/${id}`)
-                const { data: capitaesOitavas } = await Api.get(`/campeonatos/time/times/capitaes/${id}/fase/oitavas`)
 
-                if (capitaes.length > 16) {
-                    setCapitaes(capitaesOitavas)
-                } else {
-                    setCapitaes(capitaes)
-                }
+                setCapitaes(capitaes)
+                
 
                 setLoading(false)
             } catch (e) {
@@ -42,7 +38,8 @@ const CapitaesCampeonato = () => {
         getCapitaes()
     }, [])
 
-
+    const path = "https://cbpatio-production.up.railway.app"
+   
     return (
         <>
             <h1>{campeonato.nome}</h1>
@@ -69,6 +66,7 @@ const CapitaesCampeonato = () => {
                                 <Table size='md'>
                                     <Thead >
                                         <Tr>
+                                            <Th color={'#7662F1'}>Foto</Th>
                                             <Th color={'#7662F1'}>Nome</Th>
                                             <Th color={'#7662F1'}>Email</Th>
                                             <Th color={'#7662F1'}>Time</Th>
@@ -77,8 +75,15 @@ const CapitaesCampeonato = () => {
 
                                     <Tbody>
                                         {
-                                            capitaes.map((capitain) => (
+                                            capitaes.map((capitain) => 
+                                                (
+                                                
                                                 <Tr key={capitain.id_time}>
+                                                    <Td>
+                                                        <a href={`${path}/${capitain?.foto?.replace(/\\/g, '/')}`}>
+                                                            <img width={'50px'} src={`${path}/${capitain?.foto?.replace(/\\/g, '/')}`} />
+                                                        </a>
+                                                    </Td>
                                                     <Td>{capitain.nome_usuario}</Td>
                                                     <Td>{capitain.celular ? capitain.celular : "Sem celular cadastrado"}</Td>
                                                     <Td>{capitain.nome_time}</Td>
