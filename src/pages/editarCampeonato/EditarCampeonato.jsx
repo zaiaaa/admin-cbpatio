@@ -8,7 +8,7 @@ import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
 import { FormEditCampeonato } from "../../components/FormEditCampeonato/FormEditCampeonato"
 import { formataData } from "../../services/functions";
-import { ModalExcluir } from "../../components/ModalExcluir/ModalExcluir";
+import {ModalExcluir} from "../../components/modalExcluir/ModalExcluir"
 
 
 const path = "https://cbpatio-production.up.railway.app"
