@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import { Api } from '../../services/api';
 import { useEffect, useState } from "react";
 import { Spinner, Center } from '@chakra-ui/react';
@@ -8,6 +8,7 @@ import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
 import { FormEditCampeonato } from "../../components/FormEditCampeonato/FormEditCampeonato"
 import { formataData } from "../../services/functions";
+import { ModalExcluir } from "../../components/modalExcluir/modalExcluir";
 
 
 const path = "https://cbpatio-production.up.railway.app"
@@ -30,6 +31,8 @@ const EditarCampeonato = () => {
     const [campeonatos, setCampeonatos] = useState([])
     const [loading, setLoading] = useState(true)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         const handleGetCampeonatos = async () => {
             try {
@@ -43,6 +46,21 @@ const EditarCampeonato = () => {
         }
         handleGetCampeonatos()
     }, [])
+
+    const excluirCampeonato = async () => {
+        try {
+            setLoading(true)
+                await Api.delete(`/campeonatos/excluir/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                navigate('/campeonatos')
+            setLoading(false)
+        } catch (error) {
+            
+        }
+    }
 
     let foto = ''
     if (campeonatos.foto) {
@@ -103,6 +121,8 @@ const EditarCampeonato = () => {
                 <h2 className="h2-sublinhado">EDITAR CAMPEONATO</h2>
                 <FormEditCampeonato id={id} />
             </div>
+
+            <ModalExcluir handleOnClickSaveButton={excluirCampeonato}/>
 
             <Link to='/campeonatos'>
                 <Button text={'Voltar'} type={"button"} variant={"red"} width={"100%"} padding={".75rem 2rem"} />

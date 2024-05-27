@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { Button } from '../Button/button'
 
-const ModalComponent = ({ children, titulo, textModalOpenBtn, variantTextOpenBtn, handleOnClickSaveButton }) => {
+const ModalComponent = ({ children, titulo, textModalOpenBtn, variantTextOpenBtn, handleOnClickSaveButton, variant = "affirmative" }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -28,15 +28,16 @@ const ModalComponent = ({ children, titulo, textModalOpenBtn, variantTextOpenBtn
                         {children}
                     </ModalBody>
 
-                    <ModalFooter>
-                        {
-                            handleOnClickSaveButton && (
-                                <Button text={'Salvar'} type={'button'} variant={'green'} padding={'1rem'} width={'100%'}
-                                    onClick={handleOnClickSaveButton} />
-                            )
-                        }
-                        <Button text={'Cancelar'} type={'button'} variant={'red'} padding={'1rem'} margin={'10px'} width={'100%'} onClick={onClose} />
-                    </ModalFooter>
+                        <ModalFooter>
+                            {
+                                handleOnClickSaveButton && (
+                                    <Button text={'Salvar'} type={'button'} variant={'green'} padding={'1rem'} width={'100%'}
+                                        onClick={handleOnClickSaveButton} />
+                                )
+                            }
+                            <Button text={'Cancelar'} type={'button'} variant={'red'} padding={'1rem'} margin={'10px'} width={'100%'} onClick={onClose} />
+
+                        </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
