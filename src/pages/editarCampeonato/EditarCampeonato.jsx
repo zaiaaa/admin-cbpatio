@@ -8,7 +8,7 @@ import { CardCampeonato } from '../../components/CardCampeonato/CardCampeonato'
 import './EditarCampeonato.css'
 import { FormEditCampeonato } from "../../components/FormEditCampeonato/FormEditCampeonato"
 import { formataData } from "../../services/functions";
-import { ModalExcluir } from "../../components/modalExcluir/modalExcluir";
+import { ModalExcluir } from "../../components/ModalExcluir/ModalExcluir";
 
 
 const path = "https://cbpatio-production.up.railway.app"
@@ -125,7 +125,7 @@ const EditarCampeonato = () => {
             <ModalExcluir handleOnClickSaveButton={excluirCampeonato}/>
 
             <Link to='/campeonatos'>
-                <Button text={'Voltar'} type={"button"} variant={"red"} width={"10%"} padding={".75rem 2rem"} />
+                <Button text={'Voltar'} type={"button"} variant={"red"} width={"100%"} padding={".75rem 2rem"} />
             </Link>
         </>
     )
