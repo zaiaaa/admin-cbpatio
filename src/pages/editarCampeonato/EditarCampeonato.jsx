@@ -121,9 +121,9 @@ const EditarCampeonato = () => {
                 <h2 className="h2-sublinhado">EDITAR CAMPEONATO</h2>
                 <FormEditCampeonato id={id} />
             </div>
-
-            <ModalExcluir handleOnClickSaveButton={excluirCampeonato} />
-
+            
+            <ModalExcluir handleOnClickSaveButton={excluirCampeonato}/>
+            
             <Link to='/campeonatos'>
                 <Button text={'Voltar'} type={"button"} variant={"red"} width={"100%"} padding={".75rem 2rem"} />
             </Link>

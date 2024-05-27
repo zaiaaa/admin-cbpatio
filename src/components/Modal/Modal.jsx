@@ -10,12 +10,12 @@ import {
 } from '@chakra-ui/react'
 import { Button } from '../Button/button'
 
-const ModalComponent = ({ children, titulo, textModalOpenBtn, variantTextOpenBtn, handleOnClickSaveButton, variant = "affirmative" }) => {
+const ModalComponent = ({ children, titulo, textModalOpenBtn, variantTextOpenBtn, handleOnClickSaveButton}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <>
-            <Button text={textModalOpenBtn} type={'button'} variant={variantTextOpenBtn} padding={'1rem'} width={'100%'} onClick={onOpen} />
+            <Button text={textModalOpenBtn} type={'button'} variant={variantTextOpenBtn} padding={'1rem'} width={'50%'} margin={'25px 0'} onClick={onOpen} />
 
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}>
                 <ModalOverlay
