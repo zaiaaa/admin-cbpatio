@@ -80,7 +80,7 @@ const CapitaesCampeonato = () => {
                                                 
                                                 <Tr key={capitain.id_time}>
                                                     <Td>
-                                                        <a href={`${path}/${capitain?.foto?.replace(/\\/g, '/')}`}>
+                                                        <a target="_blank" href={`${path}/${capitain?.foto?.replace(/\\/g, '/')}`}>
                                                             <img width={'50px'} src={`${path}/${capitain?.foto?.replace(/\\/g, '/')}`} />
                                                         </a>
                                                     </Td>
