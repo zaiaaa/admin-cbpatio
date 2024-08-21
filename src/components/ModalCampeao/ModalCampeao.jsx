@@ -34,7 +34,8 @@ const ModalCampeao = () => {
             "fk_id_campeonato": id,
             "fase": `eliminado ${faseAnterior}`,
             "jogo": "",
-            "aconteceu": ""
+            "aconteceu": "",
+            "chave": "",
         })
     }
     
