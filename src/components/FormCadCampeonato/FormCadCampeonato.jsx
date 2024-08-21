@@ -89,7 +89,8 @@ const FormCadCampeonato = () => {
                 valor_entrada: formData.valor_entrada,
                 premiacao: formData.premiacao,
                 jogadores: formData.jogadores_por_time,
-                limite: formData.limite
+                limite: formData.limite,
+                ativo: 's'
             }, 
                 {
                     //NAO APAGUE ISSO AQUI, SEM ISSO NAO ENVIA FOTO.
